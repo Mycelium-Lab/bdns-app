@@ -2,12 +2,6 @@
 
 BDNS Application
 
-# ⚠️ IMPORTANT NOTE TO CONTRIBUTORS ⚠️
-
-As work has begun on the next version of the BDNS app, please do not submit PRs for
-issues marked 'redesign' or 'post-redesign'. We will soon have info on how to
-contribute to the new app. Thanks for all your hard work!
-
 ## Installation
 
 ### Manual
@@ -15,7 +9,7 @@ contribute to the new app. Thanks for all your hard work!
 Expects Node.js version >=14.17.0
 
 ```shell
-$> git clone https://github.com/ensdomains/bdns-app.git
+$> git clone https://github.com/Mycelium-Lab/bdns-app.git
 $> cd bdns-app
 $> yarn install
 $> yarn start
@@ -189,8 +183,8 @@ Once this has been done, please create a pull request for us to review and check
 
 In case you haven't already:
 
-- `git clone https://github.com/ensdomains/bdns-app.git`
-- `git clone https://github.com/ensdomains/bdns-subgraph`
+- `git clone https://github.com/Mycelium-Lab/bdns-app.git`
+- `git clone https://github.com/Mycelium-Lab/bdns-subgraph`
 
 You need to make sure these are all cloned into the same parent folder.
 
@@ -231,7 +225,7 @@ This should open up cypress. To run the tests click on 'Run n integration tests'
 
 ---
 
-The main package for the E2E tests is `ensdomains/mock`, which exposes a script that will prepopulate ganache with BDNS so you have everything setup to run Cypress on.
+The main package for the E2E tests is `Mycelium-Lab/mock`, which exposes a script that will prepopulate ganache with BDNS so you have everything setup to run Cypress on.
 
 The BDNS app has end to end tests with Cypress. To run them you need to start ganache, run the seed script, run the app and then run cypress. This should start chrome and the Cypress GUI. Each time the test run, the script needs to be re-run and the app restarted for it to work.
 
@@ -272,7 +266,7 @@ Subgraph is used to list subdomains and all the names you have registered.
 Get bdns subgraph
 
 ```
-git clone https://github.com/ensdomains/bdns-subgraph
+git clone https://github.com/Mycelium-Lab/bdns-subgraph
 cd bdns-subgraph
 yarn
 ```
