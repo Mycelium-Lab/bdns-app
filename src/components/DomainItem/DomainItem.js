@@ -200,6 +200,8 @@ const Domain = ({
     )
   }
   const account = useAccount()
+  console.log(account)
+  console.log(domain)
   let isOwner = false
   if (!domain.available && domain.owner && parseInt(domain.owner, 16) !== 0) {
     isOwner =

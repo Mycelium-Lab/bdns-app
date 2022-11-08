@@ -3,7 +3,6 @@ import { Query } from '@apollo/client/react/components'
 import { useQuery } from '@apollo/client'
 import DomainItem from '../DomainItem/DomainItem'
 import { GET_FAVOURITES, GET_SINGLE_NAME } from '../../graphql/queries'
-
 export const DomainInfo = ({ domainState, isFavourite, loading }) => {
   return (
     <DomainItem
@@ -43,7 +42,7 @@ const DomainInfoContainer = ({ searchTerm }) => {
       name: searchTerm
     }
   })
-
+  console.log(data, loading, error)
   if (loading || !data) return null
   if (error) {
     console.error(error)

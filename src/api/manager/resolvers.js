@@ -11,7 +11,7 @@ import {
   isDecrypted,
   labelhash,
   utils
-} from '@ensdomains/ui'
+} from '../../ui'
 import { formatsByName } from '@ensdomains/address-encoder'
 import isEqual from 'lodash/isEqual'
 import modeNames from '../modes'
@@ -455,7 +455,6 @@ const resolvers = {
           parentOwner,
           __typename: 'Node'
         })
-
         detailedNode = setState(detailedNode)
         // Override parentOwner for dns if exists
         if (
@@ -502,7 +501,7 @@ const resolvers = {
           DEPRECATED: []
         },
         5: {
-          OLD: ['0xfF77b96d6bafCec0D684bB528b22e0Ab09C70663'],
+          OLD: [],
           DEPRECATED: []
         }
       }

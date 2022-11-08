@@ -6,7 +6,7 @@ import {
   getNetworkId,
   isEncodedLabelhash,
   isLabelValid as _isLabelValid
-} from '@ensdomains/ui'
+} from '../ui'
 import * as jsSHA3 from 'js-sha3'
 import { throttle } from 'lodash'
 import { useEffect, useRef } from 'react'
@@ -97,6 +97,9 @@ export async function getEtherScanAddr() {
     case 4:
     case '4':
       return 'https://rinkeby.etherscan.io/'
+    case 5:
+    case '4':
+      return 'https://goerli.etherscan.io/'
     default:
       return 'https://etherscan.io/'
   }
@@ -134,6 +137,8 @@ export const parseSearchTerm = async term => {
     return 'invalid'
   }
   const address = await ens.getOwner(tld)
+  console.log('ens:', ens)
+  console.log('domains:', domains)
   return _parseSearchTerm(term, true)
 }
 

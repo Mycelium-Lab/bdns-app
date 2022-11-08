@@ -1,4 +1,4 @@
-import { setupENS } from '@ensdomains/ui'
+import { setupENS } from '../../ui'
 import { isENSReadyReactive } from '../reactiveVars'
 
 let ens = {},
@@ -10,7 +10,7 @@ export async function setup({
   enforceReadOnly,
   enforceReload,
   customProvider,
-  ensAddress
+  ensAddress // = process.env.REACT_APP_ENS_ADDRESS
 }) {
   let option = {
     reloadOnAccountsChange: false,
@@ -19,6 +19,9 @@ export async function setup({
     customProvider,
     ensAddress
   }
+  // if (enforceReadOnly) {
+  //   option.infura = process.env.REACT_APP_INFURA_ID
+  // }
   const {
     ens: ensInstance,
     registrar: registrarInstance,
@@ -26,6 +29,7 @@ export async function setup({
   } = await setupENS(option)
   ens = ensInstance
   registrar = registrarInstance
+  console.log('Registrar: ', registrar)
   ensRegistryAddress = ensAddress
   isENSReadyReactive(true)
   return { ens, registrar, providerObject }

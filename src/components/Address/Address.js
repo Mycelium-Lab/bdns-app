@@ -255,7 +255,6 @@ export default function Address({
     page,
     expiryDate
   })
-
   const {
     data: { globalError }
   } = useQuery(GET_ERRORS)
