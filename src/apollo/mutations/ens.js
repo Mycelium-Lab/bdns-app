@@ -19,9 +19,6 @@ export async function setup({
     customProvider,
     ensAddress
   }
-  // if (enforceReadOnly) {
-  //   option.infura = process.env.REACT_APP_INFURA_ID
-  // }
   const {
     ens: ensInstance,
     registrar: registrarInstance,

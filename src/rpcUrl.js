@@ -1,1 +1,2 @@
-export const rpcUrl = 'https://web3.ens.domains/v1/mainnet'
+export const rpcUrl =
+  'https://goerli.infura.io/v3/0587dfad47e84720bdf88b223863cdb5'
