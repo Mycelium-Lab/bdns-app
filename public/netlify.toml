@@ -1,3 +1,4 @@
 [[redirects]]
-  from = "/search/*"
-  to = "/search/:splat"
+  from = "/*"
+  to = "/index.html"
+  status = 200
