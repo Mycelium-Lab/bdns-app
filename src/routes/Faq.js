@@ -68,9 +68,6 @@ function Faq() {
 
   return (
     <>
-      <NonMainPageBannerContainer>
-        <DAOBannerContent />
-      </NonMainPageBannerContainer>
       <FaqContainer>
         <Title>FAQ</Title>
         <H2>Before You register</H2>
