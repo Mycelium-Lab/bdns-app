@@ -81,7 +81,7 @@ describe('NameDetails', () => {
     )
     expect(context.url).toEqual(`${pathnameroot}/details`)
   })
-  const array = ['register', 'details', 'subdomains']
+  const array = ['register', 'details']
   for (let index = 0; index < array.length; index++) {
     const tab = array[index]
     it(`should not redirect to /${tab} if already in ${tab}`, () => {

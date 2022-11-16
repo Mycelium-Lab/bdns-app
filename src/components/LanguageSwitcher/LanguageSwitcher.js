@@ -16,44 +16,12 @@ const LANGUAGES = [
     label: '简体中文 (CN)'
   },
   {
-    value: 'ja',
-    label: '日本語 (JA)'
-  },
-  {
     value: 'de',
     label: 'Deutsch (DE)'
   },
   {
     value: 'es',
     label: 'Español (ES)'
-  },
-  {
-    value: 'fr',
-    label: 'Français (FR)'
-  },
-  {
-    value: 'ko',
-    label: '한국어 (KO)'
-  },
-  {
-    value: 'it',
-    label: 'Italiano (IT)'
-  },
-  {
-    value: 'pl',
-    label: 'Polski (PL)'
-  },
-  {
-    value: 'pt-BR',
-    label: 'Português (BR)'
-  },
-  {
-    value: 'ru',
-    label: 'Pусский (RU)'
-  },
-  {
-    value: 'vi',
-    label: 'Tiếng Việt (VI)'
   }
 ]
 
