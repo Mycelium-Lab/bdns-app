@@ -79,7 +79,7 @@ export default class NameWrapper {
     })
     const signer = await getSigner()
     const NameWrapperContract = NameWrapperContractWithoutSigner.connect(signer)
-    return NameWrapperContract.unwrapROOT2LD(labelhash, registrant, controller)
+    return NameWrapperContract.unwrap(labelhash, registrant, controller)
   }
   async getApproved(labelhash) {
     let provider = await getProvider()
@@ -122,7 +122,7 @@ export default class NameWrapper {
     })
     const signer = await getSigner()
     const NameWrapperContract = NameWrapperContractWithoutSigner.connect(signer)
-    return NameWrapperContract.wrapROOT2LD(
+    return NameWrapperContract.wrap(
       label,
       wrappedOwner,
       0,
