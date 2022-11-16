@@ -64,10 +64,12 @@ export default class NameWrapper {
   }
   async safeTransferFrom(from, to, id) {
     let provider = await getProvider()
-    const NameWrapperContract = getNameWrapperContract({
+    const NameWrapperContractWithoutSigner = getNameWrapperContract({
       address: process.env.REACT_APP_NAME_WRAPPER,
       provider
     })
+    const signer = await getSigner()
+    const NameWrapperContract = NameWrapperContractWithoutSigner.connect(signer)
     return NameWrapperContract.safeTransferFrom(
       from,
       to,

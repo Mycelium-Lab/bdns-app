@@ -742,7 +742,8 @@ const resolvers = {
     setNewNFTOwner: async (_, { from, to, id }) => {
       try {
         const nameWrapper = getNameWrapper()
-        await nameWrapper.safeTransferFrom(from, to, id)
+        const tx = await nameWrapper.safeTransferFrom(from, to, id)
+        return sendHelper(tx)
       } catch (e) {
         console.log(e)
       }

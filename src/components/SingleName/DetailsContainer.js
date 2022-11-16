@@ -301,13 +301,13 @@ function DetailsContainer({
             <DetailsItemEditable
               domain={domain}
               keyName="nftowner"
-              value={registrant}
+              value={domain.ownerOfNFT}
               canEdit={isOwnerOfNFT && !isExpired && !readOnly}
               isExpiredRegistrant={isRegistrant && isExpired}
               type="address"
               editButton={t('c.transfer')}
               mutationButton={t('c.transfer')}
-              mutation={SET_REGISTRANT}
+              mutation={SET_NEW_NFT_OWNER}
               refetch={refetch}
               confirm={true}
               copyToClipboard={true}

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useQuery, useMutation } from '@apollo/client'
 import { motion, AnimatePresence } from 'framer-motion'
 import EthVal from 'ethval'
-
+import { SET_NEW_NFT_OWNER } from 'graphql/mutations'
 import {
   GET_PUBLIC_RESOLVER,
   GET_RENT_PRICE,
@@ -222,6 +222,8 @@ function getToolTipMessage({ keyName, t, isExpiredRegistrant }) {
     case 'Resolver':
       return t(`singleName.tooltips.detailsItem.${keyName}`)
     case 'Controller':
+      return t(`singleName.tooltips.detailsItem.${keyName}`)
+    case 'nftowner':
       return t(`singleName.tooltips.detailsItem.${keyName}`)
     case 'registrant':
       if (isExpiredRegistrant) {
@@ -443,7 +445,11 @@ const Editable = ({
       }
     }
   })
-
+  const [transferNFTOwnerMutation] = useMutation(SET_NEW_NFT_OWNER, {
+    onCompleted: data => {
+      startPending(Object.values(data)[0])
+    }
+  })
   const [ownerMutation] = useMutation(
     chooseMutation(keyName, isOwnerOfParent),
     {
@@ -690,15 +696,24 @@ const Editable = ({
               <SaveCancel
                 stopEditing={stopEditing}
                 mutation={() => {
-                  const variables = getVariables(keyName, {
-                    domain,
-                    variableName,
-                    newValue,
-                    duration
-                  })
-                  mutation({
-                    variables
-                  })
+                  if (keyName === 'nftowner') {
+                    const variables = {
+                      from: account,
+                      to: newValue,
+                      id: domain.label
+                    }
+                    transferNFTOwnerMutation({ variables })
+                  } else {
+                    const variables = getVariables(keyName, {
+                      domain,
+                      variableName,
+                      newValue,
+                      duration
+                    })
+                    mutation({
+                      variables
+                    })
+                  }
                 }}
                 value={
                   keyName === 'Expiration Date' ? formatDate(value) : value

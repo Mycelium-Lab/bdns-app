@@ -34,6 +34,7 @@
     "Controller": "Controller",
     "Expiration Date": "Expiration Date",
     "Resolver": "Resolver",
+    "nftowner": "Owner",
     "about": "About",
     "addresses": "Addresses",
     "cancel": "Cancel",
@@ -362,6 +363,7 @@
     "tooltips": {
       "detailsItem": {
         "Controller": "You can only transfer the controller if you are the controller or registrant and are logged into your wallet",
+        "nftowner": "You can only transfer ownership of domain's nft if you are the owner and are logged into you wallet",
         "ControllerAndDnsAlreadySync": "The controller and DNS owner are already in sync",
         "Resolver": "You can only set the resolver on this name if you are the controller and are logged into your wallet",
         "default": "You can only make changes if you are the controller and are logged into your wallet",
