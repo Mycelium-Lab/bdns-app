@@ -138,6 +138,13 @@ export const ADD_MULTI_RECORDS = gql`
     addMultiRecords(name: $name, records: $records)
   }
 `
+/* NameWrapper Mutations */
+
+export const SET_NEW_NFT_OWNER = gql`
+  mutation setNewNFTOwner($from: String, $to: String, $id: String) {
+    setNewNFTOwner(from: $from, to: $to, id: $id)
+  }
+`
 
 /* Registrar Mutations */
 

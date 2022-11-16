@@ -402,6 +402,12 @@ export default class Registrar {
     )
     const account = await getAccount()
     const resolverAddr = await this.getAddress('resolver')
+    const abi = ['function setAddr(bytes32 node, address a)']
+    const iface = new utils.Interface(abi)
+    const callData = iface.encodeFunctionData('setAddr', [
+      namehash(name),
+      owner
+    ])
     //if (parseInt(resolverAddr, 16) === 0) {
     let result = await permanentRegistrarController.makeCommitment(
       name,
@@ -409,7 +415,7 @@ export default class Registrar {
       duration,
       secret,
       resolverAddr,
-      [],
+      [callData],
       true,
       0,
       BigNumber.from('0xFFFFFFFFFFFFFFF0')
@@ -471,48 +477,40 @@ export default class Registrar {
     const price = await this.getRentPrice(label, duration)
     const priceWithBuffer = getBufferedPrice(price)
     const resolverAddr = await this.getAddress('resolver')
+    const abi = ['function setAddr(bytes32 node, address a)']
+    const iface = new utils.Interface(abi)
+    const callData = iface.encodeFunctionData('setAddr', [
+      namehash(label),
+      account
+    ])
     console.log('resolverAddr', resolverAddr)
-    if (parseInt(resolverAddr, 16) === 0) {
-      const gasLimit = await this.estimateGasLimit(() => {
-        return permanentRegistrarController.estimateGas.register(
-          label,
-          account,
-          duration,
-          secret,
-          { value: priceWithBuffer }
-        )
-      })
-
-      return permanentRegistrarController.register(
-        label,
-        account,
-        duration,
-        secret,
-        { value: priceWithBuffer, gasLimit }
-      )
-    } else {
-      const gasLimit = await this.estimateGasLimit(() => {
-        return permanentRegistrarController.estimateGas.registerWithConfig(
-          label,
-          account,
-          duration,
-          secret,
-          resolverAddr,
-          account,
-          { value: priceWithBuffer }
-        )
-      })
-
-      return permanentRegistrarController.registerWithConfig(
+    const gasLimit = await this.estimateGasLimit(() => {
+      return permanentRegistrarController.estimateGas.register(
         label,
         account,
         duration,
         secret,
         resolverAddr,
-        account,
-        { value: priceWithBuffer, gasLimit }
+        [callData],
+        true,
+        0,
+        BigNumber.from('0xFFFFFFFFFFFFFFF0'),
+        { value: priceWithBuffer }
       )
-    }
+    })
+
+    return permanentRegistrarController.register(
+      label,
+      account,
+      duration,
+      secret,
+      resolverAddr,
+      [callData],
+      true,
+      0,
+      BigNumber.from('0xFFFFFFFFFFFFFFF0'),
+      { value: priceWithBuffer, gasLimit }
+    )
   }
 
   async estimateGasLimit(cb) {

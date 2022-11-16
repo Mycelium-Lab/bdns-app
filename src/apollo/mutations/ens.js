@@ -3,7 +3,8 @@ import { isENSReadyReactive } from '../reactiveVars'
 
 let ens = {},
   registrar = {},
-  ensRegistryAddress = undefined
+  ensRegistryAddress = undefined,
+  nameWrapper = {}
 
 export async function setup({
   reloadOnAccountsChange,
@@ -22,18 +23,23 @@ export async function setup({
   const {
     ens: ensInstance,
     registrar: registrarInstance,
-    providerObject
+    providerObject,
+    nameWrapper: nameWrapperInstance
   } = await setupENS(option)
   ens = ensInstance
+  nameWrapper = nameWrapperInstance
   registrar = registrarInstance
   console.log('Registrar: ', registrar)
   ensRegistryAddress = ensAddress
   isENSReadyReactive(true)
-  return { ens, registrar, providerObject }
+  return { ens, registrar, providerObject, nameWrapper }
 }
 
 export function getRegistrar() {
   return registrar
+}
+export function getNameWrapper() {
+  return nameWrapper
 }
 
 export function getEnsAddress() {

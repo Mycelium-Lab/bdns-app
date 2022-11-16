@@ -14,7 +14,8 @@ import {
   RENEW,
   SET_OWNER,
   SET_REGISTRANT,
-  SET_SUBNODE_OWNER
+  SET_SUBNODE_OWNER,
+  SET_NEW_NFT_OWNER
 } from '../../graphql/mutations'
 import { SingleNameBlockies } from '../Blockies'
 import You from '../Icons/You'
@@ -181,6 +182,7 @@ function canClaim(domain) {
 
 function DetailsContainer({
   isMigratedToNewRegistry,
+  isOwnerOfNFT,
   isDeedOwner,
   isRegistrant,
   showExplainer,
@@ -214,7 +216,7 @@ function DetailsContainer({
   const showUnclaimableWarning =
     is2ld &&
     parseInt(domain.owner) === 0 &&
-    domain.parent !== 'eth' &&
+    domain.parent !== '' &&
     !domain.isDNSRegistrar
 
   return (
@@ -262,7 +264,7 @@ function DetailsContainer({
         </GracePeriodWarningContainer>
       )}
       <OwnerFields outOfSync={outOfSync}>
-        {domain.parent === 'eth' && domain.isNewRegistrar ? (
+        {domain.parent === '' && domain.isNewRegistrar ? (
           <>
             <DetailsItemEditable
               domain={domain}
@@ -296,8 +298,22 @@ function DetailsContainer({
               confirm={true}
               copyToClipboard={true}
             />
+            <DetailsItemEditable
+              domain={domain}
+              keyName="nftowner"
+              value={registrant}
+              canEdit={isOwnerOfNFT && !isExpired && !readOnly}
+              isExpiredRegistrant={isRegistrant && isExpired}
+              type="address"
+              editButton={t('c.transfer')}
+              mutationButton={t('c.transfer')}
+              mutation={SET_REGISTRANT}
+              refetch={refetch}
+              confirm={true}
+              copyToClipboard={true}
+            />
           </>
-        ) : domain.parent === 'eth' && !domain.isNewRegistrar ? (
+        ) : domain.parent === '' && !domain.isNewRegistrar ? (
           <>
             <DetailsItem uneditable>
               <DetailsKey>{t('c.registrant')}</DetailsKey>
