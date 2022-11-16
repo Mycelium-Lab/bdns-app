@@ -16,10 +16,6 @@ import ENSLogo from '../components/HomePage/images/ENSLogo.svg'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
-import {
-  MainPageBannerContainer,
-  DAOBannerContent
-} from '../components/Banner/DAOBanner'
 
 const HeroTop = styled('div')`
   display: grid;
