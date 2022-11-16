@@ -464,16 +464,13 @@ export default class Registrar {
   }
 
   async register(label, duration, secret) {
-    console.log('register!')
     const permanentRegistrarControllerWithoutSigner = this
       .permanentRegistrarController
     const signer = await getSigner()
-    console.log('signer', signer)
     const permanentRegistrarController = permanentRegistrarControllerWithoutSigner.connect(
       signer
     )
     const account = await getAccount()
-    console.log('account', account)
     const price = await this.getRentPrice(label, duration)
     const priceWithBuffer = getBufferedPrice(price)
     const resolverAddr = await this.getAddress('resolver')
@@ -483,7 +480,6 @@ export default class Registrar {
       namehash(label),
       account
     ])
-    console.log('resolverAddr', resolverAddr)
     const gasLimit = await this.estimateGasLimit(() => {
       return permanentRegistrarController.estimateGas.register(
         label,
@@ -498,7 +494,6 @@ export default class Registrar {
         { value: priceWithBuffer }
       )
     })
-
     return permanentRegistrarController.register(
       label,
       account,
