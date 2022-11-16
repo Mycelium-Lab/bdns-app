@@ -29,6 +29,14 @@ class SingleError extends Component {
           t('searchErrors.domainMalformed.short', { searchTerm }),
         long: searchTerm => t('searchErrors.domainMalformed.long')
       },
+      startsWithIllegal: {
+        short: searchTerm => t('searchErrors.startsWithIllegal.short'),
+        long: searchTerm => t('searchErrors.startsWithIllegal.long')
+      },
+      haveDots: {
+        short: searchTerm => t('searchErrors.haveDots.short'),
+        long: searchTerm => t('searchErrors.haveDots.long')
+      },
       unsupported: {
         short: searchTerm => {
           const tld = searchTerm

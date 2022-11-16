@@ -15,7 +15,8 @@ import { abi as oldResolverContract } from '@ensdomains/contracts/abis/ens-022/P
 import { abi as dnsRegistrarContractOld } from '@ensdomains/contracts/abis/dnsregistrar/DNSRegistrar.json'
 import { abi as legacyAuctionRegistrarContract } from '@ensdomains/contracts/abis/ens/HashRegistrar'
 import { abi as deedContract } from '@ensdomains/contracts/abis/ens/Deed'
-
+import rootRegistrarController from './abi/RootRegistrarController'
+import nameWrapperContract from './abi/NameWrapper'
 function getReverseRegistrarContract({ address, provider }) {
   return new Contract(address, reverseRegistrarContract, provider)
 }
@@ -49,7 +50,11 @@ function getPermanentRegistrarContract({ address, provider }) {
 }
 
 function getPermanentRegistrarControllerContract({ address, provider }) {
-  return new Contract(address, permanentRegistrarControllerContract, provider)
+  return new Contract(address, rootRegistrarController, provider)
+}
+
+function getNameWrapperContract({ address, provider }) {
+  return new Contract(address, nameWrapperContract, provider)
 }
 
 function getDeedContract({ address, provider }) {
@@ -81,5 +86,6 @@ export {
   getLegacyAuctionContract,
   getDeedContract,
   getBulkRenewalContract,
-  getOracleContract
+  getOracleContract,
+  getNameWrapperContract
 }

@@ -25,7 +25,7 @@ const endpoints = {
   '1': 'https://api.thegraph.com/subgraphs/name/ensdomains/ens',
   '3': 'https://api.thegraph.com/subgraphs/name/ensdomains/ensropsten',
   '4': 'https://api.thegraph.com/subgraphs/name/ensdomains/ensrinkeby',
-  '5': 'https://api.thegraph.com/subgraphs/name/limenal/ens-fork'
+  '5': 'https://api.thegraph.com/subgraphs/name/limenal/bdns-subgraph'
 }
 
 function getGraphQLAPI() {
@@ -54,7 +54,7 @@ function fromPromise(promise, operation) {
         observer.complete()
       })
       .catch(e => {
-        console.error('fromPromise error: ', e)
+        console.error(`fromPromise error in ${operation.operationName}: `, e)
         observer.error.bind(observer)
       })
   })

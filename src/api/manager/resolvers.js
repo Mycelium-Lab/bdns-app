@@ -25,7 +25,7 @@ import TEXT_RECORD_KEYS from 'constants/textRecords'
 import COIN_LIST_KEYS from 'constants/coinList'
 import { GET_REGISTRANT_FROM_SUBGRAPH } from '../../graphql/queries'
 import getClient from '../../apollo/apolloClient'
-import getENS, { getRegistrar } from 'apollo/mutations/ens'
+import getENS, { getNameWrapper, getRegistrar } from 'apollo/mutations/ens'
 import { isENSReadyReactive, namesReactive } from '../../apollo/reactiveVars'
 import getReverseRecord from './getReverseRecord'
 import { isEmptyAddress } from '../../utils/records'
@@ -169,12 +169,7 @@ export const handleMultipleTransactions = async (
 
 async function getRegistrarEntry(name) {
   const registrar = getRegistrar()
-  const nameArray = name.split('.')
-  if (nameArray.length > 3 || nameArray[1] !== 'eth') {
-    return {}
-  }
-
-  const entry = await registrar.getEntry(nameArray[0])
+  const entry = await registrar.getEntry(name)
   const {
     registrant,
     deedOwner,
@@ -193,7 +188,7 @@ async function getRegistrarEntry(name) {
   } = entry
 
   return {
-    name: `${name}`,
+    name,
     state: modeNames[state],
     stateError: null, // This is only used for dnssec errors
     registrationDate,
@@ -215,12 +210,12 @@ async function getRegistrarEntry(name) {
 async function getParent(name) {
   const ens = getENS()
   const nameArray = name.split('.')
-  if (nameArray.length < 1) {
-    return [null, null]
-  }
-  nameArray.shift()
-  const parent = nameArray.join('.')
-  const parentOwner = await ens.getOwner(parent)
+  // if (nameArray.length < 1) {
+  //   return [null, null]
+  // }
+  // nameArray.shift()
+  const parent = ''
+  const parentOwner = await ens.getOwner(name)
   return [parent, parentOwner]
 }
 
@@ -249,7 +244,48 @@ async function getRegistrant(name) {
     return null
   }
 }
-
+async function getOwnerOfNFT(name) {
+  const nameWrapper = getNameWrapper()
+  try {
+    const ownerOfNFT = await nameWrapper.getOwnerOfNFT(name)
+    return ownerOfNFT
+  } catch (e) {
+    return null
+  }
+}
+async function getIsWrapped(name) {
+  try {
+    const nameWrapper = getNameWrapper()
+    const isWrapped = await nameWrapper.getIsWrapped(name)
+    return isWrapped
+  } catch (e) {
+    return null
+  }
+}
+async function getIsApprovedForWrap(name) {
+  try {
+    const nameWrapper = getNameWrapper()
+    const isApproved = await nameWrapper.isApprovedForWrapByName(name)
+    return isApproved
+  } catch (e) {
+    return null
+  }
+}
+async function getNFTInfo(name) {
+  const isWrapped = await getIsWrapped(name)
+  let ownerOfNFT = null
+  let isApprovedForWrap = false
+  if (isWrapped) {
+    ownerOfNFT = await getOwnerOfNFT(name)
+  } else {
+    isApprovedForWrap = await getIsApprovedForWrap(name)
+  }
+  return {
+    isWrapped,
+    ownerOfNFT,
+    isApprovedForWrap
+  }
+}
 async function setDNSSECTldOwner(ens, tld, networkId) {
   let tldowner = (await ens.getOwner(tld)).toLocaleLowerCase()
   if (parseInt(tldowner) !== 0) return tldowner
@@ -269,7 +305,9 @@ async function getDNSEntryDetails(name) {
   const nameArray = name.split('.')
   const networkId = await getNetworkId()
   if (nameArray.length !== 2 || nameArray[1] === 'eth') return {}
-
+  if (nameArray.length === 1) {
+    nameArray.push('')
+  }
   let tld = nameArray[1]
   let owner
   let tldowner = await setDNSSECTldOwner(ens, tld, networkId)
@@ -344,7 +382,7 @@ const resolvers = {
     publicResolver: async () => {
       try {
         const ens = getENS()
-        const resolver = await ens.getAddress('resolver.eth')
+        const resolver = await ens.getAddress('resolver')
         return {
           address: resolver,
           __typename: 'Resolver'
@@ -426,7 +464,8 @@ const resolvers = {
           getParent(name),
           getDNSEntryDetails(name),
           getTestEntry(name),
-          getRegistrant(name)
+          getRegistrant(name),
+          getNFTInfo(name)
         ]
 
         const [
@@ -435,7 +474,8 @@ const resolvers = {
           [parent, parentOwner],
           dnsEntry,
           testEntry,
-          registrant
+          registrant,
+          nftInfo
         ] = await Promise.all(dataSources)
 
         const names = namesReactive()
@@ -446,6 +486,7 @@ const resolvers = {
           ...domainDetails,
           ...dnsEntry,
           ...testEntry,
+          ...nftInfo,
           registrant: registrant
             ? registrant
             : registrarEntry.registrant
@@ -543,7 +584,7 @@ const resolvers = {
       }
 
       async function calculateIsPublicResolverReady() {
-        const publicResolver = await ens.getAddress('resolver.eth')
+        const publicResolver = await ens.getAddress('resolver')
         return !OLD_RESOLVERS.map(a => a.toLowerCase()).includes(publicResolver)
       }
 
@@ -730,6 +771,42 @@ const resolvers = {
         console.error(e)
       }
     },
+    setNewNFTOwner: async (_, { from, to, id }) => {
+      try {
+        const nameWrapper = getNameWrapper()
+        const tx = await nameWrapper.safeTransferFrom(from, to, id)
+        return sendHelper(tx)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    unwrap: async (_, { labelhash, registrant, controller }) => {
+      try {
+        const nameWrapper = getNameWrapper()
+        const tx = await nameWrapper.unwrap(labelhash, registrant, controller)
+        return sendHelper(tx)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    approveWrap: async (_, { labelhash }) => {
+      try {
+        const nameWrapper = getNameWrapper()
+        const tx = await nameWrapper.approveWrap(labelhash)
+        return sendHelper(tx)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    wrap: async (_, { label, wrappedOwner, resolver }) => {
+      try {
+        const nameWrapper = getNameWrapper()
+        const tx = await nameWrapper.wrap(label, wrappedOwner, resolver)
+        return sendHelper(tx)
+      } catch (e) {
+        console.log(e)
+      }
+    },
     addMultiRecords: async (_, { name, records }) => {
       const ens = getENS()
 
@@ -911,7 +988,7 @@ const resolvers = {
 
       // get public resolver
       try {
-        const publicResolver = await ens.getAddress('resolver.eth')
+        const publicResolver = await ens.getAddress('resolver')
         const resolver = await ens.getResolver(name)
         const isOldContentResolver = calculateIsOldContentResolver(resolver)
 

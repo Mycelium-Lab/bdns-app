@@ -128,18 +128,7 @@ export function isLabelValid(name) {
 }
 
 export const parseSearchTerm = async term => {
-  const ens = getENS()
-  const domains = term.split('.')
-  const tld = domains[domains.length - 1]
-  try {
-    _validateName(tld)
-  } catch (e) {
-    return 'invalid'
-  }
-  const address = await ens.getOwner(tld)
-  console.log('ens:', ens)
-  console.log('domains:', domains)
-  return _parseSearchTerm(term, true)
+  return _parseSearchTerm(term)
 }
 
 export function humaniseName(name) {

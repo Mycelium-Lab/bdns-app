@@ -6,7 +6,12 @@ import { useTranslation } from 'react-i18next'
 import { useQuery, useMutation } from '@apollo/client'
 import { motion, AnimatePresence } from 'framer-motion'
 import EthVal from 'ethval'
-
+import {
+  SET_NEW_NFT_OWNER,
+  UNWRAP,
+  WRAP,
+  APPROVE_WRAP
+} from 'graphql/mutations'
 import {
   GET_PUBLIC_RESOLVER,
   GET_RENT_PRICE,
@@ -68,6 +73,13 @@ const Info = styled(DefaultInfo)`
 `
 
 const EditButton = styled(Button)`
+  width: 130px;
+`
+const ApproveButton = styled(Button)`
+  width: 130px;
+  margin-right: 15px;
+`
+const WrapButton = styled(Button)`
   width: 130px;
 `
 
@@ -222,6 +234,8 @@ function getToolTipMessage({ keyName, t, isExpiredRegistrant }) {
     case 'Resolver':
       return t(`singleName.tooltips.detailsItem.${keyName}`)
     case 'Controller':
+      return t(`singleName.tooltips.detailsItem.${keyName}`)
+    case 'nftowner':
       return t(`singleName.tooltips.detailsItem.${keyName}`)
     case 'registrant':
       if (isExpiredRegistrant) {
@@ -443,7 +457,45 @@ const Editable = ({
       }
     }
   })
-
+  const [transferNFTOwnerMutation] = useMutation(SET_NEW_NFT_OWNER, {
+    onCompleted: data => {
+      startPending(Object.values(data)[0])
+    }
+  })
+  const [unwrapMutation] = useMutation(UNWRAP, {
+    variables: {
+      labelhash: domain.labelhash,
+      registrant: account,
+      controller: account
+    },
+    onCompleted: data => {
+      if (Object.values(data)[0]) {
+        startPending(Object.values(data)[0])
+      }
+    }
+  })
+  const [wrapMutation] = useMutation(WRAP, {
+    variables: {
+      label: domain.label,
+      wrappedOwner: account,
+      resolver: domain.resolver
+    },
+    onCompleted: data => {
+      if (Object.values(data)[0]) {
+        startPending(Object.values(data)[0])
+      }
+    }
+  })
+  const [approveMutation] = useMutation(APPROVE_WRAP, {
+    variables: {
+      labelhash: domain.labelhash
+    },
+    onCompleted: data => {
+      if (Object.values(data)[0]) {
+        startPending(Object.values(data)[0])
+      }
+    }
+  })
   const [ownerMutation] = useMutation(
     chooseMutation(keyName, isOwnerOfParent),
     {
@@ -566,7 +618,37 @@ const Editable = ({
               x: 0
             }}
           >
-            {editButton ? (
+            {keyName === 'unwrap' ? (
+              <WrapButton
+                onClick={() => {
+                  unwrapMutation()
+                }}
+                data-testid="send-transaction"
+              >
+                {editButton}
+              </WrapButton>
+            ) : keyName === 'wrap' ? (
+              <>
+                <ApproveButton
+                  type={domain.isApprovedForWrap ? 'disabled' : 'primary'}
+                  onClick={() => {
+                    approveMutation()
+                  }}
+                  data-testid="send-transaction"
+                >
+                  Approve
+                </ApproveButton>
+                <WrapButton
+                  type={domain.isApprovedForWrap ? 'primary' : 'disabled'}
+                  onClick={() => {
+                    wrapMutation()
+                  }}
+                  data-testid="send-transaction"
+                >
+                  {editButton}
+                </WrapButton>
+              </>
+            ) : editButton ? (
               <EditButton
                 type={editButtonType}
                 onClick={startEditing}
@@ -690,15 +772,24 @@ const Editable = ({
               <SaveCancel
                 stopEditing={stopEditing}
                 mutation={() => {
-                  const variables = getVariables(keyName, {
-                    domain,
-                    variableName,
-                    newValue,
-                    duration
-                  })
-                  mutation({
-                    variables
-                  })
+                  if (keyName === 'nftowner') {
+                    const variables = {
+                      from: account,
+                      to: newValue,
+                      id: domain.label
+                    }
+                    transferNFTOwnerMutation({ variables })
+                  } else {
+                    const variables = getVariables(keyName, {
+                      domain,
+                      variableName,
+                      newValue,
+                      duration
+                    })
+                    mutation({
+                      variables
+                    })
+                  }
                 }}
                 value={
                   keyName === 'Expiration Date' ? formatDate(value) : value

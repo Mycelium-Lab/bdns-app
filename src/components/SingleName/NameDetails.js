@@ -46,6 +46,7 @@ function NameDetails({
 
   const isDeedOwner = domain.deedOwner === account
   const isRegistrant = !domain.available && domain.registrant === account
+  const isOwnerOfNFT = !domain.available && domain.ownerOfNFT === account
   let dnssecmode, canSubmit
   if ([5, 6].includes(domain.state) && !isMigrated) {
     dnssecmode = dnssecmodes[7]
@@ -78,6 +79,7 @@ function NameDetails({
             <DetailsContainer
               loadingIsMigrated={loadingIsMigrated}
               isMigratedToNewRegistry={isMigratedToNewRegistry}
+              isOwnerOfNFT={isOwnerOfNFT}
               isDeedOwner={isDeedOwner}
               isRegistrant={isRegistrant}
               showExplainer={showExplainer}

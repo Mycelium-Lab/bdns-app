@@ -1,4 +1,5 @@
-import { utils } from 'ethers'
+import { utils, BigNumber } from 'ethers'
+import ResultsContainer from 'routes/SearchResults'
 import { interfaces } from './constants/interfaces'
 import {
   getBulkRenewalContract,
@@ -82,7 +83,7 @@ export default class Registrar {
     })
     const permanentRegistrarController = getPermanentRegistrarControllerContract(
       {
-        address: '0x58f27df70315F6cF1cdfFe04E026CE8546271cd8',
+        address: process.env.REACT_APP_ROOT_REGISTRAR,
         provider
       }
     )
@@ -319,18 +320,26 @@ export default class Registrar {
 
   async getRentPrice(name, duration) {
     const permanentRegistrarController = this.permanentRegistrarController
-    let price = await permanentRegistrarController.rentPrice(name, duration)
+    let rentPriceResult = await permanentRegistrarController.rentPrice(
+      name,
+      duration
+    )
+    let price = rentPriceResult[0]
     return price
   }
 
   async getRentPriceAndPremium(name, duration, block = 'latest') {
     const permanentRegistrarController = this.permanentRegistrarController
-    let price = await permanentRegistrarController.rentPrice(name, duration, {
-      blockTag: block
-    })
-    let premium = await permanentRegistrarController.rentPrice(name, 0, {
-      blockTag: block
-    })
+    let rentPriceResult = await permanentRegistrarController.rentPrice(
+      name,
+      duration,
+      {
+        blockTag: block
+      }
+    )
+    let price = rentPriceResult[0]
+    let premium = rentPriceResult[1]
+
     return {
       price,
       premium
@@ -379,7 +388,12 @@ export default class Registrar {
     return permanentRegistrarController.maxCommitmentAge()
   }
 
-  async makeCommitment(name, owner, secret = '') {
+  async makeCommitment(
+    name,
+    owner,
+    secret = '',
+    duration = BigNumber.from('31556952')
+  ) {
     const permanentRegistrarControllerWithoutSigner = this
       .permanentRegistrarController
     const signer = await getSigner()
@@ -387,18 +401,36 @@ export default class Registrar {
       signer
     )
     const account = await getAccount()
-    const resolverAddr = await this.getAddress('resolver.eth')
-    if (parseInt(resolverAddr, 16) === 0) {
-      return permanentRegistrarController.makeCommitment(name, owner, secret)
-    } else {
-      return permanentRegistrarController.makeCommitmentWithConfig(
-        name,
-        owner,
-        secret,
-        resolverAddr,
-        account
-      )
-    }
+    const resolverAddr = await this.getAddress('resolver')
+    const abi = ['function setAddr(bytes32 node, address a)']
+    const iface = new utils.Interface(abi)
+    const callData = iface.encodeFunctionData('setAddr', [
+      namehash(name),
+      owner
+    ])
+    //if (parseInt(resolverAddr, 16) === 0) {
+    let result = await permanentRegistrarController.makeCommitment(
+      name,
+      owner,
+      duration,
+      secret,
+      resolverAddr,
+      [callData],
+      true,
+      0,
+      BigNumber.from('0xFFFFFFFFFFFFFFF0')
+    )
+    console.log('makeCommitmentResult', result)
+    return result
+    // } else {
+    //   return permanentRegistrarController.makeCommitmentWithConfig(
+    //     name,
+    //     owner,
+    //     secret,
+    //     resolverAddr,
+    //     account
+    //   )
+    // }
   }
 
   async checkCommitment(label, secret = '') {
@@ -413,7 +445,7 @@ export default class Registrar {
     return await permanentRegistrarController.commitments(commitment)
   }
 
-  async commit(label, secret = '') {
+  async commit(label, secret = '', duration) {
     const permanentRegistrarControllerWithoutSigner = this
       .permanentRegistrarController
     const signer = await getSigner()
@@ -421,7 +453,12 @@ export default class Registrar {
       signer
     )
     const account = await getAccount()
-    const commitment = await this.makeCommitment(label, account, secret)
+    const commitment = await this.makeCommitment(
+      label,
+      account,
+      secret,
+      duration
+    )
 
     return permanentRegistrarController.commit(commitment)
   }
@@ -439,49 +476,41 @@ export default class Registrar {
     console.log('account', account)
     const price = await this.getRentPrice(label, duration)
     const priceWithBuffer = getBufferedPrice(price)
-    const resolverAddr = await this.getAddress('resolver.eth')
+    const resolverAddr = await this.getAddress('resolver')
+    const abi = ['function setAddr(bytes32 node, address a)']
+    const iface = new utils.Interface(abi)
+    const callData = iface.encodeFunctionData('setAddr', [
+      namehash(label),
+      account
+    ])
     console.log('resolverAddr', resolverAddr)
-    if (parseInt(resolverAddr, 16) === 0) {
-      const gasLimit = await this.estimateGasLimit(() => {
-        return permanentRegistrarController.estimateGas.register(
-          label,
-          account,
-          duration,
-          secret,
-          { value: priceWithBuffer }
-        )
-      })
-
-      return permanentRegistrarController.register(
-        label,
-        account,
-        duration,
-        secret,
-        { value: priceWithBuffer, gasLimit }
-      )
-    } else {
-      const gasLimit = await this.estimateGasLimit(() => {
-        return permanentRegistrarController.estimateGas.registerWithConfig(
-          label,
-          account,
-          duration,
-          secret,
-          resolverAddr,
-          account,
-          { value: priceWithBuffer }
-        )
-      })
-
-      return permanentRegistrarController.registerWithConfig(
+    const gasLimit = await this.estimateGasLimit(() => {
+      return permanentRegistrarController.estimateGas.register(
         label,
         account,
         duration,
         secret,
         resolverAddr,
-        account,
-        { value: priceWithBuffer, gasLimit }
+        [callData],
+        true,
+        0,
+        BigNumber.from('0xFFFFFFFFFFFFFFF0'),
+        { value: priceWithBuffer }
       )
-    }
+    })
+
+    return permanentRegistrarController.register(
+      label,
+      account,
+      duration,
+      secret,
+      resolverAddr,
+      [callData],
+      true,
+      0,
+      BigNumber.from('0xFFFFFFFFFFFFFFF0'),
+      { value: priceWithBuffer, gasLimit }
+    )
   }
 
   async estimateGasLimit(cb) {
@@ -674,7 +703,7 @@ export default class Registrar {
     } else {
       // Only available for the new DNSRegistrar
       if (!isOld && owner === user) {
-        const resolverAddress = await this.getAddress('resolver.eth')
+        const resolverAddress = await this.getAddress('resolver')
         return registrar.proveAndClaimWithResolver(
           claim.encodedName,
           data,
@@ -718,7 +747,8 @@ export default class Registrar {
 }
 
 async function getEthResolver(ENS) {
-  const resolverAddr = await ENS.resolver(namehash('eth'))
+  const resolverAddr = await ENS.resolver(namehash(''))
+  console.log('RESOLVER ADDRESS:', resolverAddr)
   const provider = await getProvider()
   return getResolverContract({ address: resolverAddr, provider })
 }
@@ -731,25 +761,25 @@ export async function setupRegistrar(registryAddress) {
 
   // call await ENS.resolver(namehash('eth')), get Resolver contract object
   const Resolver = await getEthResolver(ENS)
-
+  console.log('namehash', namehash(''))
   // owner of namehash('eth') is BaseRegistrarImplemetation
-  let ethAddress = await ENS.owner(namehash('eth'))
+  let ethAddress = await ENS.owner(namehash(''))
 
   // get address of permanentRegistrar interface implementer (0x018fac06) - LegacyETHRegistrarController
   let controllerAddress = await Resolver.interfaceImplementer(
-    namehash('eth'),
+    namehash(''),
     permanentRegistrarInterfaceId
   )
   console.log('controllerAddress', controllerAddress)
   // get address of legacyRegistrar interface implementer (0x7ba18ba1)
   let legacyAuctionRegistrarAddress = await Resolver.interfaceImplementer(
-    namehash('eth'),
+    namehash(''),
     legacyRegistrarInterfaceId
   )
   console.log('legacyAuctionRegistrarAddress', legacyAuctionRegistrarAddress)
   // get address of bulkRenewal interface implementer (0x3150bfba)
   let bulkRenewalAddress = await Resolver.interfaceImplementer(
-    namehash('eth'),
+    namehash(''),
     bulkRenewalInterfaceId
   )
   console.log('bulkRenewalAddress', bulkRenewalAddress)
