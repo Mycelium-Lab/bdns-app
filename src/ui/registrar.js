@@ -83,7 +83,7 @@ export default class Registrar {
     })
     const permanentRegistrarController = getPermanentRegistrarControllerContract(
       {
-        address: '0x655b090b92E056D8eD7b7699Ef13a91d8bB10a41',
+        address: process.env.REACT_APP_ROOT_REGISTRAR,
         provider
       }
     )
