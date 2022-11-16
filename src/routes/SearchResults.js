@@ -28,16 +28,18 @@ const useCheckValidity = (_searchTerm, isENSReady) => {
   useEffect(() => {
     const checkValidity = async () => {
       let _parsed, searchTerm
+      searchTerm = _searchTerm
       setErrors([])
-
-      if (_searchTerm.split('.').length === 1) {
-        searchTerm = _searchTerm + '.eth'
-      } else {
-        searchTerm = _searchTerm
-      }
-
       const type = await parseSearchTerm(searchTerm)
-      if (!['unsupported', 'invalid', 'short'].includes(type)) {
+      if (
+        ![
+          'unsupported',
+          'invalid',
+          'short',
+          'startsWithIllegal',
+          'haveDots'
+        ].includes(type)
+      ) {
         _parsed = validateName(searchTerm)
         setParsed(_parsed)
       }
@@ -49,6 +51,10 @@ const useCheckValidity = (_searchTerm, isENSReady) => {
         setErrors(['tooShort'])
       } else if (type === 'invalid' || !validate(searchTerm)) {
         setErrors(['domainMalformed'])
+      } else if (type === 'startsWithIllegal') {
+        setErrors(['startsWithIllegal'])
+      } else if (type === 'haveDots') {
+        setErrors(['haveDots'])
       }
     }
     if (isENSReady) {

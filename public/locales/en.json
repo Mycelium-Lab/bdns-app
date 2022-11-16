@@ -254,6 +254,14 @@
       "long": "You have either added a domain without a TLD such as .eth or you have added unsupported characters.",
       "short": "Domain malformed. {{searchTerm}} is not a valid domain."
     },
+    "startsWithIllegal": {
+      "long": "To prevent fraud we don't allow users to register domains that start with 1, 3 and 0x",
+      "short": "Domain can't start with 1, 3 or 0x"
+    },
+    "haveDots": {
+      "long": "To prevent fraud we don't allow users to register domains that have dots in its name",
+      "short": "Domain can't have dots in its name"
+    },
     "tooShort": {
       "long": "Names less than 6 characters have been reserved for when the permanent registrar has been released.",
       "short1": "Name is too short.",

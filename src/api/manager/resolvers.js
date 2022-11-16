@@ -169,12 +169,7 @@ export const handleMultipleTransactions = async (
 
 async function getRegistrarEntry(name) {
   const registrar = getRegistrar()
-  const nameArray = name.split('.')
-  // if (nameArray.length > 3 || nameArray[1] !== 'eth') {
-  //   return {}
-  // }
-
-  const entry = await registrar.getEntry(nameArray[0])
+  const entry = await registrar.getEntry(name)
   const {
     registrant,
     deedOwner,
@@ -193,7 +188,7 @@ async function getRegistrarEntry(name) {
   } = entry
 
   return {
-    name: `${name}`,
+    name,
     state: modeNames[state],
     stateError: null, // This is only used for dnssec errors
     registrationDate,
@@ -251,15 +246,30 @@ async function getRegistrant(name) {
 }
 async function getOwnerOfNFT(name) {
   const nameWrapper = getNameWrapper()
-  return nameWrapper.getOwnerOfNFT(name)
+  try {
+    const ownerOfNFT = await nameWrapper.getOwnerOfNFT(name)
+    return ownerOfNFT
+  } catch (e) {
+    return null
+  }
 }
 async function getIsWrapped(name) {
-  const nameWrapper = getNameWrapper()
-  return nameWrapper.getIsWrapped(name)
+  try {
+    const nameWrapper = getNameWrapper()
+    const isWrapped = await nameWrapper.getIsWrapped(name)
+    return isWrapped
+  } catch (e) {
+    return null
+  }
 }
 async function getIsApprovedForWrap(name) {
-  const nameWrapper = getNameWrapper()
-  return nameWrapper.isApprovedForWrapByName(name)
+  try {
+    const nameWrapper = getNameWrapper()
+    const isApproved = await nameWrapper.isApprovedForWrapByName(name)
+    return isApproved
+  } catch (e) {
+    return null
+  }
 }
 async function getNFTInfo(name) {
   const isWrapped = await getIsWrapped(name)

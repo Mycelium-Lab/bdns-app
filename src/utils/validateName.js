@@ -8,52 +8,41 @@ function isEncodedLabelhash(hash) {
 
 export const parseSearchTerm = (term, validTld) => {
   console.log(term, validTld)
-  let regex = /[^.]+$/
-
   try {
+    if (validTld) {
+      throw new Error("Domain can't have same name as popular tlds")
+    }
     validateName(term)
   } catch (e) {
-    return 'invalid'
-  }
-
-  if (term.indexOf('.') !== -1) {
-    const termArray = term.split('.')
-    const tld = term.match(regex) ? term.match(regex)[0] : ''
-    if (validTld) {
-      if (tld === 'eth' && [...termArray[termArray.length - 2]].length < 3) {
-        // code-point length
-        return 'short'
-      }
-      return 'supported'
+    if (e.message === 'Domain cannot have dots') {
+      return 'haveDots'
+    } else if (e.message === 'Domain cannot start with "0x", "1" or "3"') {
+      return 'startsWithIllegal'
+    } else {
+      return 'invalid'
     }
-
-    return 'unsupported'
-  } else if (addressUtils.isAddress(term)) {
+  }
+  if (addressUtils.isAddress(term)) {
     return 'address'
   } else {
-    //check if the search term is actually a tld
-    if (validTld) {
-      return 'tld'
-    }
-    return 'search'
+    return 'supported'
   }
 }
-
+function checkIfStartsWithInvalidChars(name) {
+  let startsWithInvalidCharsRegex = /^(0x.*)|^[13].*/
+  return startsWithInvalidCharsRegex.test(name)
+}
 export function validateName(name) {
-  const nameArray = name.split('.')
-  const hasEmptyLabels = nameArray.some(label => label.length == 0)
-  if (hasEmptyLabels) throw new Error('Domain cannot have empty labels')
-  const normalizedArray = nameArray.map(label => {
-    if (label === '[root]') {
-      return label
-    } else {
-      return isEncodedLabelhash(label) ? label : normalize(label)
-    }
-  })
   try {
-    const name = normalizedArray.join('.')
-    if (!validate(name))
+    if (name.includes('.')) {
+      throw new Error('Domain cannot have dots')
+    }
+    if (checkIfStartsWithInvalidChars(name) && !addressUtils.isAddress(name)) {
+      throw new Error('Domain cannot start with "0x", "1" or "3"')
+    }
+    if (!validate(name)) {
       throw new Error('Domain cannot have invalid characters')
+    }
     return name
   } catch (e) {
     throw e
