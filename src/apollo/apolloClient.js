@@ -54,7 +54,7 @@ function fromPromise(promise, operation) {
         observer.complete()
       })
       .catch(e => {
-        console.error('fromPromise error: ', e)
+        console.error(`fromPromise error in ${operation.operationName}: `, e)
         observer.error.bind(observer)
       })
   })

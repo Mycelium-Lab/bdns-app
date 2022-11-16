@@ -73,7 +73,7 @@ function getCTA({
     PRICE_DECISION: (
       <Mutation
         mutation={COMMIT}
-        variables={{ label, secret, commitmentTimerRunning }}
+        variables={{ label, secret, commitmentTimerRunning, duration }}
         onCompleted={data => {
           const txHash = Object.values(data)[0]
           setTxHash(txHash)
@@ -245,7 +245,7 @@ const CTA = ({
   const history = useHistory()
   const account = useAccount()
   const [txHash, setTxHash] = useState(undefined)
-
+  console.log('duration in', duration)
   useEffect(() => {
     return () => {
       if (step === 'REVEAL_CONFIRMED') {

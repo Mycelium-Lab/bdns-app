@@ -67,9 +67,9 @@ const resolvers = {
     }
   },
   Mutation: {
-    async commit(_, { label, secret }) {
+    async commit(_, { label, secret, duration }) {
       const registrar = getRegistrar()
-      const tx = await registrar.commit(label, secret)
+      const tx = await registrar.commit(label, secret, duration)
       return sendHelper(tx)
     },
     async register(_, { label, duration, secret }) {
