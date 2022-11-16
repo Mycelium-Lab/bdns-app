@@ -37,6 +37,15 @@ export default function Filtering({
       >
         {t('address.filter.controller')}
       </Tab>
+      <Tab
+        active={activeFilter === 'wrapped'}
+        onClick={() => {
+          history.push(`${baseUrl}/wrapped`)
+          setActiveSort('alphabetical')
+        }}
+      >
+        {t('address.filter.wrapped')}
+      </Tab>
     </Tabs>
   )
 }

@@ -10,7 +10,8 @@ import {
   GET_FAVOURITES,
   GET_DOMAINS_SUBGRAPH,
   GET_REGISTRATIONS_SUBGRAPH,
-  GET_ERRORS
+  GET_ERRORS,
+  GET_WRAPPED_DOMAINS
 } from '../../graphql/queries'
 import { decryptName, checkIsDecrypted } from '../../api/labels'
 
@@ -165,11 +166,24 @@ function useDomains({
     skip: domainType !== 'controller',
     fetchPolicy: 'no-cache'
   })
-
+  const wrappedQuery = useQuery(GET_WRAPPED_DOMAINS, {
+    variables: {
+      id: address,
+      first: resultsPerPage,
+      skip,
+      orderBy: sort.type,
+      orderDirection: sort.direction,
+      expiryDate
+    },
+    skip: domainType !== 'wrapped',
+    fetchPolicy: 'no-cache'
+  })
   if (domainType === 'registrant') {
     return registrationsQuery
   } else if (domainType === 'controller') {
     return controllersQuery
+  } else if (domainType === 'wrapped') {
+    return wrappedQuery
   } else {
     throw new Error('Unrecognised domainType')
   }
@@ -283,8 +297,21 @@ export default function Address({
     normalisedDomains = [
       ...filterOutReverse(data.account.domains).map(domain => ({ domain }))
     ]
+  } else if (domainType === 'wrapped' && data.account) {
+    normalisedDomains = [...data.account.wrappedDomains]
   }
-
+  let query
+  switch (domainType) {
+    case 'registrant':
+      query = GET_REGISTRATIONS_SUBGRAPH
+      break
+    case 'controller':
+      query = GET_DOMAINS_SUBGRAPH
+      break
+    case 'wrapped':
+      query = GET_WRAPPED_DOMAINS
+      break
+  }
   let decryptedDomains = normaliseOrMark(
     decryptNames(normalisedDomains),
     'labelName',
@@ -416,11 +443,7 @@ export default function Address({
           resultsPerPage={resultsPerPage}
           setResultsPerPage={setResultsPerPage}
           pageLink={`/address/${address}/${domainType}`}
-          query={
-            domainType === 'registrant'
-              ? GET_REGISTRATIONS_SUBGRAPH
-              : GET_DOMAINS_SUBGRAPH
-          }
+          query={query}
         />
       </AddressContainer>
     </>

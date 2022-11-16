@@ -3,7 +3,8 @@
     "etherscanButton": "View on Etherscan",
     "filter": {
       "controller": "Controller",
-      "registrant": "Registrant"
+      "registrant": "Registrant",
+      "wrapped": "NFTs"
     },
     "namesExpiringSoonBanner": {
       "text": "Extend them all in one transaction by selecting multiple names and click 'Extend'",

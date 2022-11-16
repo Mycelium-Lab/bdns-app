@@ -233,6 +233,43 @@ export const GET_REGISTRATIONS_SUBGRAPH = gql`
     }
   }
 `
+export const GET_WRAPPED_DOMAINS = gql`
+  query getWrappedDomains(
+    $id: ID!
+    $first: Int
+    $skip: Int
+    $orderBy: WrappedDomain_orderBy
+    $orderDirection: OrderDirection
+    $expiryDate: Int
+  ) {
+    account(id: $id) {
+      wrappedDomains(
+        first: $first
+        skip: $skip
+        orderBy: $orderBy
+        orderDirection: $orderDirection
+        where: { expiryDate_gt: $expiryDate }
+      ) {
+        id
+        expiryDate
+        labelName
+        owner {
+          id
+        }
+        domain {
+          id
+          labelName
+          labelhash
+          name
+          isMigrated
+          parent {
+            name
+          }
+        }
+      }
+    }
+  }
+`
 
 export const GET_REGISTRATIONS_BY_IDS_SUBGRAPH = gql`
   query getRegistrationsById($ids: [ID]) {
