@@ -86,15 +86,10 @@ export class ENS {
     const owner = await this.ENS.owner(namehash)
     return owner
   }
-
   async getResolver(name) {
-    const provider = await getProvider()
-    let resolver = await provider.getResolver(name)
-    if (resolver) {
-      return resolver.address
-    }
+    const namehash = getNamehash(name)
+    return this.ENS.resolver(namehash)
   }
-
   async _getResolverObject(name) {
     const provider = await getProvider()
     return provider.getResolver(name)
@@ -123,38 +118,43 @@ export class ENS {
   }
 
   async getAddr(name, key) {
-    if (!name) return emptyAddress
-    const resolver = await this._getResolverObject(name)
-    if (!resolver) return emptyAddress
+    const resolverAddr = await this.getResolver(name)
+    if (parseInt(resolverAddr, 16) === 0) return emptyAddress
+    return this.getAddrWithResolver(name, key, resolverAddr)
+  }
+  async getAddrWithResolver(name, key, resolverAddr) {
+    const namehash = getNamehash(name)
     try {
+      const provider = await getProvider()
+      const Resolver = getResolverContract({
+        address: resolverAddr,
+        provider
+      })
       const { coinType, encoder } = formatsByName[key]
-      const encodedCoinType = utils.hexZeroPad(
-        BigNumber.from(coinType).toHexString(),
-        32
-      )
-      const data = await resolver._fetchBytes('0xf1cb7e06', encodedCoinType)
-      if ([emptyAddress, '0x', null].includes(data)) return emptyAddress
-      let buffer = Buffer.from(data.slice(2), 'hex')
-      return encoder(buffer)
+      const addr = await Resolver['addr(bytes32,uint256)'](namehash, coinType)
+      if (addr === '0x') return emptyAddress
+
+      return encoder(Buffer.from(addr.slice(2), 'hex'))
     } catch (e) {
-      console.log(e)
       console.warn(
         'Error getting addr on the resolver contract, are you sure the resolver address is a resolver contract?'
       )
       return emptyAddress
     }
   }
-
   async getContent(name) {
-    const resolver = await this._getResolverObject(name)
-    if (!resolver) {
+    const resolverAddr = await this.getResolver(name)
+    return this.getContentWithResolver(name, resolverAddr)
+  }
+  async getContentWithResolver(name, resolverAddr) {
+    if (parseInt(resolverAddr, 16) === 0) {
       return emptyAddress
     }
     try {
       const namehash = getNamehash(name)
       const provider = await getProvider()
       const Resolver = getResolverContract({
-        address: resolver.address,
+        address: resolverAddr,
         provider
       })
       const contentHashSignature = utils
@@ -164,11 +164,10 @@ export class ENS {
       const isContentHashSupported = await Resolver.supportsInterface(
         contentHashSignature
       )
-      if (isContentHashSupported) {
-        // use _fetchBytes as ethers.js currently only supports ipfs
-        const encoded = await resolver._fetchBytes('0xbc1c58d1')
-        const { protocolType, decoded, error } = decodeContenthash(encoded)
 
+      if (isContentHashSupported) {
+        const encoded = await Resolver.contenthash(namehash)
+        const { protocolType, decoded, error } = decodeContenthash(encoded)
         if (error) {
           return {
             value: error,
@@ -193,12 +192,22 @@ export class ENS {
       return { value: message, contentType: 'error' }
     }
   }
-
   async getText(name, key) {
-    const resolver = await this._getResolverObject(name)
-    if (!resolver) return ''
+    const resolverAddr = await this.getResolver(name)
+    return this.getTextWithResolver(name, key, resolverAddr)
+  }
+  async getTextWithResolver(name, key, resolverAddr) {
+    if (parseInt(resolverAddr, 16) === 0) {
+      return ''
+    }
+    const namehash = getNamehash(name)
     try {
-      const addr = await resolver.getText(key)
+      const provider = await getProvider()
+      const Resolver = getResolverContract({
+        address: resolverAddr,
+        provider
+      })
+      const addr = await Resolver.text(namehash, key)
       return addr
     } catch (e) {
       console.warn(
@@ -207,7 +216,6 @@ export class ENS {
       return ''
     }
   }
-
   async getName(address) {
     const provider = await getProvider()
     const name = await provider.lookupAddress(address)

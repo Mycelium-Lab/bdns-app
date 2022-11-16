@@ -583,6 +583,7 @@ function DetailsContainer({
       <ResolverAndRecords
         domain={domain}
         isOwner={isOwner}
+        isOwnerOfNFT={isOwnerOfNFT}
         refetch={refetch}
         account={account}
         isMigratedToNewRegistry={isMigratedToNewRegistry}

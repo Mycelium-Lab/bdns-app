@@ -111,6 +111,7 @@ function hasAResolver(resolver) {
 export default function ResolverAndRecords({
   domain,
   isOwner,
+  isOwnerOfNFT,
   refetch,
   account,
   isMigratedToNewRegistry,
@@ -187,6 +188,7 @@ export default function ResolverAndRecords({
           refetch={refetch}
           account={account}
           isOwner={isOwner}
+          isOwnerOfNFT={isOwnerOfNFT}
           hasResolver={hasResolver}
           needsToBeMigrated={needsToBeMigrated}
           isOldPublicResolver={isOldPublicResolver}

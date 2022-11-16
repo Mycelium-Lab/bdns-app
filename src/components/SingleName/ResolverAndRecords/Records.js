@@ -413,6 +413,7 @@ export const useResetFormOnAccountChange = (
 export default function Records({
   domain,
   isOwner,
+  isOwnerOfNFT,
   hasResolver,
   isOldPublicResolver,
   isDeprecatedResolver,
@@ -471,7 +472,7 @@ export default function Records({
   )
 
   const shouldShowRecords = calculateShouldShowRecords(
-    isOwner,
+    isOwnerOfNFT,
     hasResolver,
     hasAnyRecord(domain)
   )
@@ -480,14 +481,14 @@ export default function Records({
   }
 
   const canEditRecords =
-    !isOldPublicResolver && !isDeprecatedResolver && isOwner && !isReadOnly
+    !isOldPublicResolver && !isDeprecatedResolver && isOwnerOfNFT && !isReadOnly
 
   return (
     <RecordsWrapper
       shouldShowRecords={shouldShowRecords}
       needsToBeMigrated={needsToBeMigrated}
     >
-      {!canEditRecords && isOwner ? (
+      {!canEditRecords && isOwnerOfNFT ? (
         <CantEdit>{t('singleName.record.cantEdit')}</CantEdit>
       ) : (
         <AddRecord
