@@ -253,7 +253,29 @@ async function getOwnerOfNFT(name) {
   const nameWrapper = getNameWrapper()
   return nameWrapper.getOwnerOfNFT(name)
 }
-
+async function getIsWrapped(name) {
+  const nameWrapper = getNameWrapper()
+  return nameWrapper.getIsWrapped(name)
+}
+async function getIsApprovedForWrap(name) {
+  const nameWrapper = getNameWrapper()
+  return nameWrapper.isApprovedForWrapByName(name)
+}
+async function getNFTInfo(name) {
+  const isWrapped = await getIsWrapped(name)
+  let ownerOfNFT = null
+  let isApprovedForWrap = false
+  if (isWrapped) {
+    ownerOfNFT = await getOwnerOfNFT(name)
+  } else {
+    isApprovedForWrap = await getIsApprovedForWrap(name)
+  }
+  return {
+    isWrapped,
+    ownerOfNFT,
+    isApprovedForWrap
+  }
+}
 async function setDNSSECTldOwner(ens, tld, networkId) {
   let tldowner = (await ens.getOwner(tld)).toLocaleLowerCase()
   if (parseInt(tldowner) !== 0) return tldowner
@@ -433,7 +455,7 @@ const resolvers = {
           getDNSEntryDetails(name),
           getTestEntry(name),
           getRegistrant(name),
-          getOwnerOfNFT(name)
+          getNFTInfo(name)
         ]
 
         const [
@@ -443,7 +465,7 @@ const resolvers = {
           dnsEntry,
           testEntry,
           registrant,
-          ownerOfNFT
+          nftInfo
         ] = await Promise.all(dataSources)
 
         const names = namesReactive()
@@ -454,6 +476,7 @@ const resolvers = {
           ...domainDetails,
           ...dnsEntry,
           ...testEntry,
+          ...nftInfo,
           registrant: registrant
             ? registrant
             : registrarEntry.registrant
@@ -461,7 +484,6 @@ const resolvers = {
             : null,
           parent,
           parentOwner,
-          ownerOfNFT,
           __typename: 'Node'
         })
         detailedNode = setState(detailedNode)
@@ -743,6 +765,33 @@ const resolvers = {
       try {
         const nameWrapper = getNameWrapper()
         const tx = await nameWrapper.safeTransferFrom(from, to, id)
+        return sendHelper(tx)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    unwrap: async (_, { labelhash, registrant, controller }) => {
+      try {
+        const nameWrapper = getNameWrapper()
+        const tx = await nameWrapper.unwrap(labelhash, registrant, controller)
+        return sendHelper(tx)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    approveWrap: async (_, { labelhash }) => {
+      try {
+        const nameWrapper = getNameWrapper()
+        const tx = await nameWrapper.approveWrap(labelhash)
+        return sendHelper(tx)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    wrap: async (_, { label, wrappedOwner, resolver }) => {
+      try {
+        const nameWrapper = getNameWrapper()
+        const tx = await nameWrapper.wrap(label, wrappedOwner, resolver)
         return sendHelper(tx)
       } catch (e) {
         console.log(e)

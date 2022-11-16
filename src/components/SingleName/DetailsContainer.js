@@ -15,7 +15,9 @@ import {
   SET_OWNER,
   SET_REGISTRANT,
   SET_SUBNODE_OWNER,
-  SET_NEW_NFT_OWNER
+  SET_NEW_NFT_OWNER,
+  UNWRAP,
+  WRAP
 } from '../../graphql/mutations'
 import { SingleNameBlockies } from '../Blockies'
 import You from '../Icons/You'
@@ -298,20 +300,57 @@ function DetailsContainer({
               confirm={true}
               copyToClipboard={true}
             />
-            <DetailsItemEditable
-              domain={domain}
-              keyName="nftowner"
-              value={domain.ownerOfNFT}
-              canEdit={isOwnerOfNFT && !isExpired && !readOnly}
-              isExpiredRegistrant={isRegistrant && isExpired}
-              type="address"
-              editButton={t('c.transfer')}
-              mutationButton={t('c.transfer')}
-              mutation={SET_NEW_NFT_OWNER}
-              refetch={refetch}
-              confirm={true}
-              copyToClipboard={true}
-            />
+            {domain.isWrapped ? (
+              <>
+                <DetailsItemEditable
+                  domain={domain}
+                  keyName="nftowner"
+                  value={domain.ownerOfNFT}
+                  canEdit={isOwnerOfNFT && !isExpired && !readOnly}
+                  isExpiredRegistrant={isRegistrant && isExpired}
+                  type="address"
+                  editButton={t('c.transfer')}
+                  mutationButton={t('c.transfer')}
+                  mutation={SET_NEW_NFT_OWNER}
+                  refetch={refetch}
+                  confirm={true}
+                  copyToClipboard={true}
+                />
+                <DetailsItemEditable
+                  domain={domain}
+                  keyName="unwrap"
+                  value={'YES'}
+                  canEdit={
+                    isOwnerOfNFT && !isExpired && !readOnly && domain.isWrapped
+                  }
+                  isExpiredRegistrant={isRegistrant && isExpired}
+                  type="bool"
+                  editButton={t('c.unwrapAction')}
+                  mutationButton={t('c.unwrapAction')}
+                  mutation={UNWRAP}
+                  refetch={refetch}
+                  confirm={true}
+                  copyToClipboard={false}
+                />
+              </>
+            ) : (
+              <DetailsItemEditable
+                domain={domain}
+                keyName="wrap"
+                value={'NO'}
+                canEdit={
+                  isOwner && !isExpired && !readOnly && !domain.isWrapped
+                }
+                isExpiredRegistrant={isRegistrant && isExpired}
+                type="bool"
+                editButton={t('c.wrapAction')}
+                mutationButton={t('c.wrapAction')}
+                mutation={WRAP}
+                refetch={refetch}
+                confirm={true}
+                copyToClipboard={false}
+              />
+            )}
           </>
         ) : domain.parent === '' && !domain.isNewRegistrar ? (
           <>

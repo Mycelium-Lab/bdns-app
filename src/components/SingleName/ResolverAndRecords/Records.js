@@ -481,14 +481,17 @@ export default function Records({
   }
 
   const canEditRecords =
-    !isOldPublicResolver && !isDeprecatedResolver && isOwnerOfNFT && !isReadOnly
+    !isOldPublicResolver &&
+    !isDeprecatedResolver &&
+    (isOwnerOfNFT || isOwner) &&
+    !isReadOnly
 
   return (
     <RecordsWrapper
       shouldShowRecords={shouldShowRecords}
       needsToBeMigrated={needsToBeMigrated}
     >
-      {!canEditRecords && isOwnerOfNFT ? (
+      {!canEditRecords && (isOwnerOfNFT || isOwner) ? (
         <CantEdit>{t('singleName.record.cantEdit')}</CantEdit>
       ) : (
         <AddRecord

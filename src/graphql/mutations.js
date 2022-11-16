@@ -145,6 +145,29 @@ export const SET_NEW_NFT_OWNER = gql`
     setNewNFTOwner(from: $from, to: $to, id: $id)
   }
 `
+export const UNWRAP = gql`
+  mutation unwrap(
+    $labelhash: String
+    $registrant: String
+    $controller: String
+  ) {
+    unwrap(
+      labelhash: $labelhash
+      registrant: $registrant
+      controller: $controller
+    )
+  }
+`
+export const WRAP = gql`
+  mutation wrap($label: String, $wrappedOwner: String, $resolver: String) {
+    wrap(label: $label, wrappedOwner: $wrappedOwner, resolver: $resolver)
+  }
+`
+export const APPROVE_WRAP = gql`
+  mutation approveWrap($labelhash: String) {
+    approveWrap(labelhash: $labelhash)
+  }
+`
 
 /* Registrar Mutations */
 

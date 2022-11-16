@@ -62,6 +62,74 @@ export default class NameWrapper {
     const account = await getAccount()
     return ownerOfNFT.toLowerCase() === account.toLowerCase()
   }
+  async getIsWrapped(name) {
+    let provider = await getProvider()
+    const NameWrapperContract = getNameWrapperContract({
+      address: process.env.REACT_APP_NAME_WRAPPER,
+      provider
+    })
+    const namehash = utils.namehash(name)
+    return NameWrapperContract.isWrapped(namehash)
+  }
+  async unwrap(labelhash, registrant, controller) {
+    let provider = await getProvider()
+    const NameWrapperContractWithoutSigner = getNameWrapperContract({
+      address: process.env.REACT_APP_NAME_WRAPPER,
+      provider
+    })
+    const signer = await getSigner()
+    const NameWrapperContract = NameWrapperContractWithoutSigner.connect(signer)
+    return NameWrapperContract.unwrapROOT2LD(labelhash, registrant, controller)
+  }
+  async getApproved(labelhash) {
+    let provider = await getProvider()
+    const BaseRegistrarImplementation = getPermanentRegistrarContract({
+      address: process.env.REACT_APP_BASE_REGISTRAR,
+      provider
+    })
+    return BaseRegistrarImplementation.getApproved(labelhash)
+  }
+  async isApprovedForWrap(labelhash) {
+    const approvedAddress = await this.getApproved(labelhash)
+    return approvedAddress === process.env.REACT_APP_NAME_WRAPPER
+  }
+  async isApprovedForWrapByName(name) {
+    const approvedAddress = await this.getApproved(utils.id(name))
+    return approvedAddress === process.env.REACT_APP_NAME_WRAPPER
+  }
+  async approveWrap(labelhash) {
+    let provider = await getProvider()
+    const BaseRegistrarImplementationWithoutSigner = getPermanentRegistrarContract(
+      {
+        address: process.env.REACT_APP_BASE_REGISTRAR,
+        provider
+      }
+    )
+    const signer = await getSigner()
+    const BaseRegistrarImplementation = BaseRegistrarImplementationWithoutSigner.connect(
+      signer
+    )
+    return BaseRegistrarImplementation.approve(
+      process.env.REACT_APP_NAME_WRAPPER,
+      labelhash
+    )
+  }
+  async wrap(label, wrappedOwner, resolver) {
+    let provider = await getProvider()
+    const NameWrapperContractWithoutSigner = getNameWrapperContract({
+      address: process.env.REACT_APP_NAME_WRAPPER,
+      provider
+    })
+    const signer = await getSigner()
+    const NameWrapperContract = NameWrapperContractWithoutSigner.connect(signer)
+    return NameWrapperContract.wrapROOT2LD(
+      label,
+      wrappedOwner,
+      0,
+      BigNumber.from('0xFFFFFFFFFFFFFFF0'),
+      resolver
+    )
+  }
   async safeTransferFrom(from, to, id) {
     let provider = await getProvider()
     const NameWrapperContractWithoutSigner = getNameWrapperContract({
