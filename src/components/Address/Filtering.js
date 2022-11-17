@@ -23,6 +23,15 @@ export default function Filtering({
   return (
     <Tabs className={className}>
       <Tab
+        active={activeFilter === 'wrapped'}
+        onClick={() => {
+          history.push(`${baseUrl}/wrapped`)
+          setActiveSort('alphabetical')
+        }}
+      >
+        {t('address.filter.wrapped')}
+      </Tab>
+      <Tab
         active={activeFilter === 'registrant'}
         onClick={() => history.push(`${baseUrl}/registrant`)}
       >
@@ -36,15 +45,6 @@ export default function Filtering({
         }}
       >
         {t('address.filter.controller')}
-      </Tab>
-      <Tab
-        active={activeFilter === 'wrapped'}
-        onClick={() => {
-          history.push(`${baseUrl}/wrapped`)
-          setActiveSort('alphabetical')
-        }}
-      >
-        {t('address.filter.wrapped')}
       </Tab>
     </Tabs>
   )
