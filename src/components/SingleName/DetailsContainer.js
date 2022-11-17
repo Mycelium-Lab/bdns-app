@@ -24,13 +24,12 @@ import You from '../Icons/You'
 import SubmitProof from './SubmitProof'
 import Tooltip from '../Tooltip/Tooltip'
 import { HR } from '../Typography/Basic'
-import { formatDate } from '../../utils/dates'
+import { formatDate, formatDateUnix } from '../../utils/dates'
 import ResolverAndRecords from './ResolverAndRecords'
 import NameClaimTestDomain from './NameClaimTestDomain'
 import DefaultLoader from '../Loader'
 import DefaultButton from '../Forms/Button'
 import DefaultAddressLink from '../Links/AddressLink'
-
 import { ReactComponent as DefaultOrangeExclamation } from '../Icons/OrangeExclamation.svg'
 
 const Details = styled('section')`
@@ -220,7 +219,8 @@ function DetailsContainer({
     parseInt(domain.owner) === 0 &&
     domain.parent !== '' &&
     !domain.isDNSRegistrar
-
+  const showBrandsUnclaimableWarning =
+    domain.domainType === 'BRAND' && !domain.isDomainUlocked
   return (
     <Details data-testid="name-details">
       {isOwner && <SetupName initialState={showExplainer} />}
@@ -237,6 +237,16 @@ function DetailsContainer({
             readOnly={readOnly}
           />
         )}
+      {showBrandsUnclaimableWarning && (
+        <GracePeriodWarningContainer>
+          <DetailsItem>
+            {t('c.brandsCannotClaim', {
+              brandsUnlockTime: formatDateUnix(domain.unlockTimestamp),
+              brandName: domain.label
+            })}
+          </DetailsItem>
+        </GracePeriodWarningContainer>
+      )}
       {domainParent ? (
         <DetailsItem uneditable>
           <DetailsKey>{t('c.parent')}</DetailsKey>

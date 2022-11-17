@@ -25,7 +25,11 @@ import TEXT_RECORD_KEYS from 'constants/textRecords'
 import COIN_LIST_KEYS from 'constants/coinList'
 import { GET_REGISTRANT_FROM_SUBGRAPH } from '../../graphql/queries'
 import getClient from '../../apollo/apolloClient'
-import getENS, { getNameWrapper, getRegistrar } from 'apollo/mutations/ens'
+import getENS, {
+  getNameWrapper,
+  getRegistrar,
+  getReservedDomains
+} from 'apollo/mutations/ens'
 import { isENSReadyReactive, namesReactive } from '../../apollo/reactiveVars'
 import getReverseRecord from './getReverseRecord'
 import { isEmptyAddress } from '../../utils/records'
@@ -242,6 +246,38 @@ async function getRegistrant(name) {
   } catch (e) {
     console.log('GraphQL error from getRegistrant', e)
     return null
+  }
+}
+async function getDomainType(label) {
+  const reservedDomains = getReservedDomains()
+  try {
+    const domainType = await reservedDomains.getDomainType(label)
+    return domainType
+  } catch (e) {
+    return null
+  }
+}
+async function getBrandsUnlockTimestamp() {
+  const reservedDomains = getReservedDomains()
+  try {
+    const unlockTimestamp = await reservedDomains.getBrandsUnlockTimestamp()
+    return unlockTimestamp
+  } catch (e) {
+    return null
+  }
+}
+async function getDomainTypeInfo(label) {
+  let domainType = await getDomainType(label)
+  let unlockTimestamp
+  let isDomainUnlocked = true
+  if (domainType === 'BRAND') {
+    unlockTimestamp = await getBrandsUnlockTimestamp()
+    isDomainUnlocked = parseInt(new Date().getTime() / 1000) >= unlockTimestamp
+  }
+  return {
+    domainType,
+    unlockTimestamp,
+    isDomainUnlocked
   }
 }
 async function getOwnerOfNFT(name) {
@@ -465,7 +501,8 @@ const resolvers = {
           getDNSEntryDetails(name),
           getTestEntry(name),
           getRegistrant(name),
-          getNFTInfo(name)
+          getNFTInfo(name),
+          getDomainTypeInfo(name)
         ]
 
         const [
@@ -475,7 +512,8 @@ const resolvers = {
           dnsEntry,
           testEntry,
           registrant,
-          nftInfo
+          nftInfo,
+          domainTypeInfo
         ] = await Promise.all(dataSources)
 
         const names = namesReactive()
@@ -487,6 +525,7 @@ const resolvers = {
           ...dnsEntry,
           ...testEntry,
           ...nftInfo,
+          ...domainTypeInfo,
           registrant: registrant
             ? registrant
             : registrarEntry.registrant

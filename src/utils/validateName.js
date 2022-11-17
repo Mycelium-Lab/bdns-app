@@ -29,7 +29,7 @@ export const parseSearchTerm = (term, validTld) => {
   }
 }
 function checkIfStartsWithInvalidChars(name) {
-  let startsWithInvalidCharsRegex = /^(0x.*)|^[13].*/
+  let startsWithInvalidCharsRegex = /^(0x.{11,})|^[13].{11,}/
   return startsWithInvalidCharsRegex.test(name)
 }
 export function validateName(name) {

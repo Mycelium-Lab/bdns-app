@@ -1,9 +1,9 @@
 import { getProvider, setupWeb3, getNetworkId, getNetwork } from './web3'
 import { ENS } from './ens.js'
 import { setupRegistrar } from './registrar'
-import NameWrapper, { setupNameWrapper } from './nameWrapper'
+import NameWrapper from './nameWrapper'
 export { utils, ethers } from 'ethers'
-
+import ReservedDomains from './reservedDomains'
 export async function setupENS({
   customProvider,
   ensAddress,
@@ -26,6 +26,8 @@ export async function setupENS({
   const registrar = await setupRegistrar(ens.registryAddress)
   console.log('ENS registrar - ', registrar)
   const nameWrapper = new NameWrapper()
+
+  const reservedDomains = new ReservedDomains()
   console.log('ENS Name Wrapper - ', nameWrapper)
   const network = await getNetwork()
   return {
@@ -34,7 +36,8 @@ export async function setupENS({
     provider: customProvider,
     network,
     providerObject: provider,
-    nameWrapper
+    nameWrapper,
+    reservedDomains
   }
 }
 

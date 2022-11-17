@@ -4,7 +4,8 @@ import { isENSReadyReactive } from '../reactiveVars'
 let ens = {},
   registrar = {},
   ensRegistryAddress = undefined,
-  nameWrapper = {}
+  nameWrapper = {},
+  reservedDomains = {}
 
 export async function setup({
   reloadOnAccountsChange,
@@ -24,11 +25,13 @@ export async function setup({
     ens: ensInstance,
     registrar: registrarInstance,
     providerObject,
-    nameWrapper: nameWrapperInstance
+    nameWrapper: nameWrapperInstance,
+    reservedDomains: reservedDomainsInstance
   } = await setupENS(option)
   ens = ensInstance
   nameWrapper = nameWrapperInstance
   registrar = registrarInstance
+  reservedDomains = reservedDomainsInstance
   console.log('Registrar: ', registrar)
   ensRegistryAddress = ensAddress
   isENSReadyReactive(true)
@@ -37,6 +40,9 @@ export async function setup({
 
 export function getRegistrar() {
   return registrar
+}
+export function getReservedDomains() {
+  return reservedDomains
 }
 export function getNameWrapper() {
   return nameWrapper
