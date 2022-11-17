@@ -97,7 +97,7 @@
       "manage": {
         "text1": "Como eres el propietario, puedes manejar tu nombre ahora.",
         "text2": "Como no eres el propietario, sólo puedes ver el nombre en el gestionador.",
-        "title": "¡Felicidades! Has añadido el dominio DNS al registro de ENS correctamente."
+        "title": "¡Felicidades! Has añadido el dominio DNS al registro de BDNS correctamente."
       },
       "proof": {
         "text1": "La dirección que aparece en registro de texto DNS es tu misma dirección.",
@@ -128,11 +128,11 @@
     "announcements": {
     },
     "howtouse": {
-      "body": "La aplicación ENS es una interfaz gráfica de usuario para usuarios no-técnicos. Te permite buscar cualquier nombre, gestionar sus direcciones o los recursos a los que direcciona, o crear subdominios para cada uno.",
+      "body": "La aplicación BDNS es una interfaz gráfica de usuario para usuarios no-técnicos. Te permite buscar cualquier nombre, gestionar sus direcciones o los recursos a los que direcciona, o crear subdominios para cada uno.",
       "title": "Cómo utilizar ENS"
     },
     "whatisens": {
-      "body": "El Servicio de Nombres de Ethereum  es un sistema de nombres distribuido, abierto y extensible basado en la cadena de bloques de Ethereum. El ENS elimina la necesidad de copiar o escribir direcciones largas.",
+      "body": "El Servicio de Nombres de Ethereum  es un sistema de nombres distribuido, abierto y extensible basado en la cadena de bloques de Ethereum. El BDNS elimina la necesidad de copiar o escribir direcciones largas.",
       "title": "Lo que es"
     }
   },
@@ -235,8 +235,8 @@
       "title": "Register {{name}}"
     },
     "renewal": {
-      "description": "Your ENS name is expiring soon, please renew it",
-      "title": "Renew your ENS domain {{name}}"
+      "description": "Your BDNS name is expiring soon, please renew it",
+      "title": "Renew your BDNS domain {{name}}"
     }
   },
   "search": {
@@ -296,7 +296,7 @@
     },
     "learnmore": {
       "step1": {
-        "text": "Once you register your name, Go to 'My Account' page and set a reverse record. This allows dapps to find and display your ENS name when you connect to them with your Ethereum account. ",
+        "text": "Once you register your name, Go to 'My Account' page and set a reverse record. This allows dapps to find and display your BDNS name when you connect to them with your Ethereum account. ",
         "title": "1. Set a reverse record"
       },
       "step2": {
@@ -304,7 +304,7 @@
         "title": "2. Set other records"
       },
       "step3": {
-        "text": "You can host your static html/css/images on IPFS and put the hash in your ENS name's Content record. Then it can be resolved by ENS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.limo' appended to the end (e.g. ens.eth.limo).",
+        "text": "You can host your static html/css/images on IPFS and put the hash in your BDNS name's Content record. Then it can be resolved by ENS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.limo' appended to the end (e.g. ens.eth.limo).",
         "title": "3. Set a content hash of a decentralized website"
       },
       "title": "Learn how to manage your name."
@@ -322,10 +322,10 @@
       "messages": {
         "explanation": "La resolución reversa traduce una dirección a un nombre. Permite a las Dapps mostrar '{{name}}' en lugar de la dirección larga '{{account}}'. Si quieres configurar la resolución inversa para una cuenta distinta, por favor cambia tu cuenta en tu navegador de dapps.",
         "explanation2": "You can only select names you set this Ethereum Address as.",
-        "noForwardRecordAavilable": "You either do not own any ENS names, or your ENS names have no ETH records set to this address.",
+        "noForwardRecordAavilable": "You either do not own any BDNS names, or your BDNS names have no ETH records set to this address.",
         "notSet": "Registro reverso: no configurado.",
         "reverseRecordRemoval": "Are you sure you want to delete the reverse record?",
-        "selectPlaceholder": "Select your ENS name",
+        "selectPlaceholder": "Select your BDNS name",
         "setTo": "Registro reverso: Configurado a",
         "setToDifferent": "Registro reverso: Configurar a otro nombre:"
       },
