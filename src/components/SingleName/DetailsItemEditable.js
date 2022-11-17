@@ -25,7 +25,10 @@ import { useEditable } from '../hooks'
 import { calculateDuration, formatDate } from 'utils/dates'
 import { trackReferral } from 'utils/analytics'
 import { addressUtils, emptyAddress } from 'utils/utils'
-import { refetchTilUpdatedSingle } from 'utils/graphql'
+import {
+  refetchTilUpdatedSingle,
+  refetchTilUpdatedSingleByValue
+} from 'utils/graphql'
 import Bin from '../Forms/Bin'
 import { useAccount } from '../QueryAccount'
 import { getEnsAddress } from '../../apollo/mutations/ens'
@@ -388,9 +391,9 @@ const Editable = ({
     stopEditing,
     updateValue,
     startPending,
-    setConfirmed
+    setConfirmed,
+    resetState
   } = actions
-
   //only used with Expiration date
   let duration
   let expirationDate
@@ -597,6 +600,19 @@ const Editable = ({
                   },
                   getterString: 'singleName'
                 })
+              } else if (keyName === 'unwrap') {
+                refetchTilUpdatedSingleByValue({
+                  refetch,
+                  interval: 300,
+                  keyToCompare: 'registrant',
+                  getterString: 'singleName',
+                  keyValue: account
+                })
+              } else if (keyName === 'wrap') {
+                setConfirmed()
+                resetState()
+                refetch()
+                return
               } else {
                 refetch()
               }

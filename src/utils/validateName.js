@@ -32,10 +32,17 @@ function checkIfStartsWithInvalidChars(name) {
   let startsWithInvalidCharsRegex = /^(0x.{11,})|^[13].{11,}/
   return startsWithInvalidCharsRegex.test(name)
 }
+function doesContainIllegalChars(name) {
+  let illegalCharsRegex = /[-\/:;\(\)₽&@\.,\?!’\[\]{}#%\^\*\+=_\\\|~<>\$€£]/g
+  return name.match(illegalCharsRegex) !== null
+}
 export function validateName(name) {
   try {
     if (name.includes('.')) {
       throw new Error('Domain cannot have dots')
+    }
+    if (doesContainIllegalChars(name)) {
+      throw new Error('Domain cannot contain illegal symbols')
     }
     if (checkIfStartsWithInvalidChars(name) && !addressUtils.isAddress(name)) {
       throw new Error('Domain cannot start with "0x", "1" or "3"')
