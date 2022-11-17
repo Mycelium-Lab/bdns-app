@@ -226,9 +226,6 @@ const Domain = ({
             <span onClick={e => e.preventDefault()}>
               This name is invalid.{' '}
             </span>
-            <a href="https://docs.ens.domains/frequently-asked-questions#what-about-foreign-characters-what-about-upper-case-letters-is-any-unicode-character-valid">
-              Learn more
-            </a>
           </span>
         </WarningContainer>
       )}
