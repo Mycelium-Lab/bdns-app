@@ -111,6 +111,7 @@ const NameRegister = ({
       variables: {
         label: domain.label,
         secret,
+        duration: calculateDuration(years),
         // Add this varialbe so that it keeps polling only during the timer is on
         commitmentTimerRunning
       },

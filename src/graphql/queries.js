@@ -388,11 +388,13 @@ export const CHECK_COMMITMENT = gql`
   query checkCommitment(
     $label: String
     $secret: String
+    $duration: Number
     $commitmentTimerRunning: String
   ) {
     checkCommitment(
       label: $label
       secret: $secret
+      duration: $duration
       commitmentTimerRunning: $commitmentTimerRunning
     )
   }

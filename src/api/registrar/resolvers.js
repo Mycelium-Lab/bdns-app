@@ -56,10 +56,14 @@ const resolvers = {
         console.log(e)
       }
     },
-    async checkCommitment(_, { label, secret }) {
+    async checkCommitment(_, { label, secret, duration }) {
       try {
         const registrar = getRegistrar()
-        const commitment = await registrar.checkCommitment(label, secret)
+        const commitment = await registrar.checkCommitment(
+          label,
+          secret,
+          duration
+        )
         return parseInt(commitment)
       } catch (e) {
         console.log(e)
