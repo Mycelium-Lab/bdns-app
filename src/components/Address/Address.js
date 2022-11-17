@@ -218,7 +218,7 @@ export default function Address({
   url,
   address,
   showOriginBanner,
-  domainType = 'registrant'
+  domainType = 'wrapped'
 }) {
   const {
     data: { networkId, isENSReady }
