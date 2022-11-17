@@ -12,7 +12,8 @@ import { useEditable } from './hooks'
 
 import {
   GET_REVERSE_RECORD,
-  GET_ETH_RECORD_AVAILABLE_NAMES_FROM_SUBGRAPH
+  GET_ETH_RECORD_AVAILABLE_NAMES_FROM_SUBGRAPH,
+  GET_ALL_DOMAIN_NAMES_FROM_SUBGRAPH
 } from 'graphql/queries'
 
 import SaveCancel from './SingleName/SaveCancel'
@@ -160,11 +161,11 @@ function AddReverseRecord({ account, currentAddress }) {
 
   console.log('networkId: ', networkId)
 
-  const { data: { domains } = {}, refetch: refetchNames } = useQuery(
-    GET_ETH_RECORD_AVAILABLE_NAMES_FROM_SUBGRAPH,
+  const { data: { account: domains } = {}, refetch: refetchNames } = useQuery(
+    GET_ALL_DOMAIN_NAMES_FROM_SUBGRAPH,
     {
       variables: {
-        address: currentAddress
+        id: currentAddress
       },
       fetchPolicy: 'no-cache',
       context: {
@@ -172,7 +173,6 @@ function AddReverseRecord({ account, currentAddress }) {
       }
     }
   )
-
   useEffect(() => {
     refetchNames()
   }, [account, currentAddress, networkId])
@@ -183,8 +183,31 @@ function AddReverseRecord({ account, currentAddress }) {
     account.toLowerCase() === currentAddress.toLowerCase()
 
   if (domains) {
+    let resultDomains = []
+    if (domains.wrappedDomains && domains.wrappedDomains.length > 0) {
+      const wrappedDomains = domains.wrappedDomains.map(wrappedDomain => {
+        return wrappedDomain.domain
+      })
+      resultDomains = resultDomains.concat(wrappedDomains)
+    }
+    if (domains.registrations && domains.registrations.length > 0) {
+      const registrations = domains.registrations.map(registration => {
+        return registration.domain
+      })
+      resultDomains = resultDomains.concat(registrations)
+    }
+    if (domains.domains && domains.domains.length > 0) {
+      const domainsSubraph = domains.domains.map(domain => {
+        return domain
+      })
+      resultDomains = resultDomains.concat(domainsSubraph)
+    }
+    resultDomains = resultDomains.filter(
+      (domain, index) =>
+        index === resultDomains.findIndex(other => domain.name === other.name)
+    )
     options = uniq(
-      domains
+      resultDomains
         .map(domain => {
           if (checkIsDecrypted(domain?.name)) {
             return domain?.name

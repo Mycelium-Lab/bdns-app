@@ -245,7 +245,6 @@ const CTA = ({
   const history = useHistory()
   const account = useAccount()
   const [txHash, setTxHash] = useState(undefined)
-  console.log('duration in', duration)
   useEffect(() => {
     return () => {
       if (step === 'REVEAL_CONFIRMED') {

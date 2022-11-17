@@ -62,10 +62,7 @@ export function checkIsDecrypted(string) {
 }
 
 export function decryptName(name) {
-  return name
-    .split('.')
-    .map(label => checkLabel(label) || label)
-    .join('.')
+  return checkLabel(name) || name
 }
 
 export function truncateUndecryptedName(name) {
