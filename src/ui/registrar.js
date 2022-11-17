@@ -420,17 +420,7 @@ export default class Registrar {
       0,
       BigNumber.from('0xFFFFFFFFFFFFFFF0')
     )
-    console.log('makeCommitmentResult', result)
     return result
-    // } else {
-    //   return permanentRegistrarController.makeCommitmentWithConfig(
-    //     name,
-    //     owner,
-    //     secret,
-    //     resolverAddr,
-    //     account
-    //   )
-    // }
   }
 
   async checkCommitment(label, secret = '') {

@@ -217,13 +217,34 @@ export class ENS {
     }
   }
   async getName(address) {
-    const provider = await getProvider()
-    const name = await provider.lookupAddress(address)
-    return {
-      name
-    }
+    const reverseNode = `${address.slice(2)}.addr.reverse`
+    const resolverAddr = await this.getResolver(reverseNode)
+    return this.getNameWithResolver(address, resolverAddr)
   }
 
+  async getNameWithResolver(address, resolverAddr) {
+    const reverseNode = `${address.slice(2)}.addr.reverse`
+    const reverseNamehash = getNamehash(reverseNode)
+    if (parseInt(resolverAddr, 16) === 0) {
+      return {
+        name: null
+      }
+    }
+
+    try {
+      const provider = await getProvider()
+      const Resolver = getResolverContract({
+        address: resolverAddr,
+        provider
+      })
+      const name = await Resolver.name(reverseNamehash)
+      return {
+        name
+      }
+    } catch (e) {
+      console.log(`Error getting name for reverse record of ${address}`, e)
+    }
+  }
   async isMigrated(name) {
     const namehash = getNamehash(name)
     return this.ENS.recordExists(namehash)

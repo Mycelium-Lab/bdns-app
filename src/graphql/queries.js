@@ -148,7 +148,25 @@ export const GET_SUBDOMAINS_FROM_SUBGRAPH = gql`
     }
   }
 `
-
+export const GET_ALL_DOMAIN_NAMES_FROM_SUBGRAPH = gql`
+  query getAllDomainNamesFromSubgraph($id: ID!) {
+    account(id: $id) {
+      wrappedDomains(first: 1000) {
+        domain {
+          name
+        }
+      }
+      domains(first: 1000) {
+        name
+      }
+      registrations(first: 1000) {
+        domain {
+          name
+        }
+      }
+    }
+  }
+`
 export const GET_ETH_RECORD_AVAILABLE_NAMES_FROM_SUBGRAPH = gql`
   query getNamesFromSubgraph($address: String!) {
     domains(first: 1000, where: { resolvedAddress: $address }) {
