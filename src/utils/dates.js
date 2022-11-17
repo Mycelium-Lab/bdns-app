@@ -10,6 +10,13 @@ export function formatDate(unixTimeStamp, noTime) {
   }
   return date
 }
+export function formatDateUnix(unixTimeStamp, noTime) {
+  let date = moment(unixTimeStamp, 'X').format('YYYY.MM.DD')
+  if (!noTime) {
+    date = date + ' at ' + moment(unixTimeStamp).format('HH:mm (UTCZ)')
+  }
+  return date
+}
 
 export function humanizeDate(timeLeft) {
   if (timeLeft < 3600000) {
