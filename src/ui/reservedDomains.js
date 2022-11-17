@@ -25,9 +25,9 @@ export default class ReservedDomains {
       case 0:
         return 'NORMAL'
       case 1:
-        return 'BRAND'
-      case 2:
         return 'SPECIAL'
+      case 2:
+        return 'BRAND'
     }
   }
   async getBrandsUnlockTimestamp() {
