@@ -8,6 +8,8 @@ import LogoTyped from '../assets/TypeLogo'
 
 const IconLogo = styled('img')`
   width: 30px;
+  margin-right: 20px;
+  fill: #ccc;
   ${mq.medium`
     width: 34px
   `}
@@ -29,7 +31,7 @@ const LogoContainer = styled(Link)`
 const Logo = ({ color, className, to = '' }) => (
   <LogoContainer className={className} to={to}>
     <IconLogo src={ENSLogo} />
-    <LogoTyped color={color} />
+    <h2>BDNS</h2>
   </LogoContainer>
 )
 
