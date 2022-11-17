@@ -69,5 +69,34 @@ export function refetchTilUpdatedSingle({
 
   recurseRefetch()
 }
+export function refetchTilUpdatedSingleByValue({
+  refetch,
+  interval,
+  keyToCompare,
+  getterString,
+  keyValue
+}) {
+  let maxTries = 10
+  let tries = maxTries
+  let incrementedInterval = interval
+
+  function recurseRefetch() {
+    if (tries > 0) {
+      return setTimeout(() => {
+        tries--
+        incrementedInterval = interval * (maxTries - tries + 1)
+        refetch().then(({ data }) => {
+          const updated = get(data, getterString)[keyToCompare] === keyValue
+
+          if (updated) return
+          return recurseRefetch()
+        })
+      }, incrementedInterval)
+    }
+    return
+  }
+
+  recurseRefetch()
+}
 
 export const getQueryName = document => document.definitions[0]?.name?.value

@@ -38,7 +38,8 @@ export function useEditable(
     START_UPLOADING: 'START_UPLOADING',
     STOP_UPLOADING: 'STOP_UPLOADING',
     START_AUTHORIZING: 'START_AUTHORIZING',
-    STOP_AUTHORIZING: 'STOP_AUTHORIZING'
+    STOP_AUTHORIZING: 'STOP_AUTHORIZING',
+    RESET_STATE: 'RESET_STATE'
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -53,6 +54,7 @@ export function useEditable(
   const stopUploading = () => dispatch({ type: types.STOP_UPLOADING })
   const startAuthorizing = () => dispatch({ type: types.START_AUTHORIZING })
   const stopAuthorizing = () => dispatch({ type: types.STOP_AUTHORIZING })
+  const resetState = () => dispatch({ type: types.RESET_STATE })
 
   const actions = {
     startEditing,
@@ -64,7 +66,8 @@ export function useEditable(
     startUploading,
     stopUploading,
     startAuthorizing,
-    stopAuthorizing
+    stopAuthorizing,
+    resetState
   }
 
   function reducer(state, action) {
@@ -129,6 +132,8 @@ export function useEditable(
           ...state,
           authorized: false
         }
+      case types.RESET_STATE:
+        return initialState
       default:
         return state
     }
