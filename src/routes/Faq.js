@@ -71,24 +71,24 @@ function Faq() {
       <FaqContainer>
         <Title>FAQ</Title>
         <H2>Before You register</H2>
-        <Section question="Is ENS only for storing an Ethereum address?">
+        <Section question="Is BDNS only for storing an Ethereum address?">
           No, you can store the addresses of over 100 blockchains, a content
           hash of a decentralized website, profile information such as an avatar
           and Twitter handle, and more.
         </Section>
 
-        <Section question="Can I use an ENS name to point to my website?">
-          Though ENS can technically store anything, there aren't many third
+        <Section question="Can I use an BDNS name to point to my website?">
+          Though BDNS can technically store anything, there aren't many third
           party tools and applications which resolve IP addresses attached to
-          ENS.
+          BDNS.
           <br />
           Instead, we suggest hosting your static html/css/images on IPFS and
-          put the hash in your ENS name's Content record. Then it can be
-          resolved by ENS-aware browsers (e.g. Opera), browser extensions
+          put the hash in your BDNS name's Content record. Then it can be
+          resolved by BDNS-aware browsers (e.g. Opera), browser extensions
           (Metamask), or any browser with ".link" or ".limo" appended to the end
           (e.g. matoken.eth.link or matoken.eth.limo).
           <br />
-          If you want to redirect your ENS name to an existing website, you
+          If you want to redirect your BDNS name to an existing website, you
           could write a html file containing JavaScript logic to redirect to
           your website, upload the file into ipfs using services like{' '}
           <a href="https://pinata.cloud/">IPFS Pinata</a>, then set the CID to
@@ -133,7 +133,7 @@ function Faq() {
         </Section>
 
         <Section question="Can I register names other than .eth?">
-          Yes, you can import into ENS any DNS name with the required DNSSEC.
+          Yes, you can import into BDNS any DNS name with the required DNSSEC.
           <br />
           Please refer to our{' '}
           <a href="https://docs.ens.domains/dns-registrar-guide">guide</a> for
@@ -198,20 +198,20 @@ function Faq() {
 
         <Section question="What is a Resolver?">
           A Resolver is a smart contract that holds records. Names are set by
-          default to the Public Resolver managed by the ENS team and has all the
-          standard ENS record types. You can set your Resolver to a custom
+          default to the Public Resolver managed by the BDNS team and has all
+          the standard BDNS record types. You can set your Resolver to a custom
           resolver contract if you,d like.
         </Section>
 
-        <Section question="What is a Primary ENS Name record?">
-          A Primary ENS Name record (formerly Reverse Record) makes your
-          Ethereum address point to an ENS name. This allows dapps to find and
-          display your ENS name when you connect to them with your Ethereum
+        <Section question="What is a Primary BDNS Name record?">
+          A Primary BDNS Name record (formerly Reverse Record) makes your
+          Ethereum address point to an BDNS name. This allows dapps to find and
+          display your BDNS name when you connect to them with your Ethereum
           account. This can only be set by you so it is not set automatically
           upon registration.
           <br />
-          To set the Primary ENS Name record, please click "My account", and
-          select "Primary ENS Name".
+          To set the Primary BDNS Name record, please click "My account", and
+          select "Primary BDNS Name".
         </Section>
 
         <Section question="How do I unregister my name?">
@@ -245,7 +245,7 @@ function Faq() {
         </Section>
 
         <Section question="Why are some of my subdomains shown as a jumble of characters?">
-          ENS names are stored as a hash on-chain so we have to decode the name
+          BDNS names are stored as a hash on-chain so we have to decode the name
           using a list of possible names, and it shows in the hashed format if
           we don't have it on our list. You can still access and manage the name
           if you search for the name directly in the search bar.
@@ -279,7 +279,7 @@ function Faq() {
         </Section>
 
         <Section question="Where can I see the list of names to be released">
-          You can see the list at the "ENS Names to be released" section of{' '}
+          You can see the list at the "BDNS Names to be released" section of{' '}
           <a href="https://dune.xyz/makoto/ens-released-to-be-released-names">
             {' '}
             the Dune Analytics dashboard
@@ -288,7 +288,7 @@ function Faq() {
         </Section>
 
         <Section question="I lost access to the Ethereum account that owns a name I registered. Can I still extend its registration period?">
-          Any Ethereum account can pay to extend the registration of any ENS
+          Any Ethereum account can pay to extend the registration of any BDNS
           name, though doing so from an account that's not the owner will not
           change ownership of the name. Just go to the name's page and click
           "Extend".
