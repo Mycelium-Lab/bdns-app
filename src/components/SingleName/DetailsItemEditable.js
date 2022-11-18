@@ -566,18 +566,6 @@ const Editable = ({
                   >
                     {formatDate(value)}
                   </ExpiryDate>
-                  <AddToCalendar
-                    css={css`
-                      margin-right: 20px;
-                    `}
-                    name={domain.name}
-                    owner={domain.owner}
-                    registrant={domain.registrant}
-                    startDatetime={moment(value)
-                      .utc()
-                      .local()
-                      .subtract(30, 'days')}
-                  />
                 </>
               ) : (
                 value
