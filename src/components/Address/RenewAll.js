@@ -165,11 +165,6 @@ export default function Renew({
             />
           ) : (
             <>
-              {address && allNames.length > 0 ? (
-                <ExpiryNotifyDropdown address={address} />
-              ) : (
-                ''
-              )}
               <RenewSelected
                 onClick={() => {
                   if (labelsToRenew.length > 0) startEditing()
