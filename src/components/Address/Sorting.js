@@ -80,6 +80,33 @@ export default function Sorting({
           {t('address.sort.expiry')}
         </SortButton>
       )}
+      {activeFilter === 'wrapped' && (
+        <SortButton
+          className={activeSort.type === 'expiryDate' ? 'active' : ''}
+          onClick={() => {
+            if (activeSort.type) {
+              if (activeSort.direction === 'asc') {
+                setActiveSort({
+                  type: 'expiryDate',
+                  direction: 'desc'
+                })
+              } else if (activeSort.direction === 'desc') {
+                setActiveSort({
+                  type: 'expiryDate',
+                  direction: 'asc'
+                })
+              }
+              return
+            }
+            setActiveSort({
+              type: 'expiryDate',
+              direction: 'asc'
+            })
+          }}
+        >
+          {t('address.sort.expiry')}
+        </SortButton>
+      )}
     </SortContainer>
   )
 }

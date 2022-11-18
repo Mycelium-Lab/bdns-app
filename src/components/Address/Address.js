@@ -297,7 +297,7 @@ export default function Address({
     normalisedDomains = [
       ...filterOutReverse(data.account.domains).map(domain => ({ domain }))
     ]
-  } else if (domainType === 'wrapped' && data.account) {
+  } else if (domainType === 'wrapped' && data && data.account) {
     normalisedDomains = [...data.account.wrappedDomains]
   }
   let query
