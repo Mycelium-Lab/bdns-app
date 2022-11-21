@@ -79,17 +79,6 @@ const Explainer = ({ step, waitPercentComplete, waitTime }) => {
           <h2>{titles[step]}</h2>
           <p>{t('register.favourite')}</p>
         </div>
-        {hasPermission() ? (
-          <NotifyButtonDisabled>
-            <Tick style={{ marginRight: 5 }} />
-            {t('register.notify')}
-          </NotifyButtonDisabled>
-        ) : (
-          <NotifyButton type="hollow-primary" onClick={requestPermission}>
-            <Bell style={{ marginRight: 5 }} />
-            {t('register.notify')}
-          </NotifyButton>
-        )}
       </Header>
 
       <Steps>
