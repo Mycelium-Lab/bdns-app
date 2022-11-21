@@ -402,5 +402,31 @@
       "title": "BDNS constitution book now available",
       "description": "A printed copy of the BDNS constitution and its signers is now available in hardcover and ultra-limited edition of 50"
     }
+  }, 
+  "faq": {
+    "difference" : {
+      "title": "What’s the difference between BDNS and other NFT domain services?",
+      "description": "The biggest difference is that BDNS NODs have no extension such as “.eth”. BDNS is also completely decentralized, meaning there is no private minting of NODs or reserved names (other than a list of brands and Trademarks in a very limited number of instances for a short period of time).  This flexibility means you can mint what you want to a much greater extent than with competing providers."
+    },
+    "nods": {
+      "title": "Can I use NODs to set my wallet address?",
+      "description": "Not at the present time. However, BDNS is actively developing partnerships with a number of blockchain developers now so that this feature will hopefully soon be on offer."
+    },
+    "team": {
+      "title": "Who are the BDNS team?",
+      "description": "The BDNS team comprises a group of software developers, managers and entrepreneurs from around the world who have been working with Blockchain technology and with domain names for more than a decade. If you want to get to know us better, you can come and meet us in person on any of our social media platforms."
+    },
+    "notascam": {
+      "title": "How do I know BDNS is not a scam?",
+      "description" : "A BDNS is the real deal but don't take our word for it if you're uncomfortable. Take your time, contact us directly, attend one of our live social media chats, meet the team and the founders, and only once you're convinced that we are here to stay should you buy a NOD. We are pretty sure you'll be satisfied that BDNS is for real if you follow all these steps."
+    },
+    "updates": {
+      "title": "Will BDNS launch new products and updates?",
+      "description": "Yes! In fact, one of the things that we are most excited about is building on top of NODs to create even more amazing applications. Building great software and partnering with like-minded developers are the main reasons we love Blockchain so much, so creating next-generation BDNS tools is our main priority alongside community development."
+    },
+    "partners": {
+      "title": "How does BDNS select partners?",
+      "description": "We love great software and we want to build great solutions. This means that we will partner with both larger and smaller software providers.  We see the emergence of so much new software in Blockchain currently coming from unknown brands as being some of the most exciting aspects of web3 development. Equally, the scale and reach that larger Blockchain platforms have is appealing to us in terms of community development prospects. If you have a really cool product and are interested to partner with BDNS but are afraid we may not have heard of you yet, reach out to us by e-mail or contact us on any of our social media platforms."
+    }
   }
 }
