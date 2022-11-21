@@ -119,7 +119,7 @@ function Search({ history, className, style }) {
 
         input.value = ''
         if (type === 'supported' || type === 'short') {
-          history.push(`/name/${searchTerm}`)
+          history.push(`/name/${searchTerm}/register`)
           return
         } else {
           history.push(`/search/${encodeURI(searchTerm)}`)
