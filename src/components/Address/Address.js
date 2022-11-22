@@ -120,7 +120,11 @@ function filterOutReverse(domains) {
 function normaliseAddress(address) {
   return address.toLowerCase()
 }
-
+function filterReverseAddr(domains) {
+  return domains.filter(
+    domain => !/^\[.+\]\.addr\.reverse$/.test(domain.domain.name)
+  )
+}
 function decryptNames(domains) {
   return domains.map(d => {
     const name = decryptName(d.domain.name)
@@ -317,6 +321,7 @@ export default function Address({
     'labelName',
     true
   )
+  decryptedDomains = filterReverseAddr(decryptedDomains)
   if (globalError.invalidCharacter || !decryptedDomains) {
     return <InvalidCharacterError message={globalError.invalidCharacter} />
   }
