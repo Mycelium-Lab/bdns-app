@@ -224,19 +224,6 @@ function DetailsContainer({
   return (
     <Details data-testid="name-details">
       {isOwner && <SetupName initialState={showExplainer} />}
-      {parseInt(domain.owner, 16) !== 0 &&
-        !loadingIsMigrated &&
-        !isMigratedToNewRegistry && (
-          <RegistryMigration
-            account={account}
-            domain={domain}
-            dnssecmode={dnssecmode}
-            refetchIsMigrated={refetchIsMigrated}
-            isParentMigratedToNewRegistry={isParentMigratedToNewRegistry}
-            loadingIsParentMigrated={loadingIsParentMigrated}
-            readOnly={readOnly}
-          />
-        )}
       {showBrandsUnclaimableWarning && (
         <GracePeriodWarningContainer>
           <DetailsItem>
