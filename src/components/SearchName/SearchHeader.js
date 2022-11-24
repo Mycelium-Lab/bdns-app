@@ -9,7 +9,7 @@ import '../../api/subDomainRegistrar'
 import { withRouter } from 'react-router'
 import searchIcon from '../../assets/search.svg'
 import mq from 'mediaQuery'
-import LanguageSwitcher from '../LanguageSwitcher'
+import LanguageSwitcher from '../LanguageSwitcherHeader'
 
 const SearchForm = styled('form')`
   display: flex;
@@ -25,19 +25,12 @@ const SearchForm = styled('form')`
     width: 27px;
     height: 27px;
     background: url(${searchIcon}) no-repeat;
-    filter: brightness(0) saturate(100%) invert(69%) sepia(10%) saturate(1891%)
-      hue-rotate(1deg) brightness(93%) contrast(88%);
   }
 
   input {
     padding: 20px 0 20px 55px;
     width: 100%;
-    background-color: #222224;
-    border-left: 1px solid #c6a15a;
-    border-top: 1px solid #c6a15a;
-    border-bottom: 1px solid #c6a15a;
-    border-right: none;
-    color: white;
+    border: none;
     border-radius: 0;
     font-size: 18px;
     font-family: Overpass;
@@ -53,13 +46,13 @@ const SearchForm = styled('form')`
 
     &::-webkit-input-placeholder {
       /* Chrome/Opera/Safari */
-      color: #585858;
+      color: #ccd4da;
     }
   }
 
   button {
-    ${p => (p && p.hasSearch ? 'background: #C6A15A;' : 'background: #C6A15A;')}
-    color: #222224;
+    ${p => (p && p.hasSearch ? 'background: #5284ff;' : 'background: #c7d3e3;')}
+    color: white;
     font-size: 22px;
     font-family: Overpass;
     padding: 20px 0;

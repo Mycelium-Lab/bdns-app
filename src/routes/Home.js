@@ -89,6 +89,7 @@ const NavLink = styled(Link)`
 
 const ExternalLink = styled('a')`
   margin-left: 20px;
+  color: #c6a15a !important;
   &:first-child {
     margin-left: 0;
   }
@@ -123,7 +124,7 @@ const HowToUse = styled(HowToUseDefault)`
 `
 
 const Hero = styled('section')`
-  background: url(${bg});
+  background-color: #222224;
   background-size: cover;
   padding: 60px 20px 20px;
   position: relative;
@@ -243,6 +244,8 @@ const QuestionMark = styled(QuestionMarkDefault)`
 
 const LogoLarge = styled(motion.img)`
   width: 50%;
+  filter: brightness(0) saturate(100%) invert(67%) sepia(22%) saturate(773%)
+    hue-rotate(1deg) brightness(93%) contrast(97%);
   margin: 0 auto 0;
   ${mq.medium`
     width: 223px;
