@@ -6,6 +6,8 @@ const RotatingSmallCaretSide = styled(DefaultSmallCaret)`
   flex-shrink: 0;
   transform: ${p => (p.rotated ? 'rotate(0)' : 'rotate(-90deg)')};
   transition: 0.2s;
+  filter: brightness(0) saturate(100%) invert(34%) sepia(0%) saturate(0%)
+    hue-rotate(246deg) brightness(88%) contrast(90%);
 `
 
 const RotatingSmallCaretTop = styled(DefaultSmallCaret)`
@@ -17,7 +19,7 @@ const RotatingSmallCaretTop = styled(DefaultSmallCaret)`
     p.rotated &&
     `
       path {
-        fill: #5284FF;
+        fill: #C6A15A;
       }
   `}
 `

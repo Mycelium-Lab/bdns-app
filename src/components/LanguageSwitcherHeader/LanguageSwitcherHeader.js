@@ -30,7 +30,7 @@ function getLang(lang) {
 }
 
 const ActiveLanguage = styled('div')`
-  color: #515151;
+  color: #adbbcd;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
@@ -47,9 +47,7 @@ const ActiveLanguage = styled('div')`
 `
 
 const LanguageSwitcherContainer = styled('div')`
-  border-top: 1px solid #c6a15a;
-  border-bottom: 1px solid #c6a15a;
-  background: #222224;
+  background: white;
   position: relative;
 `
 
@@ -60,11 +58,11 @@ const Dropdown = styled(motion.div)`
   right: 0;
   margin-top: 20px;
   border-radius: 8px;
-  box-shadow: -4px 18px 70px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: -4px 18px 70px 0 rgba(108, 143, 167, 0.32);
   width: 230px;
   z-index: 2;
   li {
-    color: #585858;
+    color: #adbbcd;
     padding: 20px 30px;
     border-bottom: 1px solid #dfdfdf;
     list-style: none;
@@ -76,7 +74,7 @@ const Dropdown = styled(motion.div)`
       cursor: pointer;
       div {
         /* ball */
-        background: #c6a15a;
+        background: #5284ff;
       }
     }
     &:last-child {
@@ -90,11 +88,11 @@ const Ball = styled('div')`
   background: white;
   width: 10px;
   height: 10px;
-  box-shadow: 0 0 0 3px white, 0 0 0 4px #c6a15a;
+  box-shadow: 0 0 0 3px white, 0 0 0 4px #5284ff;
   ${p =>
     p.selected &&
     `
-    background: #C6A15A;
+    background: #5284ff;
   `}
 `
 

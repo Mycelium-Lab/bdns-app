@@ -5,7 +5,7 @@ import styled from '@emotion/styled/macro'
 import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
 
 import DefaultLogo from '../Logo'
-import Search from '../SearchName/Search'
+import Search from '../SearchName/SearchHeader'
 import Hamburger from './Hamburger'
 import SideNav from '../SideNav/SideNav'
 import Banner from '../Banner'

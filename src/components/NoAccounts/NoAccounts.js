@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled/macro'
+//#C6A15A
 
 const NoAccountsContainer = styled('div')`
   box-shadow: ${({ active }) =>
@@ -37,7 +38,7 @@ const SVG = styled('svg')`
 
 const NoAccounts = ({
   className,
-  colour = '#ffffff',
+  colour = '#C6A15A',
   textColour,
   onClick,
   buttonText,
