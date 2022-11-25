@@ -19,7 +19,7 @@ const LogoContainer = styled(Link)`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  color: #000;
+  color: #000 !important;
   fill: #000;
   padding-left: 20px;
   align-items: center;

@@ -42,7 +42,7 @@ const Switch = styled(Button)`
 `
 
 const Warning = styled('div')`
-  color: #f5a623;
+  color: #C6A15A;
   align-self: center;
   margin-right: 20px;
 `

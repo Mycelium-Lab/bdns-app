@@ -38,12 +38,12 @@ const Content = styled('div')`
   div {
     font-weight: 100;
     font-size: 20px;
-    color: #2b2b2b;
+    color: white;
     letter-spacing: 0;
   }
   p {
     font-size: 12px;
-    color: #adbbcd;
+    color: #515151;
     letter-spacing: 0;
   }
 `

@@ -29,15 +29,15 @@ import Gap from '../components/Utils/Gap'
 import { gql } from '@apollo/client'
 
 const Loading = styled('span')`
-  color: #adbbcd;
+  color: #515151;
 `
 
 const Warning = styled('div')`
-  color: #f5a623;
+  color: #c6a15a;
 `
 
 const AddReverseRecordContainer = styled('div')`
-  background: #f0f6fa;
+  background: #2d2d2f;
   border: 1px solid #ededed;
   border-radius: 8px;
   margin: 20px 30px 20px;
@@ -57,7 +57,7 @@ const Message = styled('div')`
   font-family: Overpass Mono;
   font-weight: 700;
   font-size: 14px;
-  color: ${p => (p.nameSet ? '#747f8c' : '#adbbcd')};
+  color: ${p => (p.nameSet ? '#515151' : '#515151')};
   letter-spacing: 0;
   display: flex;
   align-items: center;
@@ -91,7 +91,7 @@ const Explanation = styled('div')`
   font-family: Overpass;
   font-weight: 300;
   font-size: 14px;
-  color: #2b2b2b;
+  color: white;
   letter-spacing: 0;
   line-height: 25px;
   margin-bottom: 10px;
@@ -100,7 +100,7 @@ const Explanation = styled('div')`
 `
 
 const EditableNotSet = styled('div')`
-  color: #5384fe;
+  color: #c6a15a;
 `
 
 const ButtonsContainer = styled('div')`

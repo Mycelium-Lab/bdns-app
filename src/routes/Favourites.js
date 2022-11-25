@@ -45,12 +45,12 @@ const NoDomainsContainer = styled('div')`
   justify-content: center;
   align-items: center;
   background: white;
-  box-shadow: 3px 4px 6px 0 rgba(229, 236, 241, 0.3);
+  
   border-radius: 6px;
   margin-bottom: 40px;
 
   h2 {
-    color: #adbbcd;
+    color: #515151;
     font-weight: 100;
     margin-bottom: 0;
     padding: 0;
@@ -60,7 +60,7 @@ const NoDomainsContainer = styled('div')`
   }
 
   p {
-    color: #2b2b2b;
+    color: white;
     font-size: 18px;
     font-weight: 300;
     margin-top: 20px;

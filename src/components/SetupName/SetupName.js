@@ -6,7 +6,7 @@ import { ReactComponent as BookPen } from '../Icons/BookPen.svg'
 import DefaultRotatingSmallCaret from '../Icons/RotatingSmallCaret'
 
 const SetupNameContainer = styled('div')`
-  background: #f0f6fa;
+  background: #2d2d2f;
   padding: 20px 40px;
   margin-bottom: 40px;
 `

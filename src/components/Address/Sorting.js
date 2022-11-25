@@ -11,7 +11,7 @@ const SortContainer = styled('ul')`
 `
 
 const SortButton = styled('li')`
-  color: #adbbcd;
+  color: #515151;
   font-size: 18px;
   padding: 0 10px 5px;
   border-bottom: 1px #d2d2d2 solid;
@@ -19,8 +19,8 @@ const SortButton = styled('li')`
   &:hover,
   &.active {
     cursor: pointer;
-    color: #2c46a6;
-    border-bottom: 1px #2c46a6 solid;
+    color: #c6a15a;
+    border-bottom: 1px #c6a15a solid;
   }
 `
 

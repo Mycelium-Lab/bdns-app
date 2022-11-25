@@ -52,7 +52,7 @@ const RenewSelected = styled(DefaultButton)`
 `
 
 const RenewPricer = styled(motion.div)`
-  background: #f0f6fa;
+  background: #2d2d2f;
   padding: 20px;
   margin: 20px;
   margin-left: 0;

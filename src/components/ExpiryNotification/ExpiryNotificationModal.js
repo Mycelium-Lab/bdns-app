@@ -43,7 +43,7 @@ const ActionsContainerComponent = styled('div')`
 const EmailInputComponent = styled('input')`
   border-radius: 8px;
   border: 1px solid #ededed;
-  box-shadow: inset 0 0 4px 0 rgba(181, 177, 177, 0.5);
+
   height: 42px;
   margin: auto 0;
   padding: 5px 10px;

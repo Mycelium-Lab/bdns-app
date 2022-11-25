@@ -45,6 +45,12 @@ const SideNavContainer = styled('nav')`
   li {
     list-style: none;
   }
+  path {
+    fill: #c6a15a;
+  }
+  g {
+    fill: #c6a15a;
+  }
   ${p =>
     p.hasNonAscii
       ? `
@@ -127,7 +133,7 @@ const ThirdPartyLink = styled('a')`
     fill: #c6a15a;
   }
   g {
-    fill: #515151;
+    fill: #c6a15a;
   }
   &:hover {
     span {

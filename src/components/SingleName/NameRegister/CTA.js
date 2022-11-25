@@ -109,7 +109,7 @@ function getCTA({
               </Prompt>
               <NoAccountsModal
                 onClick={connectProvider}
-                colour={'#F5A623'}
+                colour={'#C6A15A'}
                 buttonText={t('c.connect')}
               />
             </>

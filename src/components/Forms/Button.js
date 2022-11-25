@@ -11,9 +11,9 @@ function getButtonStyles({ type }) {
         }
         &:hover {
           cursor: pointer;
-          border: 2px solid #2c46a6;
-          background: #2c46a6;
-          box-shadow: 0 10px 21px 0 rgba(161, 175, 184, 0.89);
+          border: 2px solid #C6A15A;
+          background: #C6A15A;
+          
           border-radius: 23px;
         }
       `
@@ -25,8 +25,8 @@ function getButtonStyles({ type }) {
         &:hover {
           cursor: pointer;
           border: 2px solid transparent;
-          background: #2c46a6;
-          box-shadow: 0 10px 21px 0 rgba(161, 175, 184, 0.89);
+          background: #C6A15A;
+          
         }
       `
     case 'hollow-white':
@@ -41,22 +41,22 @@ function getButtonStyles({ type }) {
           color: white;
           cursor: pointer;
           border: 2px solid transparent;
-          background: #2c46a6;
-          box-shadow: 0 10px 21px 0 rgba(161, 175, 184, 0.89);
+          background: #C6A15A;
+          
         }
       `
     case 'hollow-primary':
       return `
-        color: #5384FE;
+        color: #C6A15A;
         background: transparent;
-        border: 2px solid #5384FE;
+        border: 2px solid #C6A15A;
         &:visited {
-          color: #5384FE;
+          color: #C6A15A;
         }
         &:hover {
           cursor: pointer;
-          border: 2px solid #2C46A6;
-          color: #2C46A6;
+          border: 2px solid #C6A15A;
+          color: #C6A15A;
         }
       `
     case 'hollow-primary-disabled':
@@ -89,13 +89,13 @@ function getButtonStyles({ type }) {
       `
     case 'disabled':
       return `
-        border: 2px solid #dfdfdf;
-        background: #dfdfdf;
+        border: 2px solid #525252;
+        background: #525252;
         &:hover {
           cursor: default
         }
         &:hover {
-          color: #222224;
+          color: white;
           cursor: default
         }
       `
@@ -107,7 +107,7 @@ function getButtonStyles({ type }) {
 function getButtonDefaultStyles(p) {
   return `
     color: white;
-    background: #5384FE;
+    background: #C6A15A;
     padding: 10px 25px;
     border-radius: 25px;
     font-size: 14px;
@@ -116,7 +116,7 @@ function getButtonDefaultStyles(p) {
     text-transform: capitalize;
     letter-spacing: 1.5px;
     transition: 0.2s all;
-    border: 2px solid #5384FE;
+    border: 2px solid #C6A15A;
     text-align: center;
 
     &:focus {

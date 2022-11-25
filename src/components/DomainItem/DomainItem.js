@@ -26,12 +26,12 @@ const Container = styled.div`
         case 'Yours':
           return '#52E5FF'
         case 'Open':
-          return '#42E068'
+          return '#C6A15A'
         case 'Auction':
         case 'Reveal':
           return 'linear-gradient(-180deg, #42E068 0%, #52E5FF 100%)'
         case 'Owned':
-          return '#CACACA'
+          return '#515151'
         case 'Forbidden':
           return 'black'
         case 'NotYetAvailable':
@@ -52,21 +52,21 @@ const Container = styled.div`
   position: relative;
   background-color: white;
   border-radius: 6px;
-  box-shadow: 3px 4px 20px 0 rgba(144, 171, 191, 0.42);
+
   padding: ${p => (p.hasInvalidCharacter ? '20' : '0')}px;
   padding-left: 0px;
 `
 
 const DomainContainer = styled(Link)`
   padding: 20px;
-  color: #2b2b2b;
+  color: white;
   overflow: hidden;
   position: relative;
   background: ${({ percentDone }) =>
     percentDone
       ? `
   linear-gradient(to right, rgba(128, 255, 128, 0.1) 0%, rgba(82,229,255, 0.1) ${percentDone}%,#ffffff ${percentDone}%)`
-      : 'white'};
+      : '#222224'};
   height: 65px;
   display: grid;
   height: auto;
@@ -83,14 +83,14 @@ const DomainContainer = styled(Link)`
     grid-template-rows: 39px;
   `}
 
-  color: #2b2b2b;
+  color: white;
   z-index: 1;
   .label-container {
     display: flex;
   }
 
   &:visited {
-    color: #2b2b2b;
+    color: white;
   }
 `
 
@@ -111,9 +111,9 @@ const DomainName = styled('h2')`
     switch (p.state) {
       case 'Yours':
       case 'Owned':
-        return '#2b2b2b'
+        return 'white'
       default:
-        return '#2b2b2b'
+        return 'white'
     }
   }};
 `
@@ -176,7 +176,7 @@ const WarningContainer = styled.div`
   padding: 10px 0px 10px 20px;
 
   & a:hover {
-    color: #2c46a6;
+    color: #c6a15a;
   }
 `
 

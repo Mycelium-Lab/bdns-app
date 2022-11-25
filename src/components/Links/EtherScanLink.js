@@ -8,7 +8,10 @@ const EtherScanLinkContainer = styled('a')`
   display: inline-block;
   align-items: center;
   text-overflow: ellipsis;
-
+  color: white;
+  &:visited {
+    color: white;
+  }
   svg {
     margin-left: 10px;
     transition: 0.1s;
@@ -17,6 +20,7 @@ const EtherScanLinkContainer = styled('a')`
   }
 
   &:hover {
+    color: #515151;
     svg {
       opacity: 1;
     }

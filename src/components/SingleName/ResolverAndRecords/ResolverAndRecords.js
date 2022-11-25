@@ -39,7 +39,7 @@ const ResolverWrapper = styled('div')`
   ${p =>
     p.needsToBeMigrated
       ? `
-    color: #ADBBCD;
+    color: #515151;
     font-size: 14px;
     background: hsla(37, 91%, 55%, 0.1);
     padding: 20px;
@@ -55,7 +55,6 @@ const ResolverDropdown = styled.div`
   border-radius: 6px;
   display: flex;
   flex-direction: column;
-
   & > div:last-child {
     border-top: 1px dashed #d3d3d3;
     padding: 0;
@@ -86,6 +85,7 @@ const AdvancedButton = styled.button`
   }
 
   p {
+    color: white;
     font-family: Overpass;
     font-size: 14px;
     letter-spacing: 0px;

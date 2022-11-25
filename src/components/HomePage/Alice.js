@@ -27,7 +27,7 @@ const BaseContainer = styled('div')`
   .bg-string {
     font-family: Overpass Mono;
     position: relative;
-    color: #5284ff;
+    color: #c6a15a;
     font-size: 26px;
     font-weight: 300;
     line-height: 1em;
@@ -47,7 +47,7 @@ const BaseContainer = styled('div')`
     text-align: center;
 
     h2 {
-      color: #2b2b2b;
+      color: white;
       background: rgba(255, 255, 255, 0.7);
       font-size: 16px;
       font-weight: 500;
@@ -64,7 +64,7 @@ const BaseContainer = styled('div')`
 
     p {
       margin-top: 0;
-      color: #2b2b2b;
+      color: white;
       background: rgba(255, 255, 255, 0.7);
       font-weight: 300;
       font-size: 26px;
@@ -81,7 +81,7 @@ const BaseContainer = styled('div')`
     display: none;
     font-size: 20px;
     background: #ffffff;
-    box-shadow: 2px 8px 25px 2px rgba(136, 149, 169, 0.12);
+
     border-radius: 20px;
     font-weight: 300;
     line-height: 1.4em;
@@ -117,7 +117,7 @@ const BaseContainer = styled('div')`
     padding: 50px 30px;
     display: block;
     position: relative;
-    box-shadow: 0 5px 20px 2px rgba(223, 223, 223, 0.5);
+
     border-radius: 20px;
 
     ${mq.medium`

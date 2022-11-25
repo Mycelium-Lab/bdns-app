@@ -100,9 +100,10 @@ function Faq() {
 }
 
 const FaqContainer = styled('div')`
+  color: white;
   margin: 1em;
   padding: 20px 40px;
-  background-color: white;
+  background-color: #222224;
 `
 
 export default Faq

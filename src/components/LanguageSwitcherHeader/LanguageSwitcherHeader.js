@@ -62,7 +62,7 @@ const Dropdown = styled(motion.div)`
   right: 0;
   margin-top: 20px;
   border-radius: 8px;
-  box-shadow: -4px 18px 70px 0 rgba(255, 255, 255, 0.25);
+  
   width: 230px;
   z-index: 2;
   li {
@@ -74,7 +74,7 @@ const Dropdown = styled(motion.div)`
     justify-content: space-between;
     align-items: center;
     &:hover {
-      color: #2b2b2b;
+      color: white;
       cursor: pointer;
       div {
         /* ball */
@@ -92,7 +92,7 @@ const Ball = styled('div')`
   background: white;
   width: 10px;
   height: 10px;
-  box-shadow: 0 0 0 3px white, 0 0 0 4px #c6a15a;
+  
   ${p =>
     p.selected &&
     `

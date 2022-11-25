@@ -22,7 +22,7 @@ const MainContainer = styled('div')`
     background: ${({ state }) => {
       switch (state) {
         case 'Owned':
-          return '#CACACA'
+          return '#515151'
         case 'Auction':
         case 'Reveal':
           return 'linear-gradient(-180deg, #42E068 0%, #52E5FF 100%)'
@@ -31,7 +31,7 @@ const MainContainer = styled('div')`
         case 'Open':
           return '#C6A15A'
         default:
-          return '#CACACA'
+          return '#515151'
       }
     }};
     position: absolute;

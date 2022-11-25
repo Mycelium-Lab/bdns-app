@@ -6,7 +6,7 @@ const StyledBin = styled(Bin)`
   &:hover {
     g {
       transition: 0.2s;
-      fill: #5384fe;
+      fill: #c6a15a;
     }
 
     cursor: pointer;

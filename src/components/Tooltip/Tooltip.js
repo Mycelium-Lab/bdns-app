@@ -7,7 +7,7 @@ import styled from '@emotion/styled/macro'
 import { useState, useEffect } from 'react'
 
 const DefaultTooltip = styled(ReactTooltip)`
-  box-shadow: -4px 18px 70px 0 rgba(108, 143, 167, 0.32);
+  
   opacity: 1 !important;
   max-width: 400px;
 `
