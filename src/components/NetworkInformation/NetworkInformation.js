@@ -15,7 +15,7 @@ const NetworkInformationContainer = styled('div')`
   position: relative;
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 20px;
   ${mq.medium`
     margin-top: 80px;
@@ -62,7 +62,7 @@ const NetworkStatus = styled('div')`
     width: 6px;
     height: 6px;
     border-radius: 3px;
-    background: #C6A15A;
+    background: #c6a15a;
     margin-right: 5px;
   }
 `

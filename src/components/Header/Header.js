@@ -37,7 +37,7 @@ const Header = styled('header')`
   ${p =>
     p.isMenuOpen
       ? `
-    background: #121D46;
+    background: white;
   `
       : ''}
   border-bottom: 1px solid #585858;

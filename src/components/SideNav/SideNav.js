@@ -25,7 +25,7 @@ const SideNavContainer = styled('nav')`
 
   left: 0;
   height: auto;
-  background: #121d46;
+  background: white;
   width: 100%;
   margin-top: -10px;
   ${mq.medium`
@@ -71,7 +71,7 @@ const NavLink = styled(Link)`
   font-size: 22px;
   color: ${p => (p.active ? 'white' : '#C6A15A')};
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   ${mq.medium`
     justify-content: start;
     border-bottom: 0;
@@ -113,7 +113,7 @@ const ThirdPartyLink = styled('a')`
   font-size: 22px;
   color: ${p => (p.active ? 'white' : '#C6A15A')};
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
   ${mq.medium`
     justify-content: start;

@@ -54,7 +54,7 @@ const StepContainer = styled('section')`
 const StepContent = styled('div')`
   display: flex;
   align-items: center;
-  background: white;
+  background: #2d2d2f;
   padding: 3px 15px;
   font-family: Overpass;
   font-weight: bold;
@@ -64,11 +64,10 @@ const StepContent = styled('div')`
   transition: 0.2s;
   color: ${p => (p.completed ? 'hsla(134, 72%, 57%, 1)' : 'hsla(0,0%,82%,1)')};
   &:hover {
-    color: ${p =>
-      p.completed ? 'hsla(134, 72%, 57%, 1)' : 'hsla(227, 58%, 41%, 1)'};
+    color: ${p => (p.completed ? 'hsla(134, 72%, 57%, 1)' : '#C6A15A')};
 
     circle {
-      fill: hsla(227, 58%, 41%, 1);
+      fill: #c6a15a;
     }
   }
 `

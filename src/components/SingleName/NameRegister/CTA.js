@@ -30,7 +30,7 @@ const Pencil = styled(DefaultPencil)`
 `
 
 const Prompt = styled('span')`
-  color: #ffa600;
+  color: #c6a15a;
   margin-right: 10px;
 `
 
