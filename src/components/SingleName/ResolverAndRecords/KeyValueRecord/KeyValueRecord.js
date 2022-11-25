@@ -18,6 +18,19 @@ const Bin = styled(DefaultBin)`
   align-self: center;
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 10px;
+  ${mq.small`
+  margin-top: 0px;
+`}
+${mq.medium`
+margin-top: 0px;
+`}
+${mq.large`
+margin-top: 0px;
+`}
+${mq.xLarge`
+margin-top: 0px;
+`}
 `
 
 const KeyValueItem = styled(RecordsItem)`
