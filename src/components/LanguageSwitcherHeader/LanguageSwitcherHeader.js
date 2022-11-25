@@ -2,7 +2,7 @@ import React, { createRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import styled from '@emotion/styled/macro'
-
+import mq from 'mediaQuery'
 import { useOnClickOutside } from 'components/hooks'
 import RotatingSmallCaret from '../Icons/RotatingSmallCaret'
 
@@ -30,13 +30,17 @@ function getLang(lang) {
 }
 
 const ActiveLanguage = styled('div')`
-  color: #adbbcd;
+  color: #585858;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
   height: 100%;
   padding: 0 20px;
   align-items: center;
+  ${mq.medium`
+  border-top: 1px solid #C6A15A;
+  border-bottom: 1px solid #C6A15A;
+  `}
   span {
     margin-right: 10px;
   }
@@ -58,11 +62,11 @@ const Dropdown = styled(motion.div)`
   right: 0;
   margin-top: 20px;
   border-radius: 8px;
-  box-shadow: -4px 18px 70px 0 rgba(108, 143, 167, 0.32);
+  
   width: 230px;
   z-index: 2;
   li {
-    color: #adbbcd;
+    color: #585858;
     padding: 20px 30px;
     border-bottom: 1px solid #dfdfdf;
     list-style: none;
@@ -70,11 +74,11 @@ const Dropdown = styled(motion.div)`
     justify-content: space-between;
     align-items: center;
     &:hover {
-      color: #2b2b2b;
+      color: white;
       cursor: pointer;
       div {
         /* ball */
-        background: #5284ff;
+        background: #c6a15a;
       }
     }
     &:last-child {
@@ -88,11 +92,11 @@ const Ball = styled('div')`
   background: white;
   width: 10px;
   height: 10px;
-  box-shadow: 0 0 0 3px white, 0 0 0 4px #5284ff;
+  
   ${p =>
     p.selected &&
     `
-    background: #5284ff;
+    background: #C6A15A;
   `}
 `
 

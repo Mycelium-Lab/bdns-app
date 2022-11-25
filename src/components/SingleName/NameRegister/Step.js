@@ -4,7 +4,7 @@ import styled from '@emotion/styled/macro'
 const offset = 180
 
 const Number = styled('div')`
-  color: ${p => (p.progress === 100 ? '#42E068' : '#dfdfdf')};
+  color: ${p => (p.progress === 100 ? '#42E068' : '#515151')};
   font-size: 34px;
   font-weight: 300;
   position: relative;
@@ -35,7 +35,7 @@ const SVG = styled('svg')`
 
 const Content = styled('div')`
   margin-left: 8px;
-
+  color: white;
   h3 {
     margin-top: 2px;
     font-size: 14px;
@@ -62,7 +62,7 @@ const Step = ({ number, text, title, progress = 100 }) => (
           cx="30"
           cy="30"
           r="28"
-          stroke="#dfdfdf"
+          stroke="#515151"
           strokeWidth="2"
           fill="none"
           transform="rotate(-90, 30, 30)"

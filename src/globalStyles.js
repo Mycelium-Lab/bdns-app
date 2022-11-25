@@ -6,12 +6,12 @@ injectGlobal`
   }
   body {
     font-family: Overpass;
-    background: #F0F6FA;
+    background: rgba(34, 34, 36, 0.95);
     margin: 0;
   }
 
   a {
-    color: #000;
+    color: #C6A15A;
     text-decoration: none;
     transition: 0.2s;
 
@@ -20,7 +20,7 @@ injectGlobal`
     }
 
     &:visited {
-      color: #000
+      color: #C6A15A
     } 
   }
 `

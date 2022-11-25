@@ -3,7 +3,7 @@ import mq from 'mediaQuery'
 
 const Banner = styled('div')`
   position: relative;
-  color: #2b2b2b;
+  color: white;
   font-weight: 300;
   font-size: 18px;
   background: white;
@@ -12,13 +12,13 @@ const Banner = styled('div')`
 
   h3 {
     margin: 0;
-    color: #f5a623;
+    color: #c6a15a;
     font-weight: 300;
     font-size: 18px;
   }
 
   p {
-    color: #2b2b2b;
+    color: white;
     font-weight: 300;
     font-size: 18px;
     font-weight: 300;

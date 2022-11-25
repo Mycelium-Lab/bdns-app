@@ -21,8 +21,8 @@ const Value = styled('div')`
   font-family: Overpass;
   font-weight: 100;
   font-size: 22px;
-  color: #2b2b2b;
-  border-bottom: 1px solid #dbdbdb;
+  color: white;
+  border-bottom: 1px solid #515151;
   ${mq.small`
     font-size: 28px;
   `}
@@ -36,13 +36,13 @@ const Description = styled('div')`
   font-family: Overpass;
   font-weight: 300;
   font-size: 14px;
-  color: #adbbcd;
+  color: #515151;
   margin-top: 10px;
 `
 
 const USD = styled('span')`
   font-size: 22px;
-  color: #adbbcd;
+  color: #515151;
   margin-left: 20px;
   ${mq.small`
     font-size: 28px;

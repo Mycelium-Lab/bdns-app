@@ -14,6 +14,9 @@ import InActiveHeartDefault from '../Icons/InActiveHeart'
 import ActiveHeartDefault from '../Icons/ActiveHeart'
 
 const ActiveHeart = styled(ActiveHeartDefault)`
+  path {
+    fill: #515151;
+  }
   &:hover {
     cursor: pointer;
   }

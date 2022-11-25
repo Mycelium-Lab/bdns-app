@@ -15,7 +15,7 @@ const NetworkInformationContainer = styled('div')`
   position: relative;
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 20px;
   ${mq.medium`
     margin-top: 80px;
@@ -31,7 +31,7 @@ const Blockies = styled(UnstyledBlockies)`
   left: 10px;
   top: 10px;
   ${mq.medium`
-    box-shadow: 3px 5px 24px 0 #d5e2ec;
+    
   `}
 `
 
@@ -42,12 +42,12 @@ const Avatar = styled('img')`
   top: 10px;
   border-radius: 50%;
   ${mq.medium`
-    box-shadow: 3px 5px 24px 0 #d5e2ec;
+    
   `}
 `
 
 const NetworkStatus = styled('div')`
-  color: #cacaca;
+  color: #515151;
   font-size: 14px;
   text-transform: capitalize;
   font-weight: 100;
@@ -62,13 +62,13 @@ const NetworkStatus = styled('div')`
     width: 6px;
     height: 6px;
     border-radius: 3px;
-    background: #5284ff;
+    background: #c6a15a;
     margin-right: 5px;
   }
 `
 
 const Account = styled('div')`
-  color: #adbbcd;
+  color: #515151;
   font-size: 16px;
   font-weight: 200;
   font-family: Overpass Mono;
@@ -85,8 +85,8 @@ const AccountContainer = styled('div')`
     transform: translate(-25px, 5px);
     width: 225px;
     &:hover {
-      background: white;
-      box-shadow: -4px 18px 70px 0 rgba(108, 143, 167, 0.32);
+      background: #222224;
+      
       border-radius: 6px;
       .account {
         overflow: visible;
@@ -146,7 +146,7 @@ function NetworkInformation() {
             <NoAccountsModal
               onClick={disconnectProvider}
               buttonText={t('c.disconnect')}
-              colour={'#F5A623'}
+              colour={'#C6A15A'}
             />
           )}
         </AccountContainer>
@@ -160,7 +160,7 @@ function NetworkInformation() {
           </NetworkStatus>
           <NoAccountsModal
             onClick={connectProvider}
-            colour={'#F5A623'}
+            colour={'#C6A15A'}
             buttonText={t('c.connect')}
           />
         </AccountContainer>

@@ -14,17 +14,17 @@ const Stepper = styled('div')`
   grid-template-columns:
     30px auto
     30px;
-  border-bottom: 1px solid #dfdfdf;
+  border-bottom: 1px solid #515151;
 `
 
 const Icon = styled('div')`
   font-family: Overpass;
   font-size: 28px;
   font-weight: 100;
-  color: #adbbcd;
-  ${p => p.emphasize && 'background-color: #5384fe;'}
-  ${p => (p.emphasize ? 'color: white;' : 'color: #adbbcd;')}
-  ${p => (p.emphasize ? 'border-color: white;' : 'color: #adbbcd;')}
+  color: #515151;
+  ${p => p.emphasize && 'background-color: #C6A15A;'}
+  ${p => (p.emphasize ? 'color: #515151;' : 'color: #515151;')}
+  ${p => (p.emphasize ? 'border-color: #515151;' : 'color: #515151;')}
   
   border-radius: 50%;
   border: solid 1px;
@@ -37,8 +37,8 @@ const Icon = styled('div')`
   transition: 0.2s;
 
   &:hover {
-    border: solid #2500a6 1px;
-    color: #2500a6;
+    border: solid white 1px;
+    color: white;
     cursor: pointer;
   }
 `
@@ -50,7 +50,7 @@ const Amount = styled('div')`
   font-family: Overpass;
   font-size: 28px;
   font-weight: 100;
-  color: #2b2b2b;
+  color: white;
   justify-self: left;
   align-self: center;
 
@@ -59,7 +59,7 @@ const Amount = styled('div')`
     font-family: Overpass;
     font-size: 28px;
     font-weight: 100;
-    color: #2b2b2b;
+    color: white;
     border: none;
     max-width: 65px;
     outline: 0;
@@ -71,7 +71,7 @@ const Description = styled('div')`
   font-family: Overpass;
   font-weight: 300;
   font-size: 14px;
-  color: #adbbcd;
+  color: #515151;
   margin-top: 10px;
 `
 

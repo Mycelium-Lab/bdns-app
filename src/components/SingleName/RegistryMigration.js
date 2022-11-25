@@ -16,7 +16,7 @@ const WarningBox = styled('div')`
   align-items: center;
   font-size: 18px;
   // font-weight: 100;
-  color: #2b2b2b;
+  color: white;
   padding: 20px 35px;
   background: hsla(37, 91%, 55%, 0.1);
   margin-bottom: 20px;
@@ -29,7 +29,7 @@ const WarningContent = styled('div')`
 
 const SubWarning = styled('p')`
   font-size: 14px;
-  color: #2b2b2b;
+  color: white;
   font-weight: 500;
 `
 

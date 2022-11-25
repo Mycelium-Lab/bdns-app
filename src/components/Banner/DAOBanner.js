@@ -18,7 +18,7 @@ const LogoSmall = styled.img`
   border-radius: 50%;
   margin: auto;
   display: block;
-  box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.06);
+
   background: linear-gradient(
     330.4deg,
     #44bcf0 4.54%,

@@ -33,6 +33,7 @@ import DefaultAddressLink from '../Links/AddressLink'
 import { ReactComponent as DefaultOrangeExclamation } from '../Icons/OrangeExclamation.svg'
 
 const Details = styled('section')`
+  color: white;
   padding: 20px;
   transition: 0.4s;
   ${mq.small`
@@ -75,8 +76,8 @@ const AddressLink = styled(DefaultAddressLink)`
 `
 
 const Explainer = styled('div')`
-  background: #f0f6fa;
-  color: #adbbcd;
+  background: #2d2d2f;
+  color: #515151;
   display: flex;
   padding: 1em 0;
   margin-left: 0px;
@@ -124,7 +125,7 @@ const OrangeExclamation = styled(DefaultOrangeExclamation)`
 `
 
 const DNSOwnerError = styled('span')`
-  color: #f5a623;
+  color: #C6A15A;
 `
 
 const OwnerFields = styled('div')`
@@ -134,7 +135,7 @@ const OwnerFields = styled('div')`
 `
 
 const DomainOwnerAddress = styled('span')`
-  color: ${props => (props.outOfSync ? '#CACACA' : '')};
+  color: ${props => (props.outOfSync ? '#515151' : '')};
 `
 
 const GracePeriodWarningContainer = styled('div')`
@@ -145,7 +146,7 @@ const GracePeriodWarningContainer = styled('div')`
 `
 
 const GracePeriodText = styled('span')`
-  color: ${p => (p.isExpired ? 'white' : '#cacaca')};
+  color: ${p => (p.isExpired ? 'white' : '#515151')};
   margin-left: 0.5em;
 `
 
@@ -154,7 +155,7 @@ const GracePeriodDate = styled('span')`
 `
 
 const Expiration = styled('span')`
-  color: ${p => (p.isExpired ? 'white' : '#f5a623')};
+  color: ${p => (p.isExpired ? 'white' : '#C6A15A')};
   font-weight: bold;
 `
 

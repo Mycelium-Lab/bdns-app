@@ -6,13 +6,13 @@ const StyledUpload = styled(Upload)`
     p.disabled &&
     `
      g {
-       fill: #ADBBCD;
+       fill: #515151;
      }
   `}
   &:hover {
     g {
       transition: 0.2s;
-      fill: #5384fe;
+      fill: #c6a15a;
     }
     cursor: pointer;
   }
@@ -23,7 +23,7 @@ const StyledUpload = styled(Upload)`
     &:hover {
       cursor: default;
       g {
-        fill: #ADBBCD;
+        fill: #515151;
       }
     }
   `}

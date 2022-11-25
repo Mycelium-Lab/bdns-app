@@ -99,9 +99,9 @@ const Announcement = styled('div')`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: #5284ff;
+  background: #C6A15A;
   padding: 0 10px;
-  border-bottom: #5284ff solid 3px;
+  border-bottom: #C6A15A solid 3px;
   h3 {
     color: white;
     font-weight: 400;
@@ -212,7 +212,7 @@ const WhatItIs = styled(Section)`
 `
 
 const HowItWorks = styled(Section)`
-  background: #f0f6fa;
+  background: #2d2d2f;
   padding: 40px 20px 80px;
 `
 

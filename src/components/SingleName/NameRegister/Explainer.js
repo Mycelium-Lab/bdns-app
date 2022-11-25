@@ -31,14 +31,14 @@ const Header = styled('div')`
     font-family: Overpass;
     font-weight: 300;
     font-size: 18px;
-    color: #2b2b2b;
+    color: white;
     letter-spacing: 0;
     margin: 0;
     margin-bottom: 5px;
 
     ${mq.medium`
       font-size: 24px;
-      color: #2B2B2B;
+      color: white;
       letter-spacing: 0;
     `}
   }
@@ -48,7 +48,7 @@ const Header = styled('div')`
     font-weight: 400;
     font-family: Overpass;
     font-size: 14px;
-    color: #adbbcd;
+    color: #515151;
     letter-spacing: 0;
   }
 `

@@ -64,7 +64,7 @@ export const RecordsSubKey = styled('div')`
   font-family: Overpass Mono;
   font-weight: 500;
   font-size: 14px;
-  color: #adbbcd;
+  color: #515151;
   letter-spacing: 0;
 
   ${mq.small`

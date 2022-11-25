@@ -36,7 +36,7 @@ const DomainLink = styled(Link)`
   grid-gap: 10px;
   width: 100%;
   background-color: ${props => (props.warning ? 'hsla(37,91%,55%,0.1)' : '')};
-  color: #2b2b2b;
+  color: white;
   font-size: 22px;
   font-weight: 100;
   align-items: center;
@@ -76,7 +76,7 @@ const DomainLink = styled(Link)`
       color: #DC2E2E;
     }
     &:hover h3 {
-      color: #2C46A6;
+      color: #C6A15A;
     }
   `}
 
@@ -111,7 +111,7 @@ const WarningContainer = styled.div`
   font-weight: 100;
 
   & a:hover {
-    color: #2c46a6;
+    color: #c6a15a;
   }
 `
 

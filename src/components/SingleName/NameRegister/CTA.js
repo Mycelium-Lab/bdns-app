@@ -25,13 +25,12 @@ const CTAContainer = styled('div')`
   justify-content: flex-end;
   align-items: center;
 `
-
 const Pencil = styled(DefaultPencil)`
   margin-right: 5px;
 `
 
 const Prompt = styled('span')`
-  color: #ffa600;
+  color: #c6a15a;
   margin-right: 10px;
 `
 
@@ -84,7 +83,11 @@ function getCTA({
         {mutate =>
           isAboveMinDuration && !isNameWrapped && !isReadOnly ? (
             hasSufficientBalance ? (
-              <Button data-testid="request-register-button" onClick={mutate}>
+              <Button
+                data-testid="request-register-button"
+                onClick={mutate}
+                type="primary-gold"
+              >
                 {t('register.buttons.request')}
               </Button>
             ) : (
@@ -106,7 +109,7 @@ function getCTA({
               </Prompt>
               <NoAccountsModal
                 onClick={connectProvider}
-                colour={'#F5A623'}
+                colour={'#C6A15A'}
                 buttonText={t('c.connect')}
               />
             </>

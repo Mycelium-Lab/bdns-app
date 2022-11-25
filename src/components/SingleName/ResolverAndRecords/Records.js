@@ -30,7 +30,7 @@ import ContentHash from './ContentHash'
 const RecordsWrapper = styled('div')`
   border-radius: 6px;
   border: 1px solid #ededed;
-  box-shadow: inset 0 0 10px 0 rgba(235, 235, 235, 0.5);
+  
   display: ${p => (p.shouldShowRecords ? 'block' : 'none')};
   margin-bottom: 20px;
 `
@@ -38,7 +38,7 @@ const RecordsWrapper = styled('div')`
 const CantEdit = styled('div')`
   padding: 20px;
   font-size: 14px;
-  color: #adbbcd;
+  color: #515151;
   background: hsla(37, 91%, 55%, 0.1);
 `
 
@@ -50,7 +50,7 @@ const ConfirmBox = styled('div')`
     font-size: 14px;
   }
   padding: 20px;
-  background: #f0f6fa;
+  background: #2d2d2f;
   display: flex;
   justify-content: space-between;
 `

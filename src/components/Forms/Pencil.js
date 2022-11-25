@@ -6,13 +6,13 @@ const StyledPencil = styled(Pencil)`
     p.disabled &&
     `
      g {
-       fill: #ADBBCD;
+       fill: #515151;
      }
   `}
   &:hover {
     g {
       transition: 0.2s;
-      fill: #5384fe;
+      fill: #c6a15a;
     }
     cursor: pointer;
   }
@@ -23,7 +23,7 @@ const StyledPencil = styled(Pencil)`
     &:hover {
       cursor: default;
       g {
-        fill: #ADBBCD;
+        fill: #515151;
       }
     }
   `}

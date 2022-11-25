@@ -32,7 +32,7 @@ const Address = styled('span')`
 `
 
 const DNSOwnerContainer = styled('div')`
-  background: #f0f6fa;
+  background: #2d2d2f;
   display: flex;
   padding: 1em 0;
   *{
@@ -41,13 +41,13 @@ const DNSOwnerContainer = styled('div')`
 `
 
 const BreadcrumbsCaontainer = styled('ul')`
-  background: #f0f6fa;
+  background: #2d2d2f;
   list-style: none;
   overflow: hidden;
   display: flex;
   padding: 1em;
   li {
-    border-right: 1px solid #adbbcd;
+    border-right: 1px solid #515151;
     text-align: center;
     flex: auto;
   }
@@ -100,7 +100,7 @@ const Number = ({ number, currentNumber, text }) => {
                         fontSize="10"
                         fontWeight="normal"
                         letterSpacing="0.3125"
-                        fill="#F0F6FA"
+                        fill="#2d2d2f"
                       >
                         <tspan x="2.8" y="10">
                           {displayNumber}

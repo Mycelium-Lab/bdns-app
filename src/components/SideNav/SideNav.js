@@ -25,7 +25,7 @@ const SideNavContainer = styled('nav')`
 
   left: 0;
   height: auto;
-  background: #121d46;
+  background: white;
   width: 100%;
   margin-top: -10px;
   ${mq.medium`
@@ -45,7 +45,12 @@ const SideNavContainer = styled('nav')`
   li {
     list-style: none;
   }
-
+  path {
+    fill: #c6a15a;
+  }
+  g {
+    fill: #c6a15a;
+  }
   ${p =>
     p.hasNonAscii
       ? `
@@ -64,34 +69,38 @@ const NavLink = styled(Link)`
   justify-content: center;
   font-weight: 200;
   font-size: 22px;
-  color: ${p => (p.active ? '#5284FF' : '#C7D3E3')};
+  color: ${p => (p.active ? 'white' : '#C6A15A')};
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   ${mq.medium`
     justify-content: start;
     border-bottom: 0;
   `}
 
   &:visited {
-    color: #c7d3e3;
+    color: #c6a15a;
   }
 
   span {
     transition: 0.2s;
     margin-left: 15px;
-    color: ${p => (p.active ? '#5284FF' : '#C7D3E3')};
+    color: ${p => (p.active ? 'white' : '#C6A15A')};
   }
-
+  path {
+    fill: #c6a15a;
+  }
+  g {
+    fill: #c6a15a;
+  }
   &:hover {
     span {
-      color: #5284ff;
+      color: #515151;
     }
     path {
-      fill: #5284ff;
+      fill: #515151;
     }
     g {
-      fill: #5284ff;
+      fill: #515151;
     }
   }
 `
@@ -102,9 +111,9 @@ const ThirdPartyLink = styled('a')`
   justify-content: center;
   font-weight: 200;
   font-size: 22px;
-  color: ${p => (p.active ? '#5284FF' : '#C7D3E3')};
+  color: ${p => (p.active ? 'white' : '#C6A15A')};
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
   ${mq.medium`
     justify-content: start;
@@ -112,24 +121,29 @@ const ThirdPartyLink = styled('a')`
   `}
 
   &:visited {
-    color: #c7d3e3;
+    color: #c6a15a;
   }
 
   span {
     transition: 0.2s;
     margin-left: 15px;
-    color: ${p => (p.active ? '#5284FF' : '#C7D3E3')};
+    color: ${p => (p.active ? 'white' : '#C6A15A')};
   }
-
+  path {
+    fill: #c6a15a;
+  }
+  g {
+    fill: #c6a15a;
+  }
   &:hover {
     span {
-      color: #5284ff;
+      color: #515151;
     }
     path {
-      fill: #5284ff;
+      fill: #515151;
     }
     g {
-      fill: #5284ff;
+      fill: #515151;
     }
   }
 `

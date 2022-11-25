@@ -14,21 +14,21 @@ import {
 const Records = styled('div')`
   border-radius: 6px;
   border: 1px solid #ededed;
-  box-shadow: inset 0 0 10px 0 rgba(235, 235, 235, 0.5);
+  
   padding-bottom: 10px;
   display: block;
   margin-bottom: 20px;
 `
 
 const RecordsHeader = styled('div')`
-  background: #f0f6fa;
+  background: #2d2d2f;
 `
 
 const RecordsTitle = styled('h3')`
   font-family: Overpass;
   font-weight: 700;
   font-size: 12px;
-  color: #adbbcd;
+  color: #515151;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   margin: 0;

@@ -41,7 +41,7 @@ export const RecordsItem = styled(DetailsItem)`
     align-items: flex-start;
   `}
 
-  background: ${({ editing }) => (editing ? 'white' : 'white')};
+  background: ${({ editing }) => (editing ? '#222224' : '#222224')};
   ${mq.medium`
     display: flex;
     flex-direction: column;
@@ -74,7 +74,7 @@ export const RecordsSubKey = styled('div')`
   font-family: Overpass Mono;
   font-weight: 500;
   font-size: 14px;
-  color: #adbbcd;
+  color: #515151;
   letter-spacing: 0;
 
   ${mq.small`
