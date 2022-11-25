@@ -25,6 +25,8 @@ const SearchForm = styled('form')`
     width: 27px;
     height: 27px;
     background: url(${searchIcon}) no-repeat;
+    filter: brightness(0) saturate(100%) invert(32%) sepia(0%) saturate(655%)
+      hue-rotate(150deg) brightness(102%) contrast(91%);
   }
 
   input {
@@ -32,10 +34,14 @@ const SearchForm = styled('form')`
     width: 100%;
     border: none;
     border-radius: 0;
+    color: #222224;
+
     font-size: 18px;
     font-family: Overpass;
     font-weight: 100;
     ${mq.medium`
+    border-top: 1px solid #C6A15A;
+    border-bottom: 1px solid #C6A15A;
       width: calc(100% - 162px);
       font-size: 28px;
     `}
@@ -46,13 +52,13 @@ const SearchForm = styled('form')`
 
     &::-webkit-input-placeholder {
       /* Chrome/Opera/Safari */
-      color: #ccd4da;
+      color: #585858;
     }
   }
 
   button {
-    ${p => (p && p.hasSearch ? 'background: #5284ff;' : 'background: #c7d3e3;')}
-    color: white;
+    ${p => (p && p.hasSearch ? 'background: #C6A15A;' : 'background: #585858;')}
+    color: #222224;
     font-size: 22px;
     font-family: Overpass;
     padding: 20px 0;

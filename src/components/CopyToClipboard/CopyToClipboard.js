@@ -7,6 +7,8 @@ const HOVER_TIMEOUT = 1000
 const CopyContainer = styled('span')`
   margin: 0 5px;
   position: relative;
+  filter: brightness(0) saturate(100%) invert(69%) sepia(20%) saturate(892%)
+    hue-rotate(1deg) brightness(91%) contrast(92%);
   &:hover {
     cursor: pointer;
   }

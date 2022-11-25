@@ -40,6 +40,7 @@ const Header = styled('header')`
     background: #121D46;
   `
       : ''}
+  border-bottom: 1px solid #585858;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -48,10 +49,9 @@ const Header = styled('header')`
   top: 0;
   width: 100%;
   z-index: 2;
-  box-shadow: 0 4px 8px 0 rgba(230, 240, 247, 0.8);
   height: 50px;
   ${mq.medium`
-    box-shadow: 0 8px 24px 0 rgba(230, 240, 247, 0.8);
+    border: none;
     height: auto;
   `}
 `
@@ -79,6 +79,9 @@ const Logo = styled(DefaultLogo)`
 
   ${mq.medium`
     opacity: 1;
+    border-top: 1px solid #C6A15A;
+    border-bottom: 1px solid #C6A15A;
+    border-left: 1px solid #C6A15A;
     &:before {
       background: #d3d3d3;
       height: 32px;

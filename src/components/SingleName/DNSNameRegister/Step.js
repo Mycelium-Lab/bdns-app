@@ -35,7 +35,6 @@ const SVG = styled('svg')`
 
 const Content = styled('div')`
   margin-left: 8px;
-
   div {
     font-weight: 100;
     font-size: 20px;

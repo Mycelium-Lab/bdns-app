@@ -2,8 +2,7 @@ import styled from '@emotion/styled/macro'
 import mq from 'mediaQuery'
 
 const MainContainer = styled('div')`
-  background: white;
-  box-shadow: 3px 4px 6px 0 rgba(229, 236, 241, 0.3);
+  background: #222224;
   border-radius: 0;
   margin-bottom: 60px;
   position: relative;
@@ -30,7 +29,7 @@ const MainContainer = styled('div')`
         case 'Yours':
           return '#52e5ff'
         case 'Open':
-          return '#42E068'
+          return '#C6A15A'
         default:
           return '#CACACA'
       }

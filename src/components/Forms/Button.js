@@ -72,6 +72,21 @@ function getButtonStyles({ type }) {
           cursor: default
         }
       `
+    case 'primary-gold':
+      return `
+        color: #C6A15A;
+        background: transparent;
+        border: 2px solid #C6A15A;
+        border-radius: 0px;
+        &:visited {
+          color: white;
+        }
+        &:hover {
+          cursor: pointer;
+          background: #C6A15A;
+          color: #222224;
+        }
+      `
     case 'disabled':
       return `
         border: 2px solid #dfdfdf;
@@ -79,7 +94,10 @@ function getButtonStyles({ type }) {
         &:hover {
           cursor: default
         }
-        
+        &:hover {
+          color: #222224;
+          cursor: default
+        }
       `
     default:
       return ''
