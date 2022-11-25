@@ -40,6 +40,7 @@ const Name = styled('span')`
   text-transform: none;
   display: inline-block;
   width: 100px;
+  white-space: nowrap;
 `
 
 const NetworkStatus = styled('div')`
@@ -99,9 +100,9 @@ const Announcement = styled('div')`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: #C6A15A;
+  background: #c6a15a;
   padding: 0 10px;
-  border-bottom: #C6A15A solid 3px;
+  border-bottom: #c6a15a solid 3px;
   h3 {
     color: white;
     font-weight: 400;

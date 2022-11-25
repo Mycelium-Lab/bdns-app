@@ -24,6 +24,7 @@ const CTAContainer = styled('div')`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  color: white;
 `
 const Pencil = styled(DefaultPencil)`
   margin-right: 5px;

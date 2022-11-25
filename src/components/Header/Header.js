@@ -21,7 +21,6 @@ const StyledBanner = styled(Banner)`
   display: flex;
   align-items: center;
   justify-content: center;
-
   ${mq.medium`
     top: 90px;
     position: fixed;
@@ -30,6 +29,10 @@ const StyledBanner = styled(Banner)`
 `
 
 const StyledBannerInner = styled('div')`
+  p {
+    color: #222224;
+  }
+
   max-width: 720px;
 `
 
