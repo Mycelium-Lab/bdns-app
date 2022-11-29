@@ -15,7 +15,7 @@ const IconLogo = styled('img')`
   `}
 `
 
-const LogoContainer = styled(Link)`
+const LogoContainer = styled('a')`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -30,8 +30,8 @@ const LogoContainer = styled(Link)`
   `}
 `
 
-const Logo = ({ color, className, to = '' }) => (
-  <LogoContainer className={className} to={to}>
+const Logo = ({ color, className, to = 'https://bdns.app/' }) => (
+  <LogoContainer className={className} href={to}>
     <IconLogo src={ENSLogo} />
     <h2 color={'#000'}>BDNS</h2>
   </LogoContainer>
