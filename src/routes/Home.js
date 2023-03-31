@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import styled from '@emotion/styled/macro'
@@ -16,6 +16,7 @@ import ENSLogo from '../components/HomePage/images/ENSLogo.svg'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
+import getTokensId from 'ui/utils/walletResources'
 
 const HeroTop = styled('div')`
   display: grid;
@@ -271,6 +272,20 @@ const ReadOnly = styled('span')`
   margin-left: 1em;
 `
 
+const Notification = styled('span')`
+  color: white;
+  margin-top: 2em;
+  font-weight: 400;
+  a {
+    text-decoration: underline;
+    font-weight: 300;
+    color: #195d9d;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+`
+
 export const HOME_DATA = gql`
   query getHomeData($address: string) @client {
     network
@@ -310,6 +325,27 @@ export default ({ match }) => {
   } = useQuery(HOME_DATA, {
     variables: { address: accounts?.[0] }
   })
+
+  const usePromo = () => {
+    const [isPromo, setIsPromo] = useState(false)
+    const [offers, setOffers] = useState([])
+
+    useEffect(() => {
+      ;(async () => {
+        if (!accounts?.[0]) {
+          setIsPromo(false)
+          return
+        }
+        const resources = await getTokensId()
+        setIsPromo(Boolean(resources.length))
+        setOffers(resources)
+      })()
+    }, [accounts])
+
+    return { isPromo, offers }
+  }
+
+  const { isPromo, offers } = usePromo()
 
   return (
     <Hero>
@@ -354,7 +390,22 @@ export default ({ match }) => {
             initial={animation.initial}
             animate={animation.animate}
           />
-          <Search />
+          <Search promo={{ isPromo, offers }} />
+          {isPromo && (
+            <Notification>
+              {t('c.notificationOfPromo', { value: 'byac NFT' })}
+              &nbsp;
+              <Link
+                to={
+                  offers.length > 1
+                    ? { pathname: `/names/register`, state: { offers } }
+                    : `/name/${offers[0]}/register`
+                }
+              >
+                {t('c.here')}
+              </Link>
+            </Notification>
+          )}
         </>
       </SearchContainer>
     </Hero>
