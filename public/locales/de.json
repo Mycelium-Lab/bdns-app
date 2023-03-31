@@ -11,10 +11,7 @@
     },
     "renew": {
       "button": "Ausgewählte verlängern",
-      "confirm": [
-        "Die folgenden Namen:",
-        "werden für "
-      ],
+      "confirm": ["Die folgenden Namen:", "werden für "],
       "confirmButton": "Verlängern",
       "year": "{{count}} Jahr verlängert",
       "year_plural": "{{count}} Jahre verlängert"
@@ -46,11 +43,13 @@
     "expires": "Läuft aus am",
     "faq": "FAQ",
     "favourites": "Favoriten",
+    "here": "hier",
     "learnmore": "Mehr erfahren",
     "learnmoreenglishonly": "Mehr erfahren (English Only)",
     "migrate": "Migrieren",
     "mynames": "Meine Namen",
     "network": "Netzwerk",
+    "notificationOfPromo": "Haben sie ein {{ value }}? Gehen",
     "otheraddresses": "Andere Adressen",
     "parent": "Elterndomain",
     "readonly": "Read only",
@@ -125,8 +124,7 @@
     "subdomainFavouriteTitle": "Favorisierte Subdomains"
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
       "body": "Die BDNS App ist eine grafische Oberfläche für nicht-technische Nutzer. Es ermöglicht Ihnen, Namen zu suchen, ihre Adressen oder Ressourcen, auf die verwiesen wird, zu verwalten und Subdomains für Namen zu erstellen.",
       "title": "Wie man BDNS benutzt"

@@ -11,10 +11,7 @@
     },
     "renew": {
       "button": "Renovar seleccionados",
-      "confirm": [
-        "Los siguientes nombres:",
-        "se renovarán durante"
-      ],
+      "confirm": ["Los siguientes nombres:", "se renovarán durante"],
       "confirmButton": "Renovar",
       "year": "{{count}} año",
       "year_plural": "{{count}} años"
@@ -46,11 +43,13 @@
     "expires": "Expira",
     "faq": "FAQ",
     "favourites": "Favoritos",
+    "here": "aquí",
     "learnmore": "Aprender más",
     "learnmoreenglishonly": "Learn More",
     "migrate": "Migrar",
     "mynames": "Mis Nombres",
     "network": "red",
+    "notificationOfPromo": "¿Tienes un bayc NFT? Ir",
     "otheraddresses": "Otras Direcciones",
     "parent": "matriz",
     "readonly": "Read only",
@@ -125,8 +124,7 @@
     "subdomainFavouriteTitle": "Subdominios favoritos."
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
       "body": "La aplicación BDNS es una interfaz gráfica de usuario para usuarios no-técnicos. Te permite buscar cualquier nombre, gestionar sus direcciones o los recursos a los que direcciona, o crear subdominios para cada uno.",
       "title": "Cómo utilizar ENS"
