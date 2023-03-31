@@ -21,7 +21,8 @@ function SingleName({
   match: {
     params: { name: searchTerm }
   },
-  location: { pathname }
+  location: { pathname },
+  offer
 }) {
   const history = useHistory()
   useScrollTo(0)
@@ -30,6 +31,8 @@ function SingleName({
   const [type, setType] = useState(undefined)
   const [name, setNormalisedName] = useState('')
   let errorMessage
+
+  const notNormalized = offer || searchTerm
 
   const {
     data: { isENSReady }
@@ -47,15 +50,15 @@ function SingleName({
     if (isENSReady) {
       try {
         // This is under the assumption that validateName never returns false
-        normalisedName = validateName(searchTerm)
-        if (normalisedName !== searchTerm)
+        normalisedName = validateName(notNormalized)
+        if (normalisedName !== notNormalized)
           history.replace(`/name/${normalisedName}`)
         setNormalisedName(normalisedName)
-        document.title = searchTerm
+        if (!offer) document.title = notNormalized
       } catch {
         document.title = 'Error finding name'
       } finally {
-        parseSearchTerm(normalisedName || searchTerm).then(_type => {
+        parseSearchTerm(normalisedName || notNormalized).then(_type => {
           if (_type === 'supported' || _type === 'tld' || _type === 'search') {
             setValid(true)
 
@@ -71,7 +74,7 @@ function SingleName({
         })
       }
     }
-  }, [searchTerm, isENSReady])
+  }, [notNormalized, isENSReady])
 
   if (valid) {
     if (loading) return <Loader large center />
@@ -97,7 +100,10 @@ function SingleName({
       errorMessage = type
     }
     return (
-      <SearchErrors errors={[errorMessage]} searchTerm={name || searchTerm} />
+      <SearchErrors
+        errors={[errorMessage]}
+        searchTerm={name || notNormalized}
+      />
     )
   } else {
     return <Loader large center />

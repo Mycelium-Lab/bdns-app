@@ -35,6 +35,13 @@ const SingleName = lazy(() =>
   )
 )
 
+const ListName = lazy(() =>
+  import(
+    /* webpackChunkName: "ListeName", webpackPrefetch:true */
+    './routes/ListName'
+  )
+)
+
 const Favourites = lazy(() =>
   import(
     /* webpackChunkName: "Favourites", webpackPrefetch:true */
@@ -127,6 +134,12 @@ const App = () => {
         <Route path="/how-it-works" component={SearchResults} />
         <Route path="/search/:searchTerm" component={SearchResults} />
         <Route path="/name/:name" component={SingleName} />
+        <Route
+          path="/names"
+          component={({ location, match }) => (
+            <ListName match={match} location={location} />
+          )}
+        />
         <Route path="/address/:address/:domainType" component={Address} />
         <Route path="/address/:address" component={Address} />
         <Route path="/renew" component={Renew} />

@@ -121,7 +121,9 @@ function NameDetails({
 
       <Route
         exact
-        path="/name/:name/register"
+        path={
+          pathname === '/names/register' ? pathname : '/name/:name/register'
+        }
         render={() => (
           <NameRegister
             registrationOpen={registrationOpen}

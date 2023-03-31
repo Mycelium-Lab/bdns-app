@@ -83,7 +83,7 @@ const SEARCH_QUERY = gql`
   }
 `
 
-function Search({ history, className, style }) {
+function Search({ history, className, style, promo }) {
   const { t } = useTranslation()
   const [inputValue, setInputValue] = useState(null)
   const {
@@ -126,7 +126,17 @@ function Search({ history, className, style }) {
 
         input.value = ''
         if (type === 'supported' || type === 'short') {
-          history.push(`/name/${searchTerm}/register`)
+          history.push(
+            promo.isPromo
+              ? {
+                  pathname: `/names/register`,
+                  state: {
+                    offers: promo.offers,
+                    searchTerm
+                  }
+                }
+              : `/name/${searchTerm}/register`
+          )
           return
         } else {
           history.push(`/search/${encodeURI(searchTerm)}`)
@@ -153,12 +163,13 @@ function Search({ history, className, style }) {
 
 const SearchWithRouter = withRouter(Search)
 
-const SearchContainer = ({ searchDomain, className, style }) => {
+const SearchContainer = ({ searchDomain, className, style, promo }) => {
   return (
     <SearchWithRouter
       searchDomain={searchDomain}
       className={className}
       style={style}
+      promo={promo}
     />
   )
 }
