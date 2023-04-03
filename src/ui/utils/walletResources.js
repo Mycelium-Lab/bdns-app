@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'development') {
   contractAddress = '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D'
 }
 
-const API_KEY = process.env.REACT_APP_ETHERSCAN_API_KEY
+const API_KEY = process.env.REACT_APP_API_KEY
 
 const api = {
   accounts: {

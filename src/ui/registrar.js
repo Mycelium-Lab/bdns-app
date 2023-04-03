@@ -349,8 +349,8 @@ export default class Registrar {
   async getEthPrice() {
     const oracleens = 'eth-usd.data.eth'
     try {
-      const contractAddress = await this.getAddress(oracleens)
-      const oracle = await this.getOracle(contractAddress)
+      //const contractAddress = await this.getAddress(oracleens)
+      const oracle = await this.getOracle(process.env.REACT_APP_PRICE_ORACLE)
       return (await oracle.latestAnswer()).toNumber() / 100000000
     } catch (e) {
       console.warn(
@@ -500,6 +500,40 @@ export default class Registrar {
       0,
       BigNumber.from('0xFFFFFFFFFFFFFFF0'),
       { value: priceWithBuffer, gasLimit }
+    )
+  }
+
+  async registerNFT(label, tokenId, duration, secret) {
+    const permanentRegistrarControllerWithoutSigner = this
+      .permanentRegistrarController
+    const signer = await getSigner()
+    const permanentRegistrarController = permanentRegistrarControllerWithoutSigner.connect(
+      signer
+    )
+
+    const account = await getAccount()
+    const resolverAddr = await this.getAddress('resolver')
+    const abi = ['function setAddr(bytes32 node, address a)']
+    const iface = new utils.Interface(abi)
+    const callData = iface.encodeFunctionData('setAddr', [
+      namehash(label),
+      account
+    ])
+    const available = await permanentRegistrarController.availableNFT(
+      tokenId,
+      account
+    )
+
+    return permanentRegistrarController.registerNFT(
+      tokenId,
+      account,
+      secret,
+      resolverAddr,
+      [callData],
+      true,
+      0,
+      BigNumber.from('0xFFFFFFFFFFFFFFF0'),
+      { gasLimit: Number(available.gasLimit._hex) }
     )
   }
 
@@ -768,10 +802,7 @@ export async function setupRegistrar(registryAddress) {
   )
   console.log('legacyAuctionRegistrarAddress', legacyAuctionRegistrarAddress)
   // get address of bulkRenewal interface implementer (0x3150bfba)
-  let bulkRenewalAddress = await Resolver.interfaceImplementer(
-    namehash(''),
-    bulkRenewalInterfaceId
-  )
+  let bulkRenewalAddress = process.env.REACT_APP_BULK_RENEWAL
   console.log('bulkRenewalAddress', bulkRenewalAddress)
   return new Registrar({
     registryAddress,
