@@ -337,7 +337,7 @@ export default ({ match }) => {
           return
         }
         const resources = await getTokensId()
-        setIsPromo(Boolean(resources.length))
+        setIsPromo(Boolean(resources?.length))
         setOffers(resources)
       })()
     }, [accounts])
@@ -391,21 +391,24 @@ export default ({ match }) => {
             animate={animation.animate}
           />
           <Search promo={{ isPromo, offers }} />
-          {isPromo && (
-            <Notification>
-              {t('c.notificationOfPromo', { value: 'byac NFT' })}
-              &nbsp;
-              <Link
-                to={
-                  offers.length > 1
-                    ? { pathname: `/names/register`, state: { offers } }
-                    : `/name/${offers[0]}/register`
-                }
-              >
-                {t('c.here')}
-              </Link>
-            </Notification>
-          )}
+          <Notification>
+            {t('c.notificationOfPromo', { value: 'byac NFT' })}
+            &nbsp;
+            <Link
+              to={
+                offers.length > 1
+                  ? { pathname: `/names/register`, state: { offers } }
+                  : offers.length === 1
+                  ? {
+                      pathname: `/name/${offers[0]}/register`,
+                      state: { offer: offers[0] }
+                    }
+                  : '/'
+              }
+            >
+              {t('c.here')}
+            </Link>
+          </Notification>
         </>
       </SearchContainer>
     </Hero>

@@ -133,7 +133,17 @@ const App = () => {
         <Route path="/my-bids" component={SearchResults} />
         <Route path="/how-it-works" component={SearchResults} />
         <Route path="/search/:searchTerm" component={SearchResults} />
-        <Route path="/name/:name" component={SingleName} />
+        <Route
+          path="/name/:name"
+          component={({ location, match }) => (
+            <SingleName
+              match={match}
+              location={location}
+              isNft={location.state?.offer ? true : false}
+              offer={location.state?.offer}
+            />
+          )}
+        />
         <Route
           path="/names"
           component={({ location, match }) => (
