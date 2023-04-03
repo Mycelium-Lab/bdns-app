@@ -2,14 +2,16 @@ import axios from 'axios'
 import { getAccount } from '../web3'
 
 let network, contractAddress
-
-if (process.env.NODE_ENV === 'development') {
+/*if (process.env.NODE_ENV === 'development') {
   network = 'https://api-goerli.etherscan.io/api'
   contractAddress = '0x855399f1c8ebd388ec3eea290f87c39cda914095'
 } else {
   network = 'https://api.etherscan.io/api'
   contractAddress = '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D'
-}
+}*/
+
+network = 'https://api-goerli.etherscan.io/api'
+contractAddress = '0x855399f1c8ebd388ec3eea290f87c39cda914095'
 
 const API_KEY = process.env.REACT_APP_API_KEY
 

@@ -92,7 +92,8 @@ function SingleName({
             }
           })}>
             Вернуться к списку
-          </a>*/}
+          </a>
+          */}
           <Name
             details={data.singleName}
             name={name}
