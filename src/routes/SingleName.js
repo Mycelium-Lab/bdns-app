@@ -21,8 +21,9 @@ function SingleName({
   match: {
     params: { name: searchTerm }
   },
-  location: { pathname },
-  offer
+  location: { pathname, state },
+  offer,
+  isNft = false
 }) {
   const history = useHistory()
   useScrollTo(0)
@@ -81,13 +82,27 @@ function SingleName({
     if (error) return <div>{(console.log(error), JSON.stringify(error))}</div>
     if (data?.singleName)
       return (
-        <Name
-          details={data.singleName}
-          name={name}
-          pathname={pathname}
-          type={type}
-          refetch={refetch}
-        />
+        <>
+          {/*!offer && 
+          <a onClick={history.push({
+            pathname: `/names/register`,
+            state: {
+              offers: state.offers,
+              searchTerm: state.searchTerm
+            }
+          })}>
+            Вернуться к списку
+          </a>*/}
+          <Name
+            details={data.singleName}
+            name={name}
+            pathname={pathname}
+            type={type}
+            refetch={refetch}
+            tokenId={isNft ? offer : null}
+            locationState={state}
+          />
+        </>
       )
   }
 

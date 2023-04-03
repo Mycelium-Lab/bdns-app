@@ -4,7 +4,13 @@ function ListName({ match, location }) {
   return (
     <>
       {location.state.offers.map(name => (
-        <SingleName match={match} location={location} offer={name} key={name} />
+        <SingleName
+          match={match}
+          location={location}
+          offer={name}
+          key={name}
+          isNft={true}
+        />
       ))}
       {location.state.searchTerm && (
         <SingleName

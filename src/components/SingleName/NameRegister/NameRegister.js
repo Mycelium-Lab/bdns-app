@@ -48,7 +48,8 @@ const NameRegister = ({
   refetchIsMigrated,
   isReadOnly,
   isNameWrapped,
-  registrationOpen
+  registrationOpen,
+  tokenId
 }) => {
   const { t } = useTranslation()
   const [secret, setSecret] = useState(false)
@@ -270,6 +271,7 @@ const NameRegister = ({
           premiumOnlyPrice={getPremiumPrice}
           underPremium={underPremium}
           displayGas={true}
+          tokenId={tokenId}
         />
       )}
       {showPremiumWarning ? (
@@ -336,6 +338,7 @@ const NameRegister = ({
         years={years}
         premium={currentPremium}
         ethUsdPrice={!ethUsdPriceLoading && ethUsdPrice}
+        tokenId={tokenId}
       />
     </NameRegisterContainer>
   )

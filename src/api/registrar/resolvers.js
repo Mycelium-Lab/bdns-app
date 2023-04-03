@@ -82,6 +82,11 @@ const resolvers = {
 
       return sendHelper(tx)
     },
+    async registerNFT(_, { label, tokenId, duration, secret }) {
+      const registrar = getRegistrar()
+      const tx = await registrar.registerNFT(label, tokenId, duration, secret)
+      return sendHelper(tx)
+    },
     async reclaim(_, { name, address }) {
       const registrar = getRegistrar()
       const tx = await registrar.reclaim(name, address)

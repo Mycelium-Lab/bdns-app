@@ -19,7 +19,9 @@ function NameDetails({
   tab,
   pathname,
   isNameWrapped = false,
-  isReadOnly = true
+  isReadOnly = true,
+  tokenId,
+  locationState
 }) {
   const [loading, setLoading] = useState(undefined)
   const {
@@ -132,6 +134,7 @@ function NameDetails({
             refetchIsMigrated={refetchIsMigrated}
             isNameWrapped={isNameWrapped}
             isReadOnly={isReadOnly}
+            tokenId={tokenId}
           />
         )}
       />

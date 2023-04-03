@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import EthVal from 'ethval'
 
 import { trackReferral } from '../../../utils/analytics'
-import { COMMIT, REGISTER } from '../../../graphql/mutations'
+import { COMMIT, REGISTER, REGISTER_NFT } from '../../../graphql/mutations'
 
 import PendingTx from '../../PendingTx'
 import Button from '../../Forms/Button'
@@ -67,7 +67,8 @@ function getCTA({
   history,
   t,
   ethUsdPrice,
-  account
+  account,
+  tokenId
 }) {
   const CTAs = {
     PRICE_DECISION: (
@@ -130,8 +131,12 @@ function getCTA({
     ),
     AWAITING_REGISTER: (
       <Mutation
-        mutation={REGISTER}
-        variables={{ label, duration, secret }}
+        mutation={tokenId ? REGISTER_NFT : REGISTER}
+        variables={
+          tokenId
+            ? { label, tokenId, duration, secret }
+            : { label, duration, secret }
+        }
         onCompleted={data => {
           const txHash = Object.values(data)[0]
           setTxHash(txHash)
@@ -243,7 +248,8 @@ const CTA = ({
   price,
   years,
   premium,
-  ethUsdPrice
+  ethUsdPrice,
+  tokenId
 }) => {
   const { t } = useTranslation()
   const history = useHistory()
@@ -283,7 +289,8 @@ const CTA = ({
         history,
         t,
         ethUsdPrice,
-        account
+        account,
+        tokenId
       })}
     </CTAContainer>
   )

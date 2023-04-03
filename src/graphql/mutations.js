@@ -195,6 +195,17 @@ export const REGISTER = gql`
   }
 `
 
+export const REGISTER_NFT = gql`
+  mutation registerNFT(
+    $label: String
+    $tokenId: Int
+    $duration: Int
+    $secret: String
+  ) {
+    registerNFT(label: String, tokenId: Int, duration: Int, secret: String)
+  }
+`
+
 export const RENEW = gql`
   mutation renew($label: String, $duration: Int) {
     renew(label: $label, duration: $duration)
