@@ -55,9 +55,9 @@ const Input = styled(DefaultInput)`
   margin: 5px 0;
 `
 
-const EthRegistrationGasPrice = ({ price, ethUsdPrice, gasPrice }) => {
+const EthRegistrationGasPrice = ({ price, ethUsdPrice, gasPrice, tokenId }) => {
   const { t } = useTranslation()
-  const ethVal = new EthVal(`${price || 0}`).toEth()
+  const ethVal = new EthVal(tokenId ? '0.0' : `${price || 0}`).toEth()
   const registerGasSlow = new EthVal(`${TOGAL_GAS_WEI * gasPrice.slow}`).toEth()
   const registerGasFast = new EthVal(`${TOGAL_GAS_WEI * gasPrice.fast}`).toEth()
   const gasPriceToGweiSlow = new EthVal(`${gasPrice.slow}`).toGwei()

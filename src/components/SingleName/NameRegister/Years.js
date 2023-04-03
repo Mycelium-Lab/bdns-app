@@ -75,7 +75,7 @@ const Description = styled('div')`
   margin-top: 10px;
 `
 
-const Years = ({ years, setYears }) => {
+const Years = ({ years, setYears, tokenId }) => {
   const { t } = useTranslation()
   const incrementYears = () => setYears(years + 1)
   const decrementYears = () => (years >= 1 ? setYears(years - 1) : null)
@@ -83,27 +83,33 @@ const Years = ({ years, setYears }) => {
   return (
     <YearsContainer>
       <Stepper>
-        <Icon onClick={decrementYears}>-</Icon>
+        {!tokenId && <Icon onClick={decrementYears}>-</Icon>}
         <Amount>
-          <input
-            type="text"
-            value={years}
-            aria-label={t('pricer.yearUnit')}
-            onChange={e => {
-              const sign = Math.sign(e.target.value)
-              if (sign === -1 || isNaN(sign)) {
-                setYears(0)
-              } else {
-                setYears(e.target.value)
-              }
-            }}
-          />{' '}
+          {tokenId ? (
+            '1 '
+          ) : (
+            <input
+              type="text"
+              value={years}
+              aria-label={t('pricer.yearUnit')}
+              onChange={e => {
+                const sign = Math.sign(e.target.value)
+                if (sign === -1 || isNaN(sign)) {
+                  setYears(0)
+                } else {
+                  setYears(e.target.value)
+                }
+              }}
+            />
+          )}
           {t('pricer.yearUnit')}
           {currentLanguage === 'en' && years > 1 && 's'}
         </Amount>
-        <Icon onClick={incrementYears} emphasize={years < 2}>
-          +
-        </Icon>
+        {!tokenId && (
+          <Icon onClick={incrementYears} emphasize={years < 2}>
+            +
+          </Icon>
+        )}
       </Stepper>
       <Description>{t('pricer.registrationPeriodLabel')}</Description>
     </YearsContainer>
