@@ -24,12 +24,17 @@ const api = {
 }
 
 export default async function getTokensId() {
+  let tokensId = []
   const address = await getAccount()
+  const parsedAddress = parseInt(address, 16)
   try {
-    const url = `${network}${api.accounts.getListOfERC721(address)}`
-    const response = await axios.get(url)
+    if (parsedAddress) {
+      const url = `${network}${api.accounts.getListOfERC721(address)}`
+      const response = await axios.get(url)
+      tokensId = response.data.result.map(r => r.tokenID)
+    }
     //console.log('RESPONSE', response)
-    return response.data.result.map(r => r.tokenID)
+    return tokensId
   } catch (error) {
     console.error(error)
   }
