@@ -8,11 +8,11 @@ import mq from 'mediaQuery'
 
 import SearchDefault from '../components/SearchName/Search'
 import NoAccountsDefault from '../components/NoAccounts/NoAccountsModal'
-import bg from '../assets/heroBG.jpg'
 import TextBubbleDefault from '../components/Icons/TextBubble'
 import QuestionMarkDefault from '../components/Icons/QuestionMark'
 import HowToUseDefault from '../components/HowToUse/HowToUse'
 import ENSLogo from '../components/HomePage/images/ENSLogo.svg'
+import Snackbar from '../components/Snackbar/Snackbar'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
@@ -274,18 +274,26 @@ const ReadOnly = styled('span')`
 
 const Notification = styled('span')`
   color: white;
-  margin-top: 2em;
-  font-weight: 400;
-  a {
+  margin-top: 6em;
+  font-weight: 200;
+  border: 1px solid #c5a15a;
+  border-radius: 6px;
+  text-align: center;
+  padding: 1em 0px;
+  span {
     text-decoration: underline;
-    font-weight: 300;
-    color: #195d9d;
+    font-weight: 200;
+    color: #c5a15a;
+    cursor: pointer;
   }
-  a:hover {
+  span:hover {
     text-decoration: none;
   }
 `
 
+const SnackbarBody = styled('p')`
+  margin: 0.4em 0;
+`
 export const HOME_DATA = gql`
   query getHomeData($address: string) @client {
     network
@@ -392,22 +400,30 @@ export default ({ match }) => {
           />
           <Search promo={{ isPromo, offers }} />
           <Notification>
-            {t('c.notificationOfPromo', { value: 'byac NFT' })}
+            {t('c.byac', { value: 'BAYC NFT' })}
             &nbsp;
-            <Link
-              to={
-                offers.length > 1
-                  ? { pathname: `/names/register`, state: { offers } }
-                  : offers.length === 1
-                  ? {
-                      pathname: `/name/${offers[0]}/register`,
-                      state: { offer: offers[0] }
-                    }
-                  : '/'
-              }
-            >
-              {t('c.here')}
-            </Link>
+            {offers.length && !isReadOnly ? (
+              <Link
+                to={
+                  offers.length === 1
+                    ? {
+                        pathname: `/name/${offers[0]}/register`,
+                        state: { offer: offers[0] }
+                      }
+                    : { pathname: `/names/register`, state: { offers } }
+                }
+              >
+                Mint
+              </Link>
+            ) : (
+              <Snackbar>
+                <SnackbarBody>{t('c.mintFreeDomain')}</SnackbarBody>
+                <SnackbarBody>{t('c.availableToken')}</SnackbarBody>
+                <SnackbarBody>{t('c.duractionPromo')}</SnackbarBody>
+              </Snackbar>
+            )}
+            &nbsp;
+            {t('c.freeDomain')}
           </Notification>
         </>
       </SearchContainer>
