@@ -274,7 +274,7 @@ const ReadOnly = styled('span')`
 
 const Notification = styled('span')`
   color: white;
-  margin-top: 6em;
+  margin-top: 2em;
   font-weight: 200;
   border: 1px solid #c5a15a;
   border-radius: 6px;

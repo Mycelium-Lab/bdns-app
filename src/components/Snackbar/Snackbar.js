@@ -10,6 +10,7 @@ const SnackbarContainer = styled('div')`
   color: #fff;
   text-align: center;
   border-radius: 6px;
+  border: 1px solid #c5a15a;
   padding: 0.8em;
   position: fixed;
   z-index: 1;
