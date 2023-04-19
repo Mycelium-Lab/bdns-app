@@ -113,7 +113,7 @@ export default class Registrar {
     const hash = namehash(name)
     console.log(name)
     console.log(namehash(name))
-    const resolverAddr = await this.ENS.resolver(hash)
+    const resolverAddr = process.env.REACT_APP_PUBLIC_RESOLVER
     const Resolver = getResolverContract({ address: resolverAddr, provider })
     return Resolver['addr(bytes32)'](hash)
   }
@@ -349,8 +349,8 @@ export default class Registrar {
   async getEthPrice() {
     const oracleens = 'eth-usd.data.eth'
     try {
-      //const contractAddress = await this.getAddress(oracleens)
-      const oracle = await this.getOracle(process.env.REACT_APP_PRICE_ORACLE)
+      const contractAddress = process.env.REACT_APP_PRICE_ORACLE
+      const oracle = await this.getOracle(contractAddress)
       return (await oracle.latestAnswer()).toNumber() / 100000000
     } catch (e) {
       console.warn(
@@ -771,7 +771,7 @@ export default class Registrar {
 }
 
 async function getEthResolver(ENS) {
-  const resolverAddr = await ENS.resolver(namehash(''))
+  const resolverAddr = process.env.REACT_APP_PUBLIC_RESOLVER
   console.log('RESOLVER ADDRESS:', resolverAddr)
   const provider = await getProvider()
   return getResolverContract({ address: resolverAddr, provider })
