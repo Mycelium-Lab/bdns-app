@@ -202,7 +202,12 @@ export const REGISTER_NFT = gql`
     $duration: Int
     $secret: String
   ) {
-    registerNFT(label: String, tokenId: Int, duration: Int, secret: String)
+    registerNFT(
+      label: $label
+      tokenId: $tokenId
+      duration: $duration
+      secret: $secret
+    )
   }
 `
 

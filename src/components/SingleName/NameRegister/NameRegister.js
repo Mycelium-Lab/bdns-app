@@ -30,6 +30,7 @@ import ProgressRecorder from './ProgressRecorder'
 import useNetworkInfo from '../../NetworkInformation/useNetworkInfo'
 import { sendNotification } from './notification'
 import PremiumPriceOracle from './PremiumPriceOracle'
+import { BigNumber } from 'ethers'
 const NameRegisterContainer = styled('div')`
   padding: 20px 40px;
 `
@@ -190,7 +191,9 @@ const NameRegister = ({
   })
   let getRentPrice, getPremiumPrice
   if (getRentPriceAndPremium) {
-    getRentPrice = getRentPriceAndPremium.price
+    getRentPrice = tokenId
+      ? BigNumber.from('0x00')
+      : getRentPriceAndPremium.price
     getPremiumPrice = getRentPriceAndPremium.premium
   }
 
