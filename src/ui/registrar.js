@@ -519,10 +519,6 @@ export default class Registrar {
       namehash(label),
       account
     ])
-    const available = await permanentRegistrarController.availableNFT(
-      tokenId,
-      account
-    )
 
     /*  const gasEstimate = await permanentRegistrarController.estimateGas.registerNFT(
     tokenId,
