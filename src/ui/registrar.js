@@ -521,6 +521,20 @@ export default class Registrar {
         account
       ])
 
+      const gasEstimate = await permanentRegistrarController.estimateGas
+        .registerNFT(
+          tokenId,
+          account,
+          secret,
+          resolverAddr,
+          [callData],
+          true,
+          0,
+          BigNumber.from('0xFFFFFFFFFFFFFFF0')
+        )
+        .then(estimate => estimate.mul(120).div(100)) // Add a 20% buffer
+
+      console.log('GAS', gasEstimate)
       return permanentRegistrarController.registerNFT(
         tokenId,
         account,
@@ -530,7 +544,7 @@ export default class Registrar {
         true,
         0,
         BigNumber.from('0xFFFFFFFFFFFFFFF0'),
-        { gasLimit: 40000 }
+        { gasLimit: gasEstimate }
       )
     } catch (e) {
       console.log(e)
