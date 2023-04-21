@@ -41,13 +41,13 @@ function getLabelhash(label) {
 
 const contracts = {
   1: {
-    registry: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
+    registry: '0x67E0529118256e4E0635fE10fabE023113823E9B'
   },
   3: {
-    registry: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
+    registry: '0x67E0529118256e4E0635fE10fabE023113823E9B'
   },
   4: {
-    registry: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
+    registry: '0x67E0529118256e4E0635fE10fabE023113823E9B'
   },
   5: {
     registry: process.env.REACT_APP_ENS_ADDRESS

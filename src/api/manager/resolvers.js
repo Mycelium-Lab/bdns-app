@@ -16,11 +16,7 @@ import { formatsByName } from '@ensdomains/address-encoder'
 import isEqual from 'lodash/isEqual'
 import modeNames from '../modes'
 import { sendHelper, sendHelperArray } from '../resolverUtils'
-import {
-  emptyAddress,
-  MAINNET_DNSREGISTRAR_ADDRESS,
-  ROPSTEN_DNSREGISTRAR_ADDRESS
-} from '../../utils/utils'
+import { emptyAddress } from '../../utils/utils'
 import TEXT_RECORD_KEYS from 'constants/textRecords'
 import COIN_LIST_KEYS from 'constants/coinList'
 import { GET_REGISTRANT_FROM_SUBGRAPH } from '../../graphql/queries'
@@ -325,14 +321,7 @@ async function getNFTInfo(name) {
 async function setDNSSECTldOwner(ens, tld, networkId) {
   let tldowner = (await ens.getOwner(tld)).toLocaleLowerCase()
   if (parseInt(tldowner) !== 0) return tldowner
-  switch (networkId) {
-    case 1:
-      return MAINNET_DNSREGISTRAR_ADDRESS
-    case 3:
-      return ROPSTEN_DNSREGISTRAR_ADDRESS
-    default:
-      return emptyAddress
-  }
+  return emptyAddress
 }
 
 async function getDNSEntryDetails(name) {
@@ -562,22 +551,14 @@ const resolvers = {
       const RESOLVERS = {
         1: {
           DEPRECATED: [],
-          OLD: [
-            '0x5ffc014343cd971b7eb70732021e26c35b744cc4',
-            '0x6dbc5978711cb22d7ba611bc18cec308ea12ea95',
-            '0xd3ddccdd3b25a8a7423b5bee360a42146eb4baf3',
-            '0x226159d592e2b063810a10ebf6dcbada94ed68b8'
-          ]
+          OLD: []
         },
         3: {
-          OLD: [
-            '0x12299799a50340FB860D276805E78550cBaD3De3', // Ropsten
-            '0x9C4c3B509e47a298544d0fD0591B47550845e903' // Ropsten
-          ],
+          OLD: [],
           DEPRECATED: []
         },
         4: {
-          OLD: ['0x06E6B4E68b0B9B2617b35Eec811535050999282F'],
+          OLD: [],
           DEPRECATED: []
         },
         5: {
@@ -587,9 +568,7 @@ const resolvers = {
       }
 
       let DEPRECATED_RESOLVERS = []
-      let OLD_RESOLVERS = [
-        '0xDaaF96c344f63131acadD0Ea35170E7892d3dfBA' // all networks
-      ]
+      let OLD_RESOLVERS = []
 
       if (RESOLVERS[networkId]) {
         DEPRECATED_RESOLVERS = [...RESOLVERS[networkId].DEPRECATED]
@@ -922,11 +901,7 @@ const resolvers = {
       }
 
       function calculateIsOldContentResolver(resolver) {
-        const oldContentResolvers = [
-          '0x5ffc014343cd971b7eb70732021e26c35b744cc4',
-          '0x6dbc5978711cb22d7ba611bc18cec308ea12ea95',
-          '0xbf80bc10d6ebfee11bea9a157d762110a0b73d95'
-        ]
+        const oldContentResolvers = []
         const localResolvers = process.env.REACT_APP_OLD_CONTENT_RESOLVERS
           ? process.env.REACT_APP_OLD_CONTENT_RESOLVERS.split(',')
           : []
