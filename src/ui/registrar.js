@@ -392,7 +392,7 @@ export default class Registrar {
     name,
     owner,
     secret = '',
-    duration = BigNumber.from('31556952')
+    duration = BigNumber.from('31536000')
   ) {
     const permanentRegistrarControllerWithoutSigner = this
       .permanentRegistrarController
