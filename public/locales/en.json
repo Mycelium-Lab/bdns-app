@@ -92,7 +92,7 @@
     "steps": {
       "addtext": {
         "text": "Click 'learn more' to read about the process.",
-        "title": "Set up a text record in your domain registrar then click refresh. The text record should be called '_ens' and should contain your Ethereum address in the form:"
+        "title": "Set up a text record in your domain registrar then click refresh. The text record should be called '_bdns' and should contain your Ethereum address in the form:"
       },
       "enable": {
         "text": "Click 'learn more' to read about the process.",
@@ -135,7 +135,7 @@
       "title": "How to use BDNS"
     },
     "whatisens": {
-      "body": "The Ethereum Name Service is a distributed, open, and extensible naming system based on the Ethereum blockchain. BDNS eliminates the need to copy or type long addresses.",
+      "body": "The Blockchain Domain Name Service is a distributed, open, and extensible naming system based on the Ethereum blockchain. BDNS eliminates the need to copy or type long addresses.",
       "title": "What it is"
     }
   },
@@ -235,7 +235,7 @@
   "reminder": {
     "everywhere": "everywhere",
     "release": {
-      "description": "Register {{name}} at https://app.ens.domains/name/{{name}}/register",
+      "description": "Register {{name}} at https://bdns.app/name/{{name}}/register",
       "title": "Register {{name}}"
     },
     "renewal": {
@@ -316,7 +316,7 @@
         "title": "2. Set other records"
       },
       "step3": {
-        "text": "You can host your static html/css/images on IPFS and put the hash in your BDNS name's Content record. Then it can be resolved by BDNS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.limo' appended to the end (e.g. ens.eth.limo).",
+        "text": "You can host your static html/css/images on IPFS and put the hash in your BDNS name's Content record. Then it can be resolved by BDNS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.limo' appended to the end (e.g. bdns.eth.limo).",
         "title": "3. Set a content hash of a decentralized website"
       },
       "title": "Learn how to manage your name."

@@ -26,10 +26,6 @@ const endpoint = process.env.REACT_APP_GRAPH_NODE
 function getGraphQLAPI() {
   const network = networkIdReactive()
 
-  if (network > 100 && process.env.REACT_APP_GRAPH_NODE_URI) {
-    return process.env.REACT_APP_GRAPH_NODE_URI
-  }
-
   return endpoint
 }
 
