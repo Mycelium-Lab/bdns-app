@@ -33,7 +33,7 @@
     "Resolver": "Resolvedor",
     "about": "Acerca",
     "addresses": "Addresses",
-    "availableToken": "Token de identificación disponible: 1000 - 10000",
+    "availableToken": "Token de identificación disponible: 1000 - 9999",
     "byac": "Tener un {{ value }}?",
     "cancel": "Cancelar",
     "cannotclaimDns": "You cannot claim names under .{{ name }} on this site.",

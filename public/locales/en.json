@@ -35,7 +35,7 @@
     "nftowner": "Owner of NFT",
     "about": "About",
     "addresses": "Addresses",
-    "availableToken": "Available id token: 1000 - 10000",
+    "availableToken": "Available id token: 1000 - 9999",
     "cancel": "Cancel",
     "cannotclaimDns": "You cannot claim names under .{{ name }} on this site.",
     "brandsCannotClaim": "You cannot claim \"{{ brandName }}\" brand name untill {{ brandsUnlockTime }}.",
