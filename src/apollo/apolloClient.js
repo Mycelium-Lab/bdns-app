@@ -21,12 +21,7 @@ const cache = new InMemoryCache({
   typePolicies
 })
 
-const endpoints = {
-  '1': process.env.REACT_APP_GRAPH_NODE_GOERLI,
-  '3': 'https://api.thegraph.com/subgraphs/name/ensdomains/ensropsten',
-  '4': 'https://api.thegraph.com/subgraphs/name/ensdomains/ensrinkeby',
-  '5': process.env.REACT_APP_GRAPH_NODE_GOERLI
-}
+const endpoint = process.env.REACT_APP_GRAPH_NODE
 
 function getGraphQLAPI() {
   const network = networkIdReactive()
@@ -35,11 +30,7 @@ function getGraphQLAPI() {
     return process.env.REACT_APP_GRAPH_NODE_URI
   }
 
-  if (endpoints[network]) {
-    return endpoints[network]
-  }
-
-  return endpoints['1']
+  return endpoint
 }
 
 function fromPromise(promise, operation) {

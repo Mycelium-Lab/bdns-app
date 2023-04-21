@@ -801,7 +801,13 @@ export async function setupRegistrar(registryAddress) {
   const Resolver = await getEthResolver(ENS)
   console.log('namehash', namehash(''))
   // owner of namehash('eth') is BaseRegistrarImplemetation
-  let ethAddress = await ENS.owner(namehash(''))
+  console.log('AAAAAAAAAA')
+  console.log(namehash(''))
+  console.log(ENS)
+  let ethAddress = await ENS.owner(
+    '0x0000000000000000000000000000000000000000000000000000000000000000' /*namehash('')*/
+  )
+  console.log(ethAddress)
 
   // get address of permanentRegistrar interface implementer (0x018fac06) - LegacyETHRegistrarController
   let controllerAddress = await Resolver.interfaceImplementer(

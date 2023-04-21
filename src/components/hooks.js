@@ -206,7 +206,7 @@ export function useAvatar(textKey, name, network, uri) {
   const [avatar, setAvatar] = useState({})
   useEffect(() => {
     try {
-      const _network = networkName[network?.toLowerCase()]
+      const _network = networkName
       const run = async () => {
         const result = await fetch(
           `https://metadata.ens.domains/${_network}/avatar/${name}/meta`
