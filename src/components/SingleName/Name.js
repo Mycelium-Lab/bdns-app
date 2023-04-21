@@ -110,7 +110,15 @@ const ACCOUNT_CONNECTED_QUERY = gql`
   }
 `
 
-function Name({ details: domain, name, pathname, type, refetch }) {
+function Name({
+  details: domain,
+  name,
+  pathname,
+  type,
+  refetch,
+  tokenId,
+  locationState
+}) {
   const { t } = useTranslation()
   const smallBP = useMediaMin('small')
   const percentDone = 0
@@ -228,6 +236,8 @@ function Name({ details: domain, name, pathname, type, refetch }) {
             registrationOpen={registrationOpen}
             isNameWrapped={isNameWrapped}
             isReadOnly={isReadOnly}
+            tokenId={tokenId}
+            locationState={locationState}
           />
         )}
       </NameContainer>

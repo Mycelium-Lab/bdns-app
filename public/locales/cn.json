@@ -11,10 +11,7 @@
     },
     "renew": {
       "button": "给已勾选项目续费",
-      "confirm": [
-        "以下域名：",
-        "将同时续费 "
-      ],
+      "confirm": ["以下域名：", "将同时续费 "],
       "confirmButton": "续费",
       "year": "{{count}} 年",
       "year_plural": "{{count}} 年"
@@ -36,21 +33,27 @@
     "Resolver": "解析器",
     "about": "关于",
     "addresses": "地址",
+    "availableToken": "可用 ID 代幣：1000 - 9999",
+    "byac": "有一個 {{ value }}?",
     "cancel": "取消",
     "cannotclaimDns": "您不能在本站收回 .{{ name }} 的域名",
     "claim": "申请",
     "connect": "连接",
     "disconnect": "断开连接",
+    "duractionPromo": "持續時間：1年",
     "edit": "编辑",
     "email": "电子邮箱",
     "expires": "到期",
     "faq": "常见问题",
     "favourites": "收藏",
+    "freeDomain": "免費域名",
     "learnmore": "了解更多",
     "learnmoreenglishonly": "了解更多 (仅提供英文内容)",
     "migrate": "迁移",
+    "mintFreeDomain": "將帶有 BAYC NFT 的錢包連接到 BDNS，並免費將其 id 令牌值鑄造為域！",
     "mynames": "我的域名",
     "network": "网络",
+    "notificationOfPromo": "有 {{ value }} 嗎？去",
     "otheraddresses": "其他地址",
     "parent": "父域名",
     "readonly": "只读状态",
@@ -78,12 +81,7 @@
     "notmigrated": "暂未迁移"
   },
   "dns": {
-    "breadcrumbs": [
-      "启用 DNSSEC",
-      "提交验证",
-      "提交验证",
-      "管理域名"
-    ],
+    "breadcrumbs": ["启用 DNSSEC", "提交验证", "提交验证", "管理域名"],
     "dnsowner": "DNS 所有者",
     "steps": {
       "addtext": {
@@ -125,8 +123,7 @@
     "subdomainFavouriteTitle": "子域名收藏夹"
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
       "body": "ENS 管理器是一个面向非技术用户的图形化界面。您可以利用它查询域名，管理域名指向的地址或资源，还可以为域名创建子域名。",
       "title": "如何使用 ENS"
@@ -385,7 +382,7 @@
     }
   },
   "faq": {
-    "difference" : {
+    "difference": {
       "title": "BDNS与其它NFT域名服务有什么区别？",
       "description": "最大的区别是BDNS NOD没有诸如“.eth”之类的扩展名。BDNS也是完全去中心化的。这意味着没有私人铸造NOD或者名称保留（除了在非常有限的情况下和在短时间内列出的品牌和商标列表）。这种灵活性意味着与竞争提供商相比，您可以在更大程度上铸造您想要的东西。"
     },
@@ -399,7 +396,7 @@
     },
     "notascam": {
       "title": "我如何知道BDNS不是个骗局？",
-      "description" : "BDNS是个真实的交易，但如果您有所顾虑，请不要直接相信我们的话。您可以先直接联系我们，参加我们的社交媒体直播聊天，会见团队和创始人。只有当您确信我们会在此行业长久存在，您才应该购买NOD。如果您遵循所有这些步骤，我们非常确定您会对BDNS的真实性感到满意。"
+      "description": "BDNS是个真实的交易，但如果您有所顾虑，请不要直接相信我们的话。您可以先直接联系我们，参加我们的社交媒体直播聊天，会见团队和创始人。只有当您确信我们会在此行业长久存在，您才应该购买NOD。如果您遵循所有这些步骤，我们非常确定您会对BDNS的真实性感到满意。"
     },
     "updates": {
       "title": "BDNS会推出新产品和更新吗？",

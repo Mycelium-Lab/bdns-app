@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled/macro'
 import { useTranslation } from 'react-i18next'
 import { gql } from '@apollo/client'
@@ -10,6 +10,7 @@ import { withRouter } from 'react-router'
 import searchIcon from '../../assets/search.svg'
 import mq from 'mediaQuery'
 import LanguageSwitcher from '../LanguageSwitcherHeader'
+import getTokensId from 'ui/utils/walletResources'
 
 const SearchForm = styled('form')`
   display: flex;
@@ -99,6 +100,28 @@ function Search({ history, className, style }) {
     )
   }
   const hasSearch = inputValue && inputValue.length > 0 && isENSReady
+
+  const usePromo = inputValue => {
+    const [isPromo, setIsPromo] = useState(false)
+    const [offers, setOffers] = useState([])
+
+    useEffect(() => {
+      ;(async () => {
+        if (!inputValue) {
+          setIsPromo(false)
+          return
+        }
+        const resources = await getTokensId()
+        setIsPromo(Boolean(resources.length))
+        setOffers(resources)
+      })()
+    }, [inputValue])
+
+    return { isPromo, offers }
+  }
+
+  const { isPromo, offers } = usePromo(inputValue)
+
   return (
     <SearchForm
       className={className}
@@ -125,7 +148,17 @@ function Search({ history, className, style }) {
 
         input.value = ''
         if (type === 'supported' || type === 'short') {
-          history.push(`/name/${searchTerm}/register`)
+          history.push(
+            isPromo
+              ? {
+                  pathname: `/names/register`,
+                  state: {
+                    offers,
+                    searchTerm
+                  }
+                }
+              : `/name/${searchTerm}/register`
+          )
           return
         } else {
           history.push(`/search/${encodeURI(searchTerm)}`)

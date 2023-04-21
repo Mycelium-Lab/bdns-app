@@ -46,7 +46,8 @@ const Price = ({
   premiumOnlyPrice,
   ethUsdPrice,
   ethUsdPremiumPrice,
-  underPremium
+  underPremium,
+  tokenId
 }) => {
   const { t } = useTranslation()
   let ethPrice = <InlineLoader />
@@ -69,7 +70,7 @@ const Price = ({
   return (
     <PriceContainer>
       <Value>
-        {ethPrice} ETH
+        {tokenId ? 0.0 : ethPrice} ETH
         {withPremium && (
           <USD>
             {withPremium}${priceInUsd}

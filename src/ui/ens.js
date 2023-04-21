@@ -497,10 +497,9 @@ export class ENS {
   }
 
   async claimAndSetReverseRecordName(name, overrides = {}) {
-    const reverseRegistrarAddr = await this.getOwner('addr.reverse')
     const provider = await getProvider()
     const reverseRegistrarWithoutSigner = getReverseRegistrarContract({
-      address: reverseRegistrarAddr,
+      address: process.env.REACT_APP_REVERSE_REGISTRAR,
       provider
     })
     const signer = await getSigner()

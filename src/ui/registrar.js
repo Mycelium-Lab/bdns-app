@@ -113,7 +113,7 @@ export default class Registrar {
     const hash = namehash(name)
     console.log(name)
     console.log(namehash(name))
-    const resolverAddr = await this.ENS.resolver(hash)
+    const resolverAddr = process.env.REACT_APP_PUBLIC_RESOLVER
     const Resolver = getResolverContract({ address: resolverAddr, provider })
     return Resolver['addr(bytes32)'](hash)
   }
@@ -349,7 +349,7 @@ export default class Registrar {
   async getEthPrice() {
     const oracleens = 'eth-usd.data.eth'
     try {
-      const contractAddress = await this.getAddress(oracleens)
+      const contractAddress = process.env.REACT_APP_PRICE_ORACLE
       const oracle = await this.getOracle(contractAddress)
       return (await oracle.latestAnswer()).toNumber() / 100000000
     } catch (e) {
@@ -392,7 +392,7 @@ export default class Registrar {
     name,
     owner,
     secret = '',
-    duration = BigNumber.from('31556952')
+    duration = BigNumber.from('31536000')
   ) {
     const permanentRegistrarControllerWithoutSigner = this
       .permanentRegistrarController
@@ -501,6 +501,54 @@ export default class Registrar {
       BigNumber.from('0xFFFFFFFFFFFFFFF0'),
       { value: priceWithBuffer, gasLimit }
     )
+  }
+
+  async registerNFT(label, tokenId, duration, secret) {
+    const permanentRegistrarControllerWithoutSigner = this
+      .permanentRegistrarController
+    const signer = await getSigner()
+    const permanentRegistrarController = permanentRegistrarControllerWithoutSigner.connect(
+      signer
+    )
+
+    try {
+      const account = await getAccount()
+      const resolverAddr = await this.getAddress('resolver')
+      const abi = ['function setAddr(bytes32 node, address a)']
+      const iface = new utils.Interface(abi)
+      const callData = iface.encodeFunctionData('setAddr', [
+        namehash(label),
+        account
+      ])
+
+      const gasEstimate = await permanentRegistrarController.estimateGas
+        .registerNFT(
+          tokenId,
+          account,
+          secret,
+          resolverAddr,
+          [callData],
+          true,
+          0,
+          BigNumber.from('0xFFFFFFFFFFFFFFF0')
+        )
+        .then(estimate => estimate.mul(120).div(100)) // Add a 20% buffer
+
+      console.log('GAS', gasEstimate)
+      return permanentRegistrarController.registerNFT(
+        tokenId,
+        account,
+        secret,
+        resolverAddr,
+        [callData],
+        true,
+        0,
+        BigNumber.from('0xFFFFFFFFFFFFFFF0'),
+        { gasLimit: gasEstimate }
+      )
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async estimateGasLimit(cb) {
@@ -737,7 +785,7 @@ export default class Registrar {
 }
 
 async function getEthResolver(ENS) {
-  const resolverAddr = await ENS.resolver(namehash(''))
+  const resolverAddr = process.env.REACT_APP_PUBLIC_RESOLVER
   console.log('RESOLVER ADDRESS:', resolverAddr)
   const provider = await getProvider()
   return getResolverContract({ address: resolverAddr, provider })
@@ -768,10 +816,7 @@ export async function setupRegistrar(registryAddress) {
   )
   console.log('legacyAuctionRegistrarAddress', legacyAuctionRegistrarAddress)
   // get address of bulkRenewal interface implementer (0x3150bfba)
-  let bulkRenewalAddress = await Resolver.interfaceImplementer(
-    namehash(''),
-    bulkRenewalInterfaceId
-  )
+  let bulkRenewalAddress = process.env.REACT_APP_BULK_RENEWAL
   console.log('bulkRenewalAddress', bulkRenewalAddress)
   return new Registrar({
     registryAddress,

@@ -11,10 +11,7 @@
     },
     "renew": {
       "button": "Продлить выбранные",
-      "confirm": [
-        "Следующие имена:",
-        "будут продлены за"
-      ],
+      "confirm": ["Следующие имена:", "будут продлены за"],
       "confirmButton": "Продлить",
       "year_0": "{{count}} years",
       "year_1": "{{count}} years",
@@ -47,11 +44,13 @@
     "expires": "Срок истекает",
     "faq": "FAQ",
     "favourites": "Избранное",
+    "here": "сюда",
     "learnmore": "Узнать больше",
     "learnmoreenglishonly": "Узнать больше",
     "migrate": "Перенести имена",
     "mynames": "Мои Имена",
     "network": "Сеть",
+    "notificationOfPromo": "Есть {{ value }}? Следуйте",
     "otheraddresses": "Другие Адреса",
     "parent": "Родитель",
     "readonly": "Только для чтения",
@@ -127,8 +126,7 @@
     "subdomainFavouriteTitle": "Избранные Поддомены"
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
       "body": "Приложение BDNS App – это графический интерфейс для рядовых пользователей. Оно позволяет искать любые имена, управлять ими, а также создавать для них поддомены. ",
       "title": "Как пользоваться ENS"

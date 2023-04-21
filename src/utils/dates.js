@@ -49,7 +49,7 @@ export function calculateIsExpiredSoon(expiryDate) {
   return differenceInDays < ADVANCE_WARNING_DAYS
 }
 
-export const yearInSeconds = 31556952
+export const yearInSeconds = 31536000
 
 export function calculateDuration(years) {
   return parseInt(parseFloat(years) * yearInSeconds)

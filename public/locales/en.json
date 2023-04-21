@@ -12,10 +12,7 @@
     },
     "renew": {
       "button": "Extend Selected",
-      "confirm": [
-        "The following names:",
-        "will be extended for "
-      ],
+      "confirm": ["The following names:", "will be extended for "],
       "confirmButton": "Extend",
       "year": "{{count}} year",
       "year_plural": "{{count}} years"
@@ -38,20 +35,25 @@
     "nftowner": "Owner of NFT",
     "about": "About",
     "addresses": "Addresses",
+    "availableToken": "Available id token: 1000 - 9999",
     "cancel": "Cancel",
     "cannotclaimDns": "You cannot claim names under .{{ name }} on this site.",
     "brandsCannotClaim": "You cannot claim \"{{ brandName }}\" brand name untill {{ brandsUnlockTime }}.",
+    "byac": "Have a BAYC NFT?",
     "claim": "Claim",
     "connect": "Connect",
     "disconnect": "Disconnect",
+    "duractionPromo": "Duration: 1 year",
     "edit": "Edit",
     "email": "Email",
     "expires": "Expires",
     "faq": "FAQ",
     "favourites": "Favourites",
+    "freeDomain": "domain for free",
     "learnmore": "Learn More",
     "learnmoreenglishonly": "Learn More",
     "migrate": "Migrate",
+    "mintFreeDomain": "Connect a wallet with BAYC NFT to BDNS and mint it's id token value as a domain for free!",
     "mynames": "My Account",
     "network": "network",
     "otheraddresses": "Other Addresses",
@@ -85,12 +87,7 @@
     "notmigrated": "not migrated"
   },
   "dns": {
-    "breadcrumbs": [
-      "ENABLE DNSSEC",
-      "ADD TEXT",
-      "SUBMIT PROOF",
-      "MANAGE NAME"
-    ],
+    "breadcrumbs": ["ENABLE DNSSEC", "ADD TEXT", "SUBMIT PROOF", "MANAGE NAME"],
     "dnsowner": "DNS Owner",
     "steps": {
       "addtext": {
@@ -132,8 +129,7 @@
     "subdomainFavouriteTitle": "Favourite Subdomains"
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
       "body": "The BDNS App is a Graphical User Interface for non-technical users. It allows you to search any name, manage their addresses or resources it points to and create subdomains for each name.",
       "title": "How to use BDNS"
@@ -402,9 +398,9 @@
       "title": "BDNS constitution book now available",
       "description": "A printed copy of the BDNS constitution and its signers is now available in hardcover and ultra-limited edition of 50"
     }
-  }, 
+  },
   "faq": {
-    "difference" : {
+    "difference": {
       "title": "What’s the difference between BDNS and other NFT domain services?",
       "description": "The biggest difference is that BDNS NODs have no extension such as “.eth”. BDNS is also completely decentralized, meaning there is no private minting of NODs or reserved names (other than a list of brands and Trademarks in a very limited number of instances for a short period of time).  This flexibility means you can mint what you want to a much greater extent than with competing providers."
     },
@@ -418,7 +414,7 @@
     },
     "notascam": {
       "title": "How do I know BDNS is not a scam?",
-      "description" : "A BDNS is the real deal but don't take our word for it if you're uncomfortable. Take your time, contact us directly, attend one of our live social media chats, meet the team and the founders, and only once you're convinced that we are here to stay should you buy a NOD. We are pretty sure you'll be satisfied that BDNS is for real if you follow all these steps."
+      "description": "A BDNS is the real deal but don't take our word for it if you're uncomfortable. Take your time, contact us directly, attend one of our live social media chats, meet the team and the founders, and only once you're convinced that we are here to stay should you buy a NOD. We are pretty sure you'll be satisfied that BDNS is for real if you follow all these steps."
     },
     "updates": {
       "title": "Will BDNS launch new products and updates?",

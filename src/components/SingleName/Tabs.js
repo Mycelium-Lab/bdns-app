@@ -40,7 +40,8 @@ function getDetailsActive(domain, pathname, tab) {
   if (domain.parent !== 'eth') {
     return (
       pathname !== `/name/${name}/register` &&
-      pathname !== `/name/${name}/subdomains`
+      pathname !== `/name/${name}/subdomains` &&
+      pathname.split('/')[1] !== 'names'
     )
   } else {
     return (

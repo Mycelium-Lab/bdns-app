@@ -19,7 +19,9 @@ function NameDetails({
   tab,
   pathname,
   isNameWrapped = false,
-  isReadOnly = true
+  isReadOnly = true,
+  tokenId,
+  locationState
 }) {
   const [loading, setLoading] = useState(undefined)
   const {
@@ -121,7 +123,9 @@ function NameDetails({
 
       <Route
         exact
-        path="/name/:name/register"
+        path={
+          pathname === '/names/register' ? pathname : '/name/:name/register'
+        }
         render={() => (
           <NameRegister
             registrationOpen={registrationOpen}
@@ -130,6 +134,7 @@ function NameDetails({
             refetchIsMigrated={refetchIsMigrated}
             isNameWrapped={isNameWrapped}
             isReadOnly={isReadOnly}
+            tokenId={tokenId}
           />
         )}
       />

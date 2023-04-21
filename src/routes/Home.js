@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import styled from '@emotion/styled/macro'
@@ -8,14 +8,15 @@ import mq from 'mediaQuery'
 
 import SearchDefault from '../components/SearchName/Search'
 import NoAccountsDefault from '../components/NoAccounts/NoAccountsModal'
-import bg from '../assets/heroBG.jpg'
 import TextBubbleDefault from '../components/Icons/TextBubble'
 import QuestionMarkDefault from '../components/Icons/QuestionMark'
 import HowToUseDefault from '../components/HowToUse/HowToUse'
 import ENSLogo from '../components/HomePage/images/ENSLogo.svg'
+import Snackbar from '../components/Snackbar/Snackbar'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
+import getTokensId from 'ui/utils/walletResources'
 
 const HeroTop = styled('div')`
   display: grid;
@@ -271,6 +272,28 @@ const ReadOnly = styled('span')`
   margin-left: 1em;
 `
 
+const Notification = styled('span')`
+  color: white;
+  margin-top: 2em;
+  font-weight: 200;
+  border: 1px solid #c5a15a;
+  border-radius: 6px;
+  text-align: center;
+  padding: 1em 0px;
+  span {
+    text-decoration: underline;
+    font-weight: 200;
+    color: #c5a15a;
+    cursor: pointer;
+  }
+  span:hover {
+    text-decoration: none;
+  }
+`
+
+const SnackbarBody = styled('p')`
+  margin: 0.4em 0;
+`
 export const HOME_DATA = gql`
   query getHomeData($address: string) @client {
     network
@@ -310,6 +333,27 @@ export default ({ match }) => {
   } = useQuery(HOME_DATA, {
     variables: { address: accounts?.[0] }
   })
+
+  const usePromo = () => {
+    const [isPromo, setIsPromo] = useState(false)
+    const [offers, setOffers] = useState([])
+
+    useEffect(() => {
+      ;(async () => {
+        if (!accounts?.[0]) {
+          setIsPromo(false)
+          return
+        }
+        const resources = await getTokensId()
+        setIsPromo(Boolean(resources?.length))
+        setOffers(resources)
+      })()
+    }, [accounts])
+
+    return { isPromo, offers }
+  }
+
+  const { isPromo, offers } = usePromo()
 
   return (
     <Hero>
@@ -354,7 +398,33 @@ export default ({ match }) => {
             initial={animation.initial}
             animate={animation.animate}
           />
-          <Search />
+          <Search promo={{ isPromo, offers }} />
+          <Notification>
+            {t('c.byac', { value: 'BAYC NFT' })}
+            &nbsp;
+            {offers.length && !isReadOnly ? (
+              <Link
+                to={
+                  offers.length === 1
+                    ? {
+                        pathname: `/name/${offers[0]}/register`,
+                        state: { offer: offers[0] }
+                      }
+                    : { pathname: `/names/register`, state: { offers } }
+                }
+              >
+                Mint
+              </Link>
+            ) : (
+              <Snackbar>
+                <SnackbarBody>{t('c.mintFreeDomain')}</SnackbarBody>
+                <SnackbarBody>{t('c.availableToken')}</SnackbarBody>
+                <SnackbarBody>{t('c.duractionPromo')}</SnackbarBody>
+              </Snackbar>
+            )}
+            &nbsp;
+            {t('c.freeDomain')}
+          </Notification>
         </>
       </SearchContainer>
     </Hero>

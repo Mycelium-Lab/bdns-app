@@ -21,7 +21,9 @@ function SingleName({
   match: {
     params: { name: searchTerm }
   },
-  location: { pathname }
+  location: { pathname, state },
+  offer,
+  isNft = false
 }) {
   const history = useHistory()
   useScrollTo(0)
@@ -30,6 +32,8 @@ function SingleName({
   const [type, setType] = useState(undefined)
   const [name, setNormalisedName] = useState('')
   let errorMessage
+
+  const notNormalized = offer || searchTerm
 
   const {
     data: { isENSReady }
@@ -47,15 +51,15 @@ function SingleName({
     if (isENSReady) {
       try {
         // This is under the assumption that validateName never returns false
-        normalisedName = validateName(searchTerm)
-        if (normalisedName !== searchTerm)
+        normalisedName = validateName(notNormalized)
+        if (normalisedName !== notNormalized)
           history.replace(`/name/${normalisedName}`)
         setNormalisedName(normalisedName)
-        document.title = searchTerm
+        if (!offer) document.title = notNormalized
       } catch {
         document.title = 'Error finding name'
       } finally {
-        parseSearchTerm(normalisedName || searchTerm).then(_type => {
+        parseSearchTerm(normalisedName || notNormalized).then(_type => {
           if (_type === 'supported' || _type === 'tld' || _type === 'search') {
             setValid(true)
 
@@ -71,20 +75,35 @@ function SingleName({
         })
       }
     }
-  }, [searchTerm, isENSReady])
+  }, [notNormalized, isENSReady])
 
   if (valid) {
     if (loading) return <Loader large center />
     if (error) return <div>{(console.log(error), JSON.stringify(error))}</div>
     if (data?.singleName)
       return (
-        <Name
-          details={data.singleName}
-          name={name}
-          pathname={pathname}
-          type={type}
-          refetch={refetch}
-        />
+        <>
+          {/*!offer && 
+          <a onClick={history.push({
+            pathname: `/names/register`,
+            state: {
+              offers: state.offers,
+              searchTerm: state.searchTerm
+            }
+          })}>
+            Вернуться к списку
+          </a>
+          */}
+          <Name
+            details={data.singleName}
+            name={name}
+            pathname={pathname}
+            type={type}
+            refetch={refetch}
+            tokenId={isNft ? offer : null}
+            locationState={state}
+          />
+        </>
       )
   }
 
@@ -97,7 +116,10 @@ function SingleName({
       errorMessage = type
     }
     return (
-      <SearchErrors errors={[errorMessage]} searchTerm={name || searchTerm} />
+      <SearchErrors
+        errors={[errorMessage]}
+        searchTerm={name || notNormalized}
+      />
     )
   } else {
     return <Loader large center />

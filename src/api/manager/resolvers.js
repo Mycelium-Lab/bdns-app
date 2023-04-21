@@ -976,10 +976,9 @@ const resolvers = {
       }
 
       async function getOldContent(name) {
-        const resolver = await ens.getResolver(name)
         const namehash = getNamehash(name)
         const resolverInstanceWithoutSigner = await getOldResolverContract({
-          address: resolver,
+          address: process.env.REACT_APP_PUBLIC_RESOLVER,
           provider
         })
         const content = await resolverInstanceWithoutSigner.content(namehash)

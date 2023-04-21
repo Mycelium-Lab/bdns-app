@@ -56,19 +56,20 @@ function PricerInner({
   gasPrice,
   reference,
   underPremium,
-  displayGas = false
+  displayGas = false,
+  tokenId
 }) {
   const { t } = useTranslation()
   return (
     <>
-      {years <= 1 && (
+      {years <= 1 && !tokenId && (
         <Prompt>
           <OrangeExclamation />
           <div>{t('register.increaseRegistrationPeriod')}</div>
         </Prompt>
       )}
       <PricingContainer className={className} ref={reference}>
-        <Years years={years} setYears={setYears} />
+        <Years years={years} setYears={setYears} tokenId={tokenId} />
         <Chain />
         <Price
           price={price}
@@ -79,6 +80,7 @@ function PricerInner({
           ethUsdPrice={ethUsdPrice}
           ethUsdPremiumPrice={ethUsdPremiumPrice}
           underPremium={underPremium}
+          tokenId={tokenId}
         />
       </PricingContainer>
       {displayGas && gasPrice && (
@@ -91,6 +93,7 @@ function PricerInner({
             ethUsdPrice={ethUsdPrice}
             ethUsdPremiumPrice={ethUsdPremiumPrice}
             underPremium={underPremium}
+            tokenId={tokenId}
           />
         </div>
       )}

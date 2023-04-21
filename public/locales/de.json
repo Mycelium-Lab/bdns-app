@@ -11,10 +11,7 @@
     },
     "renew": {
       "button": "Ausgewählte verlängern",
-      "confirm": [
-        "Die folgenden Namen:",
-        "werden für "
-      ],
+      "confirm": ["Die folgenden Namen:", "werden für "],
       "confirmButton": "Verlängern",
       "year": "{{count}} Jahr verlängert",
       "year_plural": "{{count}} Jahre verlängert"
@@ -36,19 +33,24 @@
     "Resolver": "Resolver",
     "about": "Über",
     "addresses": "Adressen",
+    "availableToken": "Verfügbare ID-Token: 1000 - 9999",
+    "byac": "Haben sie ein {{ value }}?",
     "cancel": "Abbrechen",
     "cannotclaimDns": "You cannot claim names under .{{ name }} on this site.",
     "claim": "Nehmen",
     "connect": "Connect",
     "disconnect": "Disconnect",
+    "duractionPromo": "Dauer: 1 Jahr",
     "edit": "Ändern",
     "email": "E-Mail",
     "expires": "Läuft aus am",
     "faq": "FAQ",
     "favourites": "Favoriten",
+    "freeDomain": "domain kostenlos",
     "learnmore": "Mehr erfahren",
     "learnmoreenglishonly": "Mehr erfahren (English Only)",
     "migrate": "Migrieren",
+    "mintFreeDomain": "Verbinden Sie eine Brieftasche mit BAYC NFT mit BDNS und prägen Sie ihren ID-Token-Wert kostenlos als Domain!",
     "mynames": "Meine Namen",
     "network": "Netzwerk",
     "otheraddresses": "Andere Adressen",
@@ -125,8 +127,7 @@
     "subdomainFavouriteTitle": "Favorisierte Subdomains"
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
       "body": "Die BDNS App ist eine grafische Oberfläche für nicht-technische Nutzer. Es ermöglicht Ihnen, Namen zu suchen, ihre Adressen oder Ressourcen, auf die verwiesen wird, zu verwalten und Subdomains für Namen zu erstellen.",
       "title": "Wie man BDNS benutzt"

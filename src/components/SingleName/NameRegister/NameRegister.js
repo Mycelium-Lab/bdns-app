@@ -48,7 +48,8 @@ const NameRegister = ({
   refetchIsMigrated,
   isReadOnly,
   isNameWrapped,
-  registrationOpen
+  registrationOpen,
+  tokenId
 }) => {
   const { t } = useTranslation()
   const [secret, setSecret] = useState(false)
@@ -199,6 +200,9 @@ const NameRegister = ({
   }
   if (getBalance && getRentPrice) {
     hasSufficientBalance = getBalance.gt(getRentPrice)
+    if (tokenId) {
+      hasSufficientBalance = true
+    }
   }
   if (blockCreatedAt && !waitUntil) {
     setWaitUntil(blockCreatedAt + waitTime * 1000)
@@ -270,6 +274,7 @@ const NameRegister = ({
           premiumOnlyPrice={getPremiumPrice}
           underPremium={underPremium}
           displayGas={true}
+          tokenId={tokenId}
         />
       )}
       {showPremiumWarning ? (
@@ -336,6 +341,7 @@ const NameRegister = ({
         years={years}
         premium={currentPremium}
         ethUsdPrice={!ethUsdPriceLoading && ethUsdPrice}
+        tokenId={tokenId}
       />
     </NameRegisterContainer>
   )

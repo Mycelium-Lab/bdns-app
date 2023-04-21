@@ -11,10 +11,7 @@
     },
     "renew": {
       "button": "Renovar seleccionados",
-      "confirm": [
-        "Los siguientes nombres:",
-        "se renovarán durante"
-      ],
+      "confirm": ["Los siguientes nombres:", "se renovarán durante"],
       "confirmButton": "Renovar",
       "year": "{{count}} año",
       "year_plural": "{{count}} años"
@@ -36,21 +33,27 @@
     "Resolver": "Resolvedor",
     "about": "Acerca",
     "addresses": "Addresses",
+    "availableToken": "Token de identificación disponible: 1000 - 9999",
+    "byac": "Tener un {{ value }}?",
     "cancel": "Cancelar",
     "cannotclaimDns": "You cannot claim names under .{{ name }} on this site.",
     "claim": "Reclamar",
     "connect": "Connect",
     "disconnect": "Disconnect",
+    "duractionPromo": "Duración: 1 año",
     "edit": "Editar",
     "email": "Correo electrónico",
     "expires": "Expira",
     "faq": "FAQ",
     "favourites": "Favoritos",
+    "freeDomain": "dominio gratis",
     "learnmore": "Aprender más",
     "learnmoreenglishonly": "Learn More",
     "migrate": "Migrar",
+    "mintFreeDomain": "¡Conecte una billetera con BAYC NFT a BDNS y acumule su valor de token de identificación como un dominio gratis!",
     "mynames": "Mis Nombres",
     "network": "red",
+    "notificationOfPromo": "¿Tienes un bayc NFT? Ir",
     "otheraddresses": "Otras Direcciones",
     "parent": "matriz",
     "readonly": "Read only",
@@ -125,8 +128,7 @@
     "subdomainFavouriteTitle": "Subdominios favoritos."
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
       "body": "La aplicación BDNS es una interfaz gráfica de usuario para usuarios no-técnicos. Te permite buscar cualquier nombre, gestionar sus direcciones o los recursos a los que direcciona, o crear subdominios para cada uno.",
       "title": "Cómo utilizar ENS"
