@@ -74,16 +74,7 @@ function getCTA({
     PRICE_DECISION: (
       <Mutation
         mutation={COMMIT}
-        variables={
-          tokenId
-            ? {
-                label: tokenId,
-                secret,
-                commitmentTimerRunning,
-                duration: 31536000
-              }
-            : { label, secret, commitmentTimerRunning, duration }
-        }
+        variables={{ label, secret, commitmentTimerRunning, duration }}
         onCompleted={data => {
           const txHash = Object.values(data)[0]
           setTxHash(txHash)
@@ -141,7 +132,11 @@ function getCTA({
     AWAITING_REGISTER: (
       <Mutation
         mutation={tokenId ? REGISTER_NFT : REGISTER}
-        variables={tokenId ? { tokenId, secret } : { label, duration, secret }}
+        variables={
+          tokenId
+            ? { label, tokenId, duration, secret }
+            : { label, duration, secret }
+        }
         onCompleted={data => {
           const txHash = Object.values(data)[0]
           setTxHash(txHash)
