@@ -511,39 +511,30 @@ export default class Registrar {
       signer
     )
 
-    const account = await getAccount()
-    const resolverAddr = await this.getAddress('resolver')
-    const abi = ['function setAddr(bytes32 node, address a)']
-    const iface = new utils.Interface(abi)
-    const callData = iface.encodeFunctionData('setAddr', [
-      namehash(label),
-      account
-    ])
+    try {
+      const account = await getAccount()
+      const resolverAddr = await this.getAddress('resolver')
+      const abi = ['function setAddr(bytes32 node, address a)']
+      const iface = new utils.Interface(abi)
+      const callData = iface.encodeFunctionData('setAddr', [
+        namehash(label),
+        account
+      ])
 
-    /*  const gasEstimate = await permanentRegistrarController.estimateGas.registerNFT(
-    tokenId,
-    account,
-    secret,
-    resolverAddr,
-    [callData],
-    true,
-    0,
-    BigNumber.from('0xFFFFFFFFFFFFFFF0')
-  )
-  .then((estimate) => estimate.mul(120).div(100)); // Add a 20% buffer
-  */
-
-    return permanentRegistrarController.registerNFT(
-      tokenId,
-      account,
-      secret,
-      resolverAddr,
-      [callData],
-      true,
-      0,
-      BigNumber.from('0xFFFFFFFFFFFFFFF0'),
-      { gasLimit: 40000 }
-    )
+      return permanentRegistrarController.registerNFT(
+        tokenId,
+        account,
+        secret,
+        resolverAddr,
+        [callData],
+        true,
+        0,
+        BigNumber.from('0xFFFFFFFFFFFFFFF0'),
+        { gasLimit: 40000 }
+      )
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async estimateGasLimit(cb) {
