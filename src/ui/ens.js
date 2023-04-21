@@ -50,7 +50,7 @@ const contracts = {
     registry: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
   },
   5: {
-    registry: process.env.REACT_APP_ENS_ADDRESS_GOERLI
+    registry: process.env.REACT_APP_ENS_ADDRESS
   }
 }
 
