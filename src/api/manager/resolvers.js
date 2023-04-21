@@ -552,18 +552,6 @@ const resolvers = {
         1: {
           DEPRECATED: [],
           OLD: []
-        },
-        3: {
-          OLD: [],
-          DEPRECATED: []
-        },
-        4: {
-          OLD: [],
-          DEPRECATED: []
-        },
-        5: {
-          OLD: [],
-          DEPRECATED: []
         }
       }
 
