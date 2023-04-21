@@ -72,6 +72,7 @@ const resolvers = {
   },
   Mutation: {
     async commit(_, { label, secret, duration }) {
+      console.log(label, secret, duration)
       const registrar = getRegistrar()
       const tx = await registrar.commit(label, secret, duration)
       return sendHelper(tx)
@@ -82,9 +83,10 @@ const resolvers = {
 
       return sendHelper(tx)
     },
-    async registerNFT(_, { label, tokenId, duration, secret }) {
+    async registerNFT(_, { tokenId, secret }) {
+      console.log(tokenId, secret)
       const registrar = getRegistrar()
-      const tx = await registrar.registerNFT(label, tokenId, duration, secret)
+      const tx = await registrar.registerNFT(tokenId, secret)
       return sendHelper(tx)
     },
     async reclaim(_, { name, address }) {

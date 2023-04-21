@@ -503,7 +503,7 @@ export default class Registrar {
     )
   }
 
-  async registerNFT(label, tokenId, duration, secret) {
+  async registerNFT(tokenId, secret) {
     const permanentRegistrarControllerWithoutSigner = this
       .permanentRegistrarController
     const signer = await getSigner()
@@ -517,7 +517,7 @@ export default class Registrar {
       const abi = ['function setAddr(bytes32 node, address a)']
       const iface = new utils.Interface(abi)
       const callData = iface.encodeFunctionData('setAddr', [
-        namehash(label),
+        namehash(tokenId.toString()),
         account
       ])
 
