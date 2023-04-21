@@ -30,7 +30,6 @@ import ProgressRecorder from './ProgressRecorder'
 import useNetworkInfo from '../../NetworkInformation/useNetworkInfo'
 import { sendNotification } from './notification'
 import PremiumPriceOracle from './PremiumPriceOracle'
-import { BigNumber } from 'ethers'
 const NameRegisterContainer = styled('div')`
   padding: 20px 40px;
 `
@@ -191,9 +190,7 @@ const NameRegister = ({
   })
   let getRentPrice, getPremiumPrice
   if (getRentPriceAndPremium) {
-    getRentPrice = tokenId
-      ? BigNumber.from('0x00')
-      : getRentPriceAndPremium.price
+    getRentPrice = getRentPriceAndPremium.price
     getPremiumPrice = getRentPriceAndPremium.premium
   }
 
@@ -203,6 +200,9 @@ const NameRegister = ({
   }
   if (getBalance && getRentPrice) {
     hasSufficientBalance = getBalance.gt(getRentPrice)
+    if (tokenId) {
+      hasSufficientBalance = true
+    }
   }
   if (blockCreatedAt && !waitUntil) {
     setWaitUntil(blockCreatedAt + waitTime * 1000)
