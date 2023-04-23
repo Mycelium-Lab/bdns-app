@@ -24,18 +24,8 @@ import {
 const BASIC_ADDRESS_REGEX = /^(0x)?[0-9a-f]{40}$/i
 const SAME_CASE_ADDRESS_REGEX = /^(0x)?([0-9a-f]{40}|[0-9A-F]{40})$/
 const ADDRESS_LENGTH = 40
-export const MAINNET_DNSREGISTRAR_ADDRESS =
-  '0x58774Bb8acD458A640aF0B88238369A167546ef2'
-export const ROPSTEN_DNSREGISTRAR_ADDRESS =
-  '0xdB328BA5FEcb432AF325Ca59E3778441eF5aa14F'
 
-export const networkName = {
-  main: 'mainnet',
-  goerli: 'goerli',
-  rinkeby: 'rinkeby',
-  ropsten: 'ropsten',
-  local: 'local'
-}
+export const networkName = 'mainnet'
 
 export const supportedAvatarProtocols = [
   'http://',
@@ -86,23 +76,7 @@ export const uniq = (a, param) =>
   )
 
 export async function getEtherScanAddr() {
-  const networkId = await getNetworkId()
-  switch (networkId) {
-    case 1:
-    case '1':
-      return 'https://etherscan.io/'
-    case 3:
-    case '3':
-      return 'https://ropsten.etherscan.io/'
-    case 4:
-    case '4':
-      return 'https://rinkeby.etherscan.io/'
-    case 5:
-    case '5':
-      return 'https://goerli.etherscan.io/'
-    default:
-      return 'https://etherscan.io/'
-  }
+  return 'https://etherscan.io/'
 }
 
 export async function ensStartBlock() {
@@ -289,7 +263,7 @@ export function prependUrl(url) {
 }
 
 export function imageUrl(url, name, network) {
-  const _network = networkName[network?.toLowerCase()]
+  const _network = networkName
   const _protocol = supportedAvatarProtocols.find(proto =>
     url.startsWith(proto)
   )

@@ -28,7 +28,7 @@ const option = {
       package: () => import('walletlink'),
       packageFactory: true,
       options: {
-        appName: 'Ethereum name service',
+        appName: 'Blockchain Domain Name Service',
         jsonRpcUrl: rpcUrl
       }
     },

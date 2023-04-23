@@ -99,13 +99,13 @@
       "manage": {
         "text1": "Odkąd jesteś właścicielem, możesz zarządzać swoimi nazwami.",
         "text2": "Ponieważ nie jesteś właścicielem, możesz tylko wyświetlać nazwy w rejestratorze.",
-        "title": "Gratulacje! Udało ci się dodać domenę DNS do Rejestru ENS"
+        "title": "Gratulacje! Udało ci się dodać domenę DNS do Rejestru BDNS"
       },
       "proof": {
         "text1": "\nAdres, który pojawia się w rekordzie txt DNS, to ten sam adres.",
         "text2": "Jeśli wiesz, że posiadasz tę domenę, zmień jej rekord TXT, aby zawierał Adres Ethereum i odśwież stronę, aby ponownie przeprowadzić weryfikację DNSSEC.",
-        "title1": "Jesteś właścicielem tego adresu. Dodaj teraz swoją domenę do Rejestru ENS.",
-        "title2": "Nie jesteś właścicielem DNS tej domeny, lecz każdy może dodać domenę do Rejestru ENS."
+        "title1": "Jesteś właścicielem tego adresu. Dodaj teraz swoją domenę do Rejestru BDNS.",
+        "title2": "Nie jesteś właścicielem DNS tej domeny, lecz każdy może dodać domenę do Rejestru BDNS."
       }
     },
     "viewinmanager": "Zobacz w Menedżerze"
@@ -130,11 +130,11 @@
     "announcements": {
     },
     "howtouse": {
-      "body": "Aplikacja ENS to graficzny interfejs użytkownika dla użytkowników nietechnicznych. Umożliwia wyszukiwanie dowolnej nazwy, zarządzanie jej adresami lub zasobami, na które wskazuje, i tworzenie subdomen dla każdej nazwy.",
-      "title": "Jak używać ENS"
+      "body": "Aplikacja BDNS to graficzny interfejs użytkownika dla użytkowników nietechnicznych. Umożliwia wyszukiwanie dowolnej nazwy, zarządzanie jej adresami lub zasobami, na które wskazuje, i tworzenie subdomen dla każdej nazwy.",
+      "title": "Jak używać BDNS"
     },
     "whatisens": {
-      "body": "The Ethereum Name Service to rozproszony, otwarty i rozszerzalny system nazewnictwa oparty na blockchainie Ethereum. ENS eliminuje potrzebę kopiowania lub wpisywania długich adresów.",
+      "body": "The Blockchain Domain Name Service to rozproszony, otwarty i rozszerzalny system nazewnictwa oparty na blockchainie Ethereum. BDNS eliminuje potrzebę kopiowania lub wpisywania długich adresów.",
       "title": "Co to jest"
     }
   },
@@ -222,7 +222,7 @@
     ]
   },
   "registrymigration": {
-    "donotaccept": "* Jeśli hadlujesz nazwami ENS, nie akcpetuj tej nazwy!",
+    "donotaccept": "* Jeśli hadlujesz nazwami BDNS, nie akcpetuj tej nazwy!",
     "messages": {
       "controller": "Ta nazwa jest kontrolowana przez kontrakt i nie może być przeniesiona automatycznie. Przed ustawieniem nowego kontrolera ponownie zdeponuj kontrakt, aby używać nowego rejestru.",
       "default": "Tę nazwę należy przenieść do nowego rejestru. Tylko rodzic tej nazwy ({{parent}}) może to zrobić.",
@@ -233,12 +233,12 @@
   "reminder": {
     "everywhere": "everywhere",
     "release": {
-      "description": "Register {{name}} at https://app.ens.domains/name/{{name}}/register",
+      "description": "Register {{name}} at https://bdns.app/name/{{name}}/register",
       "title": "Register {{name}}"
     },
     "renewal": {
-      "description": "Your ENS name is expiring soon, please renew it",
-      "title": "Renew your ENS domain {{name}}"
+      "description": "Your BDNS name is expiring soon, please renew it",
+      "title": "Renew your BDNS domain {{name}}"
     }
   },
   "search": {
@@ -298,7 +298,7 @@
     },
     "learnmore": {
       "step1": {
-        "text": "Once you register your name, Go to 'My Account' page and set a reverse record. This allows dapps to find and display your ENS name when you connect to them with your Ethereum account. ",
+        "text": "Once you register your name, Go to 'My Account' page and set a reverse record. This allows dapps to find and display your BDNS name when you connect to them with your Ethereum account. ",
         "title": "1. Set a reverse record"
       },
       "step2": {
@@ -306,7 +306,7 @@
         "title": "2. Set other records"
       },
       "step3": {
-        "text": "You can host your static html/css/images on IPFS and put the hash in your ENS name's Content record. Then it can be resolved by ENS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.limo' appended to the end (e.g. ens.eth.limo).",
+        "text": "You can host your static html/css/images on IPFS and put the hash in your BDNS name's Content record. Then it can be resolved by BDNS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.limo' appended to the end (e.g. bdns.eth.limo).",
         "title": "3. Set a content hash of a decentralized website"
       },
       "title": "Learn how to manage your name."
@@ -324,10 +324,10 @@
       "messages": {
         "explanation": "Reverse Resolution tłumaczy adres na nazwę. Pozwala Dapps na wyświetlanie w ich interfejsach '{{name}}' zamiast długiego adresu '{{konto}}'. Jeśli chcesz skonfigurować swój rewers dla innego konta, przełącz konta w przeglądarce dapp.",
         "explanation2": "You can only select names you set this Ethereum Address as.",
-        "noForwardRecordAavilable": "You either do not own any ENS names, or your ENS names have no ETH records set to this address.",
+        "noForwardRecordAavilable": "You either do not own any BDNS names, or your BDNS names have no ETH records set to this address.",
         "notSet": "Rekord Reverse: nie ustawiono",
         "reverseRecordRemoval": "Are you sure you want to delete the reverse record?",
-        "selectPlaceholder": "Select your ENS name",
+        "selectPlaceholder": "Select your BDNS name",
         "setTo": "Rekord Reverse: Ustaw na",
         "setToDifferent": "Rekord Reverse: Ustaw na inną nazwę:"
       },

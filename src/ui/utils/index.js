@@ -20,20 +20,7 @@ import { namehash } from './namehash'
 const uniq = a => a.filter((item, index) => a.indexOf(item) === index)
 
 async function getEtherScanAddr() {
-  const networkId = await getNetworkId()
-  switch (networkId) {
-    case 1:
-    case '1':
-      return 'https://etherscan.io/'
-    case 3:
-    case '3':
-      return 'https://ropsten.etherscan.io/'
-    case 4:
-    case '4':
-      return 'https://rinkeby.etherscan.io/'
-    default:
-      return 'https://etherscan.io/'
-  }
+  return 'https://etherscan.io/'
 }
 
 async function getEnsStartBlock() {

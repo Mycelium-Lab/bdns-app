@@ -65,7 +65,6 @@ const EthRegistrationGasPrice = ({ price, ethUsdPrice, gasPrice, tokenId }) => {
   const totalSlow = ethVal.add(registerGasSlow)
   const totalFast = ethVal.add(registerGasFast)
   let totalInUsdSlow, totalInUsdFast
-  // No price oracle on Goerli
   if (ethUsdPrice) {
     totalInUsdSlow = totalSlow.mul(ethUsdPrice)
     totalInUsdFast = totalFast.mul(ethUsdPrice)

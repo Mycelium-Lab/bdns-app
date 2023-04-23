@@ -125,12 +125,12 @@
   "home": {
     "announcements": {},
     "howtouse": {
-      "body": "ENS 管理器是一个面向非技术用户的图形化界面。您可以利用它查询域名，管理域名指向的地址或资源，还可以为域名创建子域名。",
-      "title": "如何使用 ENS"
+      "body": "BDNS 管理器是一个面向非技术用户的图形化界面。您可以利用它查询域名，管理域名指向的地址或资源，还可以为域名创建子域名。",
+      "title": "如何使用 BDNS"
     },
     "whatisens": {
-      "body": "以太坊域名服务 (Ethereum Name Service) 是一个基于以太坊区块链的分布式、开放和可扩展的域名系统。ENS 域名让人们不用再复制或输入冗长的区块链地址。通俗地说，ENS 就是区块链中的域名系统。",
-      "title": "ENS 是什么"
+      "body": "以太坊域名服务 (Blockchain Domain Name Service) 是一个基于以太坊区块链的分布式、开放和可扩展的域名系统。BDNS 域名让人们不用再复制或输入冗长的区块链地址。通俗地说，BDNS 就是区块链中的域名系统。",
+      "title": "BDNS 是什么"
     }
   },
   "howtouse": {
@@ -228,7 +228,7 @@
   "reminder": {
     "everywhere": "任意地点",
     "release": {
-      "description": "在 https://app.ens.domains/name/{{name}}/register 注册 {{name}}",
+      "description": "在 https://bdns.app/name/{{name}}/register 注册 {{name}}",
       "title": "注册 {{name}}"
     },
     "renewal": {
@@ -377,8 +377,8 @@
       "description": "通过将你的投票权委托给社区成员，能够提高参与 BDNS 的治理的活跃度"
     },
     "constitution": {
-      "title": "ENS 章程已经发布",
-      "description": "ENS 章程及其签署成员的印刷版已经发布，目前有精装版和旗舰版，其中旗舰版限量 50 份"
+      "title": "BDNS 章程已经发布",
+      "description": "BDNS 章程及其签署成员的印刷版已经发布，目前有精装版和旗舰版，其中旗舰版限量 50 份"
     }
   },
   "faq": {

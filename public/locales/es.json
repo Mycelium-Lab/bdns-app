@@ -106,7 +106,7 @@
         "text1": "La dirección que aparece en registro de texto DNS es tu misma dirección.",
         "text2": "Si conoces este dominio, cambia su registro TXT para que contenga tu dirección de Ethereum, y actualiza esta página para ejecutar la verificación DNSSEC de nuevo.",
         "title1": "Eres el propietario de este dominio ",
-        "title2": "Parece que no eres el propietario este dominio DNS, pero cualquiera puede añadirlo al registro de ENS."
+        "title2": "Parece que no eres el propietario este dominio DNS, pero cualquiera puede añadirlo al registro de BDNS."
       }
     },
     "viewinmanager": "Ver en el gestionador."
@@ -131,7 +131,7 @@
     "announcements": {},
     "howtouse": {
       "body": "La aplicación BDNS es una interfaz gráfica de usuario para usuarios no-técnicos. Te permite buscar cualquier nombre, gestionar sus direcciones o los recursos a los que direcciona, o crear subdominios para cada uno.",
-      "title": "Cómo utilizar ENS"
+      "title": "Cómo utilizar BDNS"
     },
     "whatisens": {
       "body": "El Servicio de Nombres de Ethereum  es un sistema de nombres distribuido, abierto y extensible basado en la cadena de bloques de Ethereum. El BDNS elimina la necesidad de copiar o escribir direcciones largas.",
@@ -222,7 +222,7 @@
     ]
   },
   "registrymigration": {
-    "donotaccept": "*Si comercias con nombres de ENS, no acepten este nombre!",
+    "donotaccept": "*Si comercias con nombres de BDNS, no acepten este nombre!",
     "messages": {
       "controller": "Este nombre está controlado por un contrato y no puede ser migrado automáticamente. Por favor, redefine tu contrato para usar el nuevo registro antes de establecer el nuevo controlador",
       "default": "Este nombre necesita ser migrado al nuevo Registro. Sólo el padre de este nombre ({{ parent}}) puede hacerlo.",
@@ -233,7 +233,7 @@
   "reminder": {
     "everywhere": "everywhere",
     "release": {
-      "description": "Register {{name}} at https://app.ens.domains/name/{{name}}/register",
+      "description": "Register {{name}} at https://bdns.app/name/{{name}}/register",
       "title": "Register {{name}}"
     },
     "renewal": {
@@ -306,7 +306,7 @@
         "title": "2. Set other records"
       },
       "step3": {
-        "text": "You can host your static html/css/images on IPFS and put the hash in your BDNS name's Content record. Then it can be resolved by ENS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.limo' appended to the end (e.g. ens.eth.limo).",
+        "text": "You can host your static html/css/images on IPFS and put the hash in your BDNS name's Content record. Then it can be resolved by BDNS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.limo' appended to the end (e.g. bdns.eth.limo).",
         "title": "3. Set a content hash of a decentralized website"
       },
       "title": "Learn how to manage your name."
