@@ -6,11 +6,13 @@ import {
   networkReactive,
   web3ProviderReactive
 } from '../apollo/reactiveVars'
+import { disconnectProvider } from 'utils/providerUtils'
 import { rpcUrl } from '../rpcUrl'
+
+let provider
 
 const PORTIS_ID = '57e5d6ca-e408-4925-99c4-e7da3bdb8bf5'
 
-let provider
 const option = {
   network: 'mainnet', // optional
   cacheProvider: true, // optional
@@ -47,19 +49,38 @@ const option = {
 }
 
 let web3Modal
-export const connect = async () => {
+export const connect = async bdnsProvider => {
   try {
-    const Web3Modal = (await import('@ensdomains/web3modal')).default
+    if (bdnsProvider) {
+      provider = bdnsProvider
+    } else {
+      const Web3Modal = (await import('@ensdomains/web3modal')).default
+      web3Modal = new Web3Modal(option)
+      window.isBdns = false
 
-    web3Modal = new Web3Modal(option)
-    provider = await web3Modal.connect()
+      web3Modal.on('connect', info => {
+        window.isBdns = Boolean(info.isEnkrypt)
+        if (window.isBdns && window.onConnect && info.isMetaMask) {
+          alert(
+            'You now have multiple wallets active. Please, if you want to continue with MetaMask, disable other wallets in your browser.'
+          )
+        }
+      })
+      provider = await web3Modal.connect()
+    }
 
-    await setupENS({
-      customProvider: provider,
-      reloadOnAccountsChange: false,
-      enforceReload: true
-    })
-    return provider
+    if (window.isBdns && window.onConnect) {
+      disconnectProvider()
+      window.isBdns = false
+      window.location = window.location
+    } else {
+      await setupENS({
+        customProvider: provider,
+        reloadOnAccountsChange: false,
+        enforceReload: true
+      })
+      return provider
+    }
   } catch (e) {
     if (e !== 'Modal closed by user') {
       throw { error: e, provider: provider }

@@ -11,6 +11,12 @@ import EthVal from 'ethval'
 import { trackReferral } from '../../../utils/analytics'
 import { COMMIT, REGISTER, REGISTER_NFT } from '../../../graphql/mutations'
 
+import { w3mProvider } from '@web3modal/ethereum'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { WalletButton } from '../../HomePage/WalletButton'
+
 import PendingTx from '../../PendingTx'
 import Button from '../../Forms/Button'
 import AddToCalendar from '../../Calendar/RenewalCalendar'
@@ -70,6 +76,26 @@ function getCTA({
   account,
   tokenId
 }) {
+  const chains = [arbitrum, mainnet, polygon]
+  const projectId = 'ed8030f6cd6f47993d17adb4b3c59c86'
+  const { publicClient, webSocketPublicClient } = configureChains(chains, [
+    w3mProvider({ projectId })
+  ])
+  const config = createConfig({
+    autoConnect: true,
+    connectors: [
+      new InjectedConnector({
+        chains,
+        options: {
+          name: 'BDNS Wallet',
+          shimDisconnect: true
+        }
+      })
+    ],
+    publicClient,
+    webSocketPublicClient
+  })
+
   const CTAs = {
     PRICE_DECISION: (
       <Mutation
@@ -109,11 +135,21 @@ function getCTA({
                 <OrangeExclamation />
                 {t('register.buttons.connect')}
               </Prompt>
-              <NoAccountsModal
-                onClick={connectProvider}
-                colour={'#C6A15A'}
-                buttonText={t('c.connect')}
-              />
+              <div
+                style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
+              >
+                <NoAccountsModal
+                  onClick={() => {
+                    window.onConnect = true
+                    connectProvider()
+                  }}
+                  colour={'#C6A15A'}
+                  buttonText={t('c.connect')}
+                />
+                <WagmiConfig config={config}>
+                  <WalletButton isReadOnly={isReadOnly} />
+                </WagmiConfig>
+              </div>
             </>
           ) : (
             <Button data-testid="request-register-button" type="disabled">

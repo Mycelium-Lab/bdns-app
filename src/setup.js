@@ -61,7 +61,7 @@ const handleUnsupportedNetwork = (provider = window.ethereum) => {
   })
 }
 
-export const getProvider = async reconnect => {
+export const getProvider = async (reconnect, bdnsProvider) => {
   try {
     let provider
     if (
@@ -97,7 +97,7 @@ export const getProvider = async reconnect => {
       window.localStorage.getItem('WEB3_CONNECT_CACHED_PROVIDER') ||
       reconnect
     ) {
-      provider = await connect()
+      provider = await connect(bdnsProvider)
       return provider
     }
 
@@ -165,11 +165,11 @@ export const setWeb3Provider = async provider => {
   return provider
 }
 
-export default async reconnect => {
+export default async (reconnect, bdnsProvider) => {
   try {
     setFavourites()
     setSubDomainFavourites()
-    const provider = await getProvider(reconnect)
+    const provider = await getProvider(reconnect, bdnsProvider)
 
     if (!provider) throw 'Please install a wallet'
 

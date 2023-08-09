@@ -7,8 +7,8 @@ import {
 } from '../apollo/reactiveVars'
 import { disconnect } from '../api/web3modal'
 
-export const connectProvider = () => {
-  setup(true)
+export const connectProvider = provider => {
+  setup(true, provider)
 }
 
 export const disconnectProvider = () => {

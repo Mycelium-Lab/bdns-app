@@ -11,6 +11,12 @@ import { GET_REVERSE_RECORD } from '../../graphql/queries'
 import { connectProvider, disconnectProvider } from '../../utils/providerUtils'
 import { imageUrl } from '../../utils/utils'
 
+import { w3mProvider } from '@web3modal/ethereum'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { WalletButton } from '../HomePage/WalletButton'
+
 const NetworkInformationContainer = styled('div')`
   position: relative;
   display: flex;
@@ -123,6 +129,26 @@ function NetworkInformation() {
     skip: !accounts?.length
   })
 
+  const chains = [arbitrum, mainnet, polygon]
+  const projectId = 'ed8030f6cd6f47993d17adb4b3c59c86'
+  const { publicClient, webSocketPublicClient } = configureChains(chains, [
+    w3mProvider({ projectId })
+  ])
+  const config = createConfig({
+    autoConnect: true,
+    connectors: [
+      new InjectedConnector({
+        chains,
+        options: {
+          name: 'BDNS Wallet',
+          shimDisconnect: true
+        }
+      })
+    ],
+    publicClient,
+    webSocketPublicClient
+  })
+
   return (
     <NetworkInformationContainer hasAccount={accounts && accounts.length > 0}>
       {!isReadOnly ? (
@@ -144,7 +170,10 @@ function NetworkInformation() {
           </NetworkStatus>
           {!isSafeApp && (
             <NoAccountsModal
-              onClick={disconnectProvider}
+              onClick={() => {
+                window.onConnect = false
+                disconnectProvider()
+              }}
               buttonText={t('c.disconnect')}
               colour={'#C6A15A'}
             />
@@ -159,10 +188,16 @@ function NetworkInformation() {
             {network} {t('c.network')}
           </NetworkStatus>
           <NoAccountsModal
-            onClick={connectProvider}
+            onClick={() => {
+              window.onConnect = true
+              connectProvider()
+            }}
             colour={'#C6A15A'}
             buttonText={t('c.connect')}
           />
+          <WagmiConfig config={config}>
+            <WalletButton isReadOnly={isReadOnly} />
+          </WagmiConfig>
         </AccountContainer>
       )}
     </NetworkInformationContainer>

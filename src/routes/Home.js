@@ -13,10 +13,16 @@ import QuestionMarkDefault from '../components/Icons/QuestionMark'
 import HowToUseDefault from '../components/HowToUse/HowToUse'
 import ENSLogo from '../components/HomePage/images/ENSLogo.svg'
 import Snackbar from '../components/Snackbar/Snackbar'
+import { WalletButton } from 'components/HomePage/WalletButton'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
 import getTokensId from 'ui/utils/walletResources'
+
+import { w3mProvider } from '@web3modal/ethereum'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 const HeroTop = styled('div')`
   display: grid;
@@ -355,6 +361,26 @@ export default ({ match }) => {
 
   const { isPromo, offers } = usePromo()
 
+  const chains = [arbitrum, mainnet, polygon]
+  const projectId = 'ed8030f6cd6f47993d17adb4b3c59c86'
+  const { publicClient, webSocketPublicClient } = configureChains(chains, [
+    w3mProvider({ projectId })
+  ])
+  const config = createConfig({
+    autoConnect: true,
+    connectors: [
+      new InjectedConnector({
+        chains,
+        options: {
+          name: 'BDNS Wallet',
+          shimDisconnect: true
+        }
+      })
+    ],
+    publicClient,
+    webSocketPublicClient
+  })
+
   return (
     <Hero>
       <HeroTop>
@@ -367,10 +393,25 @@ export default ({ match }) => {
             )}
           </Network>
           {!isSafeApp && (
-            <NoAccounts
-              onClick={isReadOnly ? connectProvider : disconnectProvider}
-              buttonText={isReadOnly ? t('c.connect') : t('c.disconnect')}
-            />
+            <>
+              <NoAccounts
+                onClick={
+                  isReadOnly
+                    ? () => {
+                        window.onConnect = true
+                        connectProvider()
+                      }
+                    : () => {
+                        window.onConnect = false
+                        disconnectProvider()
+                      }
+                }
+                buttonText={isReadOnly ? t('c.connect') : t('c.disconnect')}
+              />
+              <WagmiConfig config={config}>
+                <WalletButton isReadOnly={isReadOnly} />
+              </WagmiConfig>
+            </>
           )}
         </NetworkStatus>
         <Nav>

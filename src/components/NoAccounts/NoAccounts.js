@@ -50,6 +50,7 @@ const NoAccounts = ({
     onClick={onClick}
     active={active}
     textColour={textColour}
+    id="btn-connect"
   >
     <span>{buttonText}</span>
   </NoAccountsContainer>
