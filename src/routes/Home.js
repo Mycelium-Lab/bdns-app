@@ -12,7 +12,6 @@ import TextBubbleDefault from '../components/Icons/TextBubble'
 import QuestionMarkDefault from '../components/Icons/QuestionMark'
 import HowToUseDefault from '../components/HowToUse/HowToUse'
 import ENSLogo from '../components/HomePage/images/ENSLogo.svg'
-import Snackbar from '../components/Snackbar/Snackbar'
 import { WalletButton } from 'components/HomePage/WalletButton'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
@@ -440,6 +439,7 @@ export default ({ match }) => {
             animate={animation.animate}
           />
           <Search promo={{ isPromo, offers }} />
+          {/*
           <Notification>
             {t('c.byac', { value: 'BAYC NFT' })}
             &nbsp;
@@ -466,6 +466,7 @@ export default ({ match }) => {
             &nbsp;
             {t('c.freeDomain')}
           </Notification>
+          */}
         </>
       </SearchContainer>
     </Hero>
